@@ -1,12 +1,10 @@
 # Фасады
 
+### Вступление
 
+Фасады обеспечивают "статический" интерфейс к классам, которые доступны в [service container](service-container.md) приложения. Laravel имеет множество фасадов, которые обеспечивают доступ почти ко всем возможностям фреймворка. Фасады служат "статическими прокси" к базовым классам в сервисном контейнере, обеспечивая преимущество лаконичного, экспрессивного синтаксиса при сохранении большей тестируемости и гибкости по сравнению с традиционными статическими методами.
 
-### [Introduction](https://laravel.com/docs/7.x/facades#introduction) <a id="introduction"></a>
-
-Facades provide a "static" interface to classes that are available in the application's [service container](https://laravel.com/docs/7.x/container). Laravel ships with many facades which provide access to almost all of Laravel's features. Laravel facades serve as "static proxies" to underlying classes in the service container, providing the benefit of a terse, expressive syntax while maintaining more testability and flexibility than traditional static methods.
-
-All of Laravel's facades are defined in the `Illuminate\Support\Facades` namespace. So, we can easily access a facade like so:
+Все фасады Laravel определены в пространстве имен `Illuminate\Support\Facades`. Таким образом, мы можем легко получить доступ к такому фасаду:
 
 ```text
 use Illuminate\Support\Facades\Cache;
@@ -16,23 +14,23 @@ Route::get('/cache', function () {
 });
 ```
 
-Throughout the Laravel documentation, many of the examples will use facades to demonstrate various features of the framework.
+Во всей документации Laravel многие примеры будут использовать фасады для демонстрации различных особенностей фреймворка.
 
-### [When To Use Facades](https://laravel.com/docs/7.x/facades#when-to-use-facades) <a id="when-to-use-facades"></a>
+### Когда использовать фасады
 
-Facades have many benefits. They provide a terse, memorable syntax that allows you to use Laravel's features without remembering long class names that must be injected or configured manually. Furthermore, because of their unique usage of PHP's dynamic methods, they are easy to test.
+Фасады имеют много преимуществ. Они обеспечивают лаконичный, запоминающийся синтаксис, который позволяет использовать функции Laravel, не запоминая длинные названия классов, которые необходимо вводить или настраивать вручную. Более того, благодаря уникальному использованию динамических методов PHP, они легко тестируются.
 
-However, some care must be taken when using facades. The primary danger of facades is class scope creep. Since facades are so easy to use and do not require injection, it can be easy to let your classes continue to grow and use many facades in a single class. Using dependency injection, this potential is mitigated by the visual feedback a large constructor gives you that your class is growing too large. So, when using facades, pay special attention to the size of your class so that its scope of responsibility stays narrow.
+Тем не менее, при использовании фасадов необходимо проявлять некоторую осторожность. Основная опасность фасадов — это ползучесть по классу. Так как фасады настолько просты в использовании и не требуют внедрения, можно легко позволить Вашим классам продолжать расти и использовать много фасадов в одном классе. Используя внедрение зависимостей, этот потенциал смягчается визуальной обратной связью, которую дает вам большой конструктор, что ваш класс растет слишком большим. Поэтому, при использовании фасадов, обратите особое внимание на размер вашего класса, чтобы сфера его ответственности оставалась узкой.
 
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
-> When building a third-party package that interacts with Laravel, it's better to inject [Laravel contracts](https://laravel.com/docs/7.x/contracts) instead of using facades. Since packages are built outside of Laravel itself, you will not have access to Laravel's facade testing helpers.
+> При создании стороннего пакета, взаимодействующего с Laravel, лучше сделать внедрение [Laravel Contracts](contracts.md) вместо использования фасадов. Поскольку пакеты создаются вне самой Laravel, у вас не будет доступа к помощникам Laravel по тестированию фасадов.
 
-#### [Facades Vs. Dependency Injection](https://laravel.com/docs/7.x/facades#facades-vs-dependency-injection) <a id="facades-vs-dependency-injection"></a>
+#### Фасады Против Внедрения зависимостей
 
-One of the primary benefits of dependency injection is the ability to swap implementations of the injected class. This is useful during testing since you can inject a mock or stub and assert that various methods were called on the stub.
+Одним из основных преимуществ внедрения зависимостей является возможность обмена реализациями внедряемого класса. Это полезно при тестировании, так как можно вводить имитацию или заглушку и утверждать, что различные методы были вызваны в заглушке.
 
-Typically, it would not be possible to mock or stub a truly static class method. However, since facades use dynamic methods to proxy method calls to objects resolved from the service container, we actually can test facades just as we would test an injected class instance. For example, given the following route:
+Обычно невозможно имитировать или заглушить по-настоящему статический метод класса. Однако, поскольку фасады используют динамические методы для прокси вызова методов к объектам, разрешенным из сервисного контейнера, мы фактически можем тестировать фасады точно так же, как мы тестировали бы внедряемый экземпляр класса. Например, учитывая следующий маршрут:
 
 ```text
 use Illuminate\Support\Facades\Cache;
