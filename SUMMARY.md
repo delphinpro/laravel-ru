@@ -16,6 +16,8 @@
 * [Жизненный цикл запроса](architecture-concepts/request-lifecycle.md)
 * [Service Container](architecture-concepts/service-container.md)
 * [Service Providers](architecture-concepts/service-providers.md)
+* [Фасады](architecture-concepts/facades.md)
+* [Контракты](architecture-concepts/contracts.md)
 
 ## Основы <a id="the-basics"></a>
 
