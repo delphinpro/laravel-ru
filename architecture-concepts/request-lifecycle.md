@@ -30,15 +30,15 @@
 
 Сервис-провайдеры отвечают за загрузку различных компонентов фреймворка, таких как база данных \(database\), очередь \(queue\), валидация \(validation\) и компоненты маршрутизации \(routing\). Так как они осуществляют загрузку и конфигурирование каждой функции, предлагаемой фреймворком, поставщики услуг являются наиболее важным аспектом всего процесса загрузки Laravel.
 
-**Dispatch Request**
+**Отправка запроса**
 
-Once the application has been bootstrapped and all service providers have been registered, the `Request` will be handed off to the router for dispatching. The router will dispatch the request to a route or controller, as well as run any route specific middleware.
+Как только приложение будет загружено и все сервис-провайдеры будут зарегистрированы, `Request` будет передан маршрутизатору. Маршрутизатор отправит запрос на маршрут или контроллер, а также запустит посредника для маршрута.
 
-### Focus On Service Providers <a id="focus-on-service-providers"></a>
+### Focus On Service Providers
 
-Service providers are truly the key to bootstrapping a Laravel application. The application instance is created, the service providers are registered, and the request is handed to the bootstrapped application. It's really that simple!
+Сервис-провайдеры являются ключевыми в загрузке приложения Laravel. Экземпляр приложения создается, сервис-провайдеры регистрируются, и запрос передается в загрузчик приложения. Это действительно так просто!
 
-Having a firm grasp of how a Laravel application is built and bootstrapped via service providers is very valuable. Your application's default service providers are stored in the `app/Providers` directory.
+Иметь твердое представление о том, как построено приложение Laravel и как оно загружается через сервис-провайдеров, очень ценно. По умолчанию поставщики приложения хранятся в каталоге `app/Providers`.
 
-By default, the `AppServiceProvider` is fairly empty. This provider is a great place to add your application's own bootstrapping and service container bindings. For large applications, you may wish to create several service providers, each with a more granular type of bootstrapping.
+По умолчанию `AppServiceProvider` почти пуст. Этот провайдер — отличное место для добавления собственных привязок к загрузочным и сервисным контейнерам приложения. Для больших приложений можно создать несколько провайдеров, каждый из которых будет иметь более гранулярный тип загрузочной обвязки.
 
