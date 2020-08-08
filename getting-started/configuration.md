@@ -1,10 +1,10 @@
 # Конфигурация
 
-### [Introduction](https://laravel.com/docs/7.x/configuration#introduction) <a id="introduction"></a>
+## Introduction
 
 All of the configuration files for the Laravel framework are stored in the `config` directory. Each option is documented, so feel free to look through the files and get familiar with the options available to you.
 
-### [Environment Configuration](https://laravel.com/docs/7.x/configuration#environment-configuration) <a id="environment-configuration"></a>
+## Environment Configuration
 
 It is often helpful to have different configuration values based on the environment where the application is running. For example, you may wish to use a different cache driver locally than you do on your production server.
 
@@ -14,11 +14,11 @@ Your `.env` file should not be committed to your application's source control, s
 
 If you are developing with a team, you may wish to continue including a `.env.example` file with your application. By putting placeholder values in the example configuration file, other developers on your team can clearly see which environment variables are needed to run your application. You may also create a `.env.testing` file. This file will override the `.env` file when running PHPUnit tests or executing Artisan commands with the `--env=testing` option.
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> Any variable in your `.env` file can be overridden by external environment variables such as server-level or system-level environment variables.
+{% hint style='info' %}
+Any variable in your `.env` file can be overridden by external environment variables such as server-level or system-level environment variables.
+{% endhint %}
 
-#### [Environment Variable Types](https://laravel.com/docs/7.x/configuration#environment-variable-types) <a id="environment-variable-types"></a>
+### Environment Variable Types
 
 All variables in your `.env` files are parsed as strings, so some reserved values have been created to allow you to return a wider range of types from the `env()` function:
 
@@ -39,7 +39,7 @@ If you need to define an environment variable with a value that contains spaces,
 APP_NAME="My Application"
 ```
 
-#### [Retrieving Environment Configuration](https://laravel.com/docs/7.x/configuration#retrieving-environment-configuration) <a id="retrieving-environment-configuration"></a>
+### Retrieving Environment Configuration
 
 All of the variables listed in this file will be loaded into the `$_ENV` PHP super-global when your application receives a request. However, you may use the `env` helper to retrieve values from these variables in your configuration files. In fact, if you review the Laravel configuration files, you will notice several of the options already using this helper:
 
@@ -49,7 +49,7 @@ All of the variables listed in this file will be loaded into the `$_ENV` PHP sup
 
 The second value passed to the `env` function is the "default value". This value will be used if no environment variable exists for the given key.
 
-#### [Determining The Current Environment](https://laravel.com/docs/7.x/configuration#determining-the-current-environment) <a id="determining-the-current-environment"></a>
+### Determining The Current Environment
 
 The current application environment is determined via the `APP_ENV` variable from your `.env` file. You may access this value via the `environment` method on the `App` [facade](https://laravel.com/docs/7.x/facades):
 
@@ -69,11 +69,11 @@ if (App::environment(['local', 'staging'])) {
 }
 ```
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> The current application environment detection can be overridden by a server-level `APP_ENV` environment variable. This can be useful when you need to share the same application for different environment configurations, so you can set up a given host to match a given environment in your server's configurations.
+{% hint style='info' %}
+The current application environment detection can be overridden by a server-level `APP_ENV` environment variable. This can be useful when you need to share the same application for different environment configurations, so you can set up a given host to match a given environment in your server's configurations.
+{% endhint %}
 
-#### [Hiding Environment Variables From Debug Pages](https://laravel.com/docs/7.x/configuration#hiding-environment-variables-from-debug) <a id="hiding-environment-variables-from-debug"></a>
+### Hiding Environment Variables From Debug Pages
 
 When an exception is uncaught and the `APP_DEBUG` environment variable is `true`, the debug page will show all environment variables and their contents. In some cases you may want to obscure certain variables. You may do this by updating the `debug_hide` option in your `config/app.php` configuration file.
 
@@ -102,7 +102,7 @@ return [
 ];
 ```
 
-### [Accessing Configuration Values](https://laravel.com/docs/7.x/configuration#accessing-configuration-values) <a id="accessing-configuration-values"></a>
+## Accessing Configuration Values
 
 You may easily access your configuration values using the global `config` helper function from anywhere in your application. The configuration values may be accessed using "dot" syntax, which includes the name of the file and option you wish to access. A default value may also be specified and will be returned if the configuration option does not exist:
 
@@ -119,17 +119,17 @@ To set configuration values at runtime, pass an array to the `config` helper:
 config(['app.timezone' => 'America/Chicago']);
 ```
 
-### [Configuration Caching](https://laravel.com/docs/7.x/configuration#configuration-caching) <a id="configuration-caching"></a>
+## Configuration Caching
 
 To give your application a speed boost, you should cache all of your configuration files into a single file using the `config:cache` Artisan command. This will combine all of the configuration options for your application into a single file which will be loaded quickly by the framework.
 
 You should typically run the `php artisan config:cache` command as part of your production deployment routine. The command should not be run during local development as configuration options will frequently need to be changed during the course of your application's development.
 
-> ![](https://laravel.com/img/callouts/exclamation.min.svg)
->
-> If you execute the `config:cache` command during your deployment process, you should be sure that you are only calling the `env` function from within your configuration files. Once the configuration has been cached, the `.env` file will not be loaded and all calls to the `env` function will return `null`.
+{% hint style='info' %}
+If you execute the `config:cache` command during your deployment process, you should be sure that you are only calling the `env` function from within your configuration files. Once the configuration has been cached, the `.env` file will not be loaded and all calls to the `env` function will return `null`.
+{% endhint %}
 
-### [Maintenance Mode](https://laravel.com/docs/7.x/configuration#maintenance-mode) <a id="maintenance-mode"></a>
+### Maintenance Mode
 
 When your application is in maintenance mode, a custom view will be displayed for all requests into your application. This makes it easy to "disable" your application while it is updating or when you are performing maintenance. A maintenance mode check is included in the default middleware stack for your application. If the application is in maintenance mode, a `MaintenanceModeException` will be thrown with a status code of 503.
 
@@ -157,9 +157,9 @@ To disable maintenance mode, use the `up` command:
 php artisan up
 ```
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> You may customize the default maintenance mode template by defining your own template at `resources/views/errors/503.blade.php`.
+{% hint style='info' %}
+You may customize the default maintenance mode template by defining your own template at `resources/views/errors/503.blade.php`.
+{% endhint %}
 
 **Maintenance Mode & Queues**
 
