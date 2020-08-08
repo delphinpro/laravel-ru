@@ -88,7 +88,7 @@ vagrant box add laravel/homestead
 
 Если эта команда не работает, убедитесь, что ваш Vagrant обновлен.
 
-{% hint style='info' %}
+{% hint style="info" %}
 Homestead периодически выпускает "alpha"/"beta" боксы для тестирования, которые могут помешать команде `vagrant box add`. Если у вас возникли проблемы с запуском `vagrant box add`, вы можете запустить команду `vagrant up` и правильный бокс будет загружен, когда Vagrant попытается запустить виртуальную машину.
 {% endhint %}
 
@@ -138,7 +138,7 @@ folders:
       to: /home/vagrant/project1
 ```
 
-{% hint style='info' %}
+{% hint style="info" %}
 Пользователи Windows не должны использовать синтаксис пути `~/` и вместо нужно использовать полный путь к своему проекту, например `C:\Users\user\Code\project1`.
 {% endhint %}
 
@@ -153,7 +153,7 @@ folders:
       to: /home/vagrant/project2
 ```
 
-{% hint style='info' %}
+{% hint style="info" %}
 Вы никогда не должны монтировать `.` \(текущий каталог\) при использовании Homestead. Это приводит к тому, что Vagrant не сопоставляет текущую папку с `/vagrant`, делает недоступными некоторые возможности и приводит к неожиданным результатам во время инициализации.
 {% endhint %}
 
@@ -166,7 +166,7 @@ folders:
       type: "nfs"
 ```
 
-{% hint style='info' %}
+{% hint style="info" %}
 При использовании NFS под Windows следует подумать об установке плагина [vagrant-winnfsd](https://github.com/winnfsd/vagrant-winnfsd). Этот плагин будет поддерживать правильные пользовательские/групповые разрешения для файлов и каталогов в Homestead box.
 {% endhint %}
 
@@ -194,7 +194,7 @@ sites:
 
 If you change the `sites` property after provisioning the Homestead box, you should re-run `vagrant reload --provision` to update the Nginx configuration on the virtual machine.
 
-{% hint style='info' %}
+{% hint style="info" %}
 Homestead scripts are built to be as idempotent as possible. However, if you are experiencing issues while provisioning you should destroy and rebuild the machine via `vagrant destroy && vagrant up`.
 {% endhint %}
 
@@ -308,7 +308,7 @@ The default MongoDB installation will set the database username to `homestead` a
 
 You may specify a supported version of Elasticsearch, which may be a major version or an exact version number \(major.minor.patch\). The default installation will create a cluster named 'homestead'. You should never give Elasticsearch more than half of the operating system's memory, so make sure your Homestead machine has at least twice the Elasticsearch allocation.
 
-{% hint style='tip' %}
+{% hint style="info" %}
 Check out the [Elasticsearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current) to learn how to customize your configuration.
 {% endhint %}
 
@@ -372,7 +372,7 @@ But, since you will probably need to SSH into your Homestead machine frequently,
 
 A `homestead` database is configured for both MySQL and PostgreSQL out of the box. To connect to your MySQL or PostgreSQL database from your host machine's database client, you should connect to `127.0.0.1` and port `33060` \(MySQL\) or `54320` \(PostgreSQL\). The username and password for both databases is `homestead` / `secret`.
 
-{% hint style='info' %}
+{% hint style="info" %}
 You should only use these non-standard ports when connecting to the databases from your host machine. You will use the default 3306 and 5432 ports in your Laravel database configuration file since Laravel is running _within_ the virtual machine.
 {% endhint %}
 
@@ -598,7 +598,7 @@ After running the command, you will see an Ngrok screen appear which contains th
 share homestead.test -region=eu -subdomain=laravel
 ```
 
-{% hint style='info' %}
+{% hint style="info" %}
 Remember, Vagrant is inherently insecure and you are exposing your virtual machine to the Internet when running the `share` command.
 {% endhint %}
 
@@ -655,7 +655,7 @@ Homestead includes support for step debugging using [Xdebug](https://xdebug.org/
 
 By default Xdebug is already running and ready to accept connections. If you need to enable Xdebug on the CLI run the `sudo phpenmod xdebug` command within your Vagrant box. Next, follow your IDE's instructions to enable debugging. Finally, configure your browser to trigger Xdebug with an extension or [bookmarklet](https://www.jetbrains.com/phpstorm/marklets/).
 
-{% hint style='info' %}
+{% hint style="info" %}
 Xdebug causes PHP to run significantly slower. To disable Xdebug, run `sudo phpdismod xdebug` within your Vagrant box and restart the FPM service.
 {% endhint %}
 

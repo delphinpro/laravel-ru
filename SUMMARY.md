@@ -25,3 +25,7 @@
 * [CSRF защита](the-basics/csrf-protection.md)
 * [Сессии](the-basics/session.md)
 
+## Глубокое погружение <a id="digging-deeper"></a>
+
+* [Очереди](digging-deeper/queues.md)
+
