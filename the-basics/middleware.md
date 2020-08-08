@@ -1,6 +1,6 @@
 # Посредники \(Middleware\)
 
-### Introduction
+## Introduction
 
 Middleware provide a convenient mechanism for filtering HTTP requests entering your application. For example, Laravel includes a middleware that verifies the user of your application is authenticated. If the user is not authenticated, the middleware will redirect the user to the login screen. However, if the user is authenticated, the middleware will allow the request to proceed further into the application.
 
@@ -8,17 +8,17 @@ Additional middleware can be written to perform a variety of tasks besides authe
 
 There are several middleware included in the Laravel framework, including middleware for authentication and CSRF protection. All of these middleware are located in the `app/Http/Middleware` directory.
 
-### [Defining Middleware](https://laravel.com/docs/7.x/middleware#defining-middleware) <a id="defining-middleware"></a>
+## Defining Middleware
 
 To create a new middleware, use the `make:middleware` Artisan command:
 
-```text
+```bash
 php artisan make:middleware CheckAge
 ```
 
 This command will place a new `CheckAge` class within your `app/Http/Middleware` directory. In this middleware, we will only allow access to the route if the supplied `age` is greater than 200. Otherwise, we will redirect the users back to the `home` URI:
 
-```text
+```php
 <?php
 
 namespace App\Http\Middleware;
@@ -49,6 +49,10 @@ As you can see, if the given `age` is less than or equal to `200`, the middlewar
 
 It's best to envision middleware as a series of "layers" HTTP requests must pass through before they hit your application. Each layer can examine the request and even reject it entirely.
 
+{% hint style="info" %}
+
+{% endhint %}
+
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
 > All middleware are resolved via the [service container](https://laravel.com/docs/7.x/container), so you may type-hint any dependencies you need within a middleware's constructor.
@@ -57,7 +61,7 @@ It's best to envision middleware as a series of "layers" HTTP requests must pass
 
 Whether a middleware runs before or after a request depends on the middleware itself. For example, the following middleware would perform some task **before** the request is handled by the application:
 
-```text
+```php
 <?php
 
 namespace App\Http\Middleware;
@@ -77,7 +81,7 @@ class BeforeMiddleware
 
 However, this middleware would perform its task **after** the request is handled by the application:
 
-```text
+```php
 <?php
 
 namespace App\Http\Middleware;
@@ -97,17 +101,17 @@ class AfterMiddleware
 }
 ```
 
-### [Registering Middleware](https://laravel.com/docs/7.x/middleware#registering-middleware) <a id="registering-middleware"></a>
+## Registering Middleware
 
-#### [Global Middleware](https://laravel.com/docs/7.x/middleware#global-middleware) <a id="global-middleware"></a>
+### Global Middleware
 
 If you want a middleware to run during every HTTP request to your application, list the middleware class in the `$middleware` property of your `app/Http/Kernel.php` class.
 
-#### [Assigning Middleware To Routes](https://laravel.com/docs/7.x/middleware#assigning-middleware-to-routes) <a id="assigning-middleware-to-routes"></a>
+### Assigning Middleware To Routes
 
 If you would like to assign middleware to specific routes, you should first assign the middleware a key in your `app/Http/Kernel.php` file. By default, the `$routeMiddleware` property of this class contains entries for the middleware included with Laravel. To add your own, append it to this list and assign it a key of your choosing:
 
-```text
+```php
 // Within App\Http\Kernel Class...
 
 protected $routeMiddleware = [
@@ -125,7 +129,7 @@ protected $routeMiddleware = [
 
 Once the middleware has been defined in the HTTP kernel, you may use the `middleware` method to assign middleware to a route:
 
-```text
+```php
 Route::get('admin/profile', function () {
     //
 })->middleware('auth');
@@ -133,7 +137,7 @@ Route::get('admin/profile', function () {
 
 You may also assign multiple middleware to the route:
 
-```text
+```php
 Route::get('/', function () {
     //
 })->middleware('first', 'second');
@@ -141,7 +145,7 @@ Route::get('/', function () {
 
 When assigning middleware, you may also pass the fully qualified class name:
 
-```text
+```php
 use App\Http\Middleware\CheckAge;
 
 Route::get('admin/profile', function () {
@@ -151,7 +155,7 @@ Route::get('admin/profile', function () {
 
 When assigning middleware to a group of routes, you may occasionally need to prevent the middleware from being applied to an individual route within the group. You may accomplish this using the `withoutMiddleware` method:
 
-```text
+```php
 use App\Http\Middleware\CheckAge;
 
 Route::middleware([CheckAge::class])->group(function () {
@@ -167,13 +171,13 @@ Route::middleware([CheckAge::class])->group(function () {
 
 The `withoutMiddleware` method can only remove route middleware and does not apply to [global middleware](https://laravel.com/docs/7.x/middleware#global-middleware).
 
-#### [Middleware Groups](https://laravel.com/docs/7.x/middleware#middleware-groups) <a id="middleware-groups"></a>
+### Middleware Groups
 
 Sometimes you may want to group several middleware under a single key to make them easier to assign to routes. You may do this using the `$middlewareGroups` property of your HTTP kernel.
 
 Out of the box, Laravel comes with `web` and `api` middleware groups that contain common middleware you may want to apply to your web UI and API routes:
 
-```text
+```php
 /**
  * The application's route middleware groups.
  *
@@ -198,7 +202,7 @@ protected $middlewareGroups = [
 
 Middleware groups may be assigned to routes and controller actions using the same syntax as individual middleware. Again, middleware groups make it more convenient to assign many middleware to a route at once:
 
-```text
+```php
 Route::get('/', function () {
     //
 })->middleware('web');
@@ -212,15 +216,19 @@ Route::middleware(['web', 'subscribed'])->group(function () {
 });
 ```
 
+{% hint style="info" %}
+
+{% endhint %}
+
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
 > Out of the box, the `web` middleware group is automatically applied to your `routes/web.php` file by the `RouteServiceProvider`.
 
-#### [Sorting Middleware](https://laravel.com/docs/7.x/middleware#sorting-middleware) <a id="sorting-middleware"></a>
+### Sorting Middleware
 
 Rarely, you may need your middleware to execute in a specific order but not have control over their order when they are assigned to the route. In this case, you may specify your middleware priority using the `$middlewarePriority` property of your `app/Http/Kernel.php` file:
 
-```text
+```php
 /**
  * The priority-sorted list of middleware.
  *
@@ -239,13 +247,13 @@ protected $middlewarePriority = [
 ];
 ```
 
-### [Middleware Parameters](https://laravel.com/docs/7.x/middleware#middleware-parameters) <a id="middleware-parameters"></a>
+## Middleware Parameters
 
 Middleware can also receive additional parameters. For example, if your application needs to verify that the authenticated user has a given "role" before performing a given action, you could create a `CheckRole` middleware that receives a role name as an additional argument.
 
 Additional middleware parameters will be passed to the middleware after the `$next` argument:
 
-```text
+```php
 <?php
 
 namespace App\Http\Middleware;
@@ -276,17 +284,17 @@ class CheckRole
 
 Middleware parameters may be specified when defining the route by separating the middleware name and parameters with a `:`. Multiple parameters should be delimited by commas:
 
-```text
+```php
 Route::put('post/{id}', function ($id) {
     //
 })->middleware('role:editor');
 ```
 
-### [Terminable Middleware](https://laravel.com/docs/7.x/middleware#terminable-middleware) <a id="terminable-middleware"></a>
+## Terminable Middleware
 
 Sometimes a middleware may need to do some work after the HTTP response has been sent to the browser. If you define a `terminate` method on your middleware and your web server is using FastCGI, the `terminate` method will automatically be called after the response is sent to the browser:
 
-```text
+```php
 <?php
 
 namespace Illuminate\Session\Middleware;
@@ -311,7 +319,7 @@ The `terminate` method should receive both the request and the response. Once yo
 
 When calling the `terminate` method on your middleware, Laravel will resolve a fresh instance of the middleware from the [service container](https://laravel.com/docs/7.x/container). If you would like to use the same middleware instance when the `handle` and `terminate` methods are called, register the middleware with the container using the container's `singleton` method. Typically this should be done in the `register` method of your `AppServiceProvider.php`:
 
-```text
+```php
 use App\Http\Middleware\TerminableMiddleware;
 
 /**

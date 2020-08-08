@@ -1,8 +1,6 @@
 # Контракты
 
-
-
-### [Introduction](https://laravel.com/docs/7.x/contracts#introduction) <a id="introduction"></a>
+## Introduction
 
 Laravel's Contracts are a set of interfaces that define the core services provided by the framework. For example, a `Illuminate\Contracts\Queue\Queue` contract defines the methods needed for queueing jobs, while the `Illuminate\Contracts\Mail\Mailer` contract defines the methods needed for sending e-mail.
 
@@ -10,7 +8,7 @@ Each contract has a corresponding implementation provided by the framework. For 
 
 All of the Laravel contracts live in [their own GitHub repository](https://github.com/illuminate/contracts). This provides a quick reference point for all available contracts, as well as a single, decoupled package that may be utilized by package developers.
 
-#### [Contracts Vs. Facades](https://laravel.com/docs/7.x/contracts#contracts-vs-facades) <a id="contracts-vs-facades"></a>
+### Contracts Vs. Facades
 
 Laravel's [facades](https://laravel.com/docs/7.x/facades) and helper functions provide a simple way of utilizing Laravel's services without needing to type-hint and resolve contracts out of the service container. In most cases, each facade has an equivalent contract.
 
@@ -20,17 +18,21 @@ Unlike facades, which do not require you to require them in your class' construc
 >
 > Most applications will be fine regardless of whether you prefer facades or contracts. However, if you are building a package, you should strongly consider using contracts since they will be easier to test in a package context.
 
-### [When To Use Contracts](https://laravel.com/docs/7.x/contracts#when-to-use-contracts) <a id="when-to-use-contracts"></a>
+{% hint style="info" %}
+
+{% endhint %}
+
+## When To Use Contracts
 
 As discussed elsewhere, much of the decision to use contracts or facades will come down to personal taste and the tastes of your development team. Both contracts and facades can be used to create robust, well-tested Laravel applications. As long as you are keeping your class' responsibilities focused, you will notice very few practical differences between using contracts and facades.
 
 However, you may still have several questions regarding contracts. For example, why use interfaces at all? Isn't using interfaces more complicated? Let's distill the reasons for using interfaces to the following headings: loose coupling and simplicity.
 
-#### [Loose Coupling](https://laravel.com/docs/7.x/contracts#loose-coupling) <a id="loose-coupling"></a>
+### Loose Coupling
 
 First, let's review some code that is tightly coupled to a cache implementation. Consider the following:
 
-```text
+```php
 <?php
 
 namespace App\Orders;
@@ -74,7 +76,7 @@ Likewise, if we want to replace our underlying cache technology \(Memcached\) wi
 
 **Instead of this approach, we can improve our code by depending on a simple, vendor agnostic interface:**
 
-```text
+```php
 <?php
 
 namespace App\Orders;
@@ -103,13 +105,13 @@ class Repository
 
 Now the code is not coupled to any specific vendor, or even Laravel. Since the contracts package contains no implementation and no dependencies, you may easily write an alternative implementation of any given contract, allowing you to replace your cache implementation without modifying any of your cache consuming code.
 
-#### [Simplicity](https://laravel.com/docs/7.x/contracts#simplicity) <a id="simplicity"></a>
+### Simplicity
 
 When all of Laravel's services are neatly defined within simple interfaces, it is very easy to determine the functionality offered by a given service. **The contracts serve as succinct documentation to the framework's features.**
 
 In addition, when you depend on simple interfaces, your code is easier to understand and maintain. Rather than tracking down which methods are available to you within a large, complicated class, you can refer to a simple, clean interface.
 
-### [How To Use Contracts](https://laravel.com/docs/7.x/contracts#how-to-use-contracts) <a id="how-to-use-contracts"></a>
+## How To Use Contracts
 
 So, how do you get an implementation of a contract? It's actually quite simple.
 
@@ -117,7 +119,7 @@ Many types of classes in Laravel are resolved through the [service container](ht
 
 For example, take a look at this event listener:
 
-```text
+```php
 <?php
 
 namespace App\Listeners;
@@ -159,7 +161,7 @@ class CacheOrderInformation
 
 When the event listener is resolved, the service container will read the type-hints on the constructor of the class, and inject the appropriate value. To learn more about registering things in the service container, check out [its documentation](https://laravel.com/docs/7.x/container).
 
-### [Contract Reference](https://laravel.com/docs/7.x/contracts#contract-reference) <a id="contract-reference"></a>
+## Contract Reference
 
 This table provides a quick reference to all of the Laravel contracts and their equivalent facades:
 

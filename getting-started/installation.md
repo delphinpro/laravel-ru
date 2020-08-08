@@ -39,7 +39,7 @@ composer global require laravel/installer
 
 После установки команда `laravel new` создаст новую установку Laravel в указанном вами каталоге. Например, `laravel new blog` создаст каталог под названием blog, содержащий свежую установку Laravel со всеми уже установленными зависимостями Laravel:
 
-```text
+```bash
 laravel new blog
 ```
 
@@ -47,7 +47,7 @@ laravel new blog
 
 Также, Вы можете установить Laravel, выполнив команду Composer `create-project` в Вашем терминале:
 
-```text
+```bash
 composer create-project --prefer-dist laravel/laravel blog
 ```
 
@@ -55,7 +55,7 @@ composer create-project --prefer-dist laravel/laravel blog
 
 Если у вас PHP установлен локально и вы хотите использовать встроенный сервер разработки PHP для разработки приложения, то можете использовать команду Artisan `serve`. Эта команда запустит сервер разработки по адресу `http://localhost:8000`:
 
-```text
+```bash
 php artisan serve
 ```
 

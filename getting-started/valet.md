@@ -1,8 +1,6 @@
 # Valet
 
-
-
-### [Introduction](https://laravel.com/docs/7.x/valet#introduction) <a id="introduction"></a>
+## Introduction
 
 Valet is a Laravel development environment for Mac minimalists. No Vagrant, no `/etc/hosts` file. You can even share your sites publicly using local tunnels. _Yeah, we like it too._
 
@@ -37,7 +35,7 @@ Out of the box, Valet support includes, but is not limited to:
 
 However, you may extend Valet with your own [custom drivers](https://laravel.com/docs/7.x/valet#custom-valet-drivers).
 
-#### [Valet Or Homestead](https://laravel.com/docs/7.x/valet#valet-or-homestead) <a id="valet-or-homestead"></a>
+### Valet Or Homestead
 
 As you may know, Laravel offers [Homestead](https://laravel.com/docs/7.x/homestead), another local Laravel development environment. Homestead and Valet differ in regards to their intended audience and their approach to local development. Homestead offers an entire Ubuntu virtual machine with automated Nginx configuration. Homestead is a wonderful choice if you want a fully virtualized Linux development environment or are on Windows / Linux.
 
@@ -45,7 +43,7 @@ Valet only supports Mac, and requires you to install PHP and a database server d
 
 Both Valet and Homestead are great choices for configuring your Laravel development environment. Which one you choose will depend on your personal taste and your team's needs.
 
-### [Installation](https://laravel.com/docs/7.x/valet#installation) <a id="installation"></a>
+## Installation
 
 **Valet requires macOS and** [**Homebrew**](https://brew.sh/)**. Before installation, you should make sure that no other programs such as Apache or Nginx are binding to your local machine's port 80.**
 
@@ -73,7 +71,7 @@ If you need a database, try MySQL by running `brew install mysql@5.7` on your co
 
 Valet allows you to switch PHP versions using the `valet use php@version` command. Valet will install the specified PHP version via Brew if it is not already installed:
 
-```text
+```bash
 valet use php@7.2
 
 valet use php
@@ -87,15 +85,15 @@ valet use php
 
 If you are having trouble getting your Valet installation to run properly, executing the `composer global update` command followed by `valet install` will reset your installation and can solve a variety of problems. In rare cases it may be necessary to "hard reset" Valet by executing `valet uninstall --force` followed by `valet install`.
 
-#### [Upgrading](https://laravel.com/docs/7.x/valet#upgrading) <a id="upgrading"></a>
+### Upgrading
 
 You may update your Valet installation using the `composer global update` command in your terminal. After upgrading, it is good practice to run the `valet install` command so Valet can make additional upgrades to your configuration files if necessary.
 
-### [Serving Sites](https://laravel.com/docs/7.x/valet#serving-sites) <a id="serving-sites"></a>
+## Serving Sites
 
 Once Valet is installed, you're ready to start serving sites. Valet provides two commands to help you serve your Laravel sites: `park` and `link`.
 
-**The park Command**
+### **The park Command**
 
 * Create a new directory on your Mac by running something like `mkdir ~/Sites`. Next, `cd ~/Sites` and run `valet park`. This command will register your current working directory as a path that Valet should search for sites.
 * Next, create a new Laravel site within this directory: `laravel new blog`.
@@ -103,7 +101,7 @@ Once Valet is installed, you're ready to start serving sites. Valet provides two
 
 **That's all there is to it.** Now, any Laravel project you create within your "parked" directory will automatically be served using the `http://folder-name.test` convention.
 
-**The link Command**
+### **The link Command**
 
 The `link` command may also be used to serve your Laravel sites. This command is useful if you want to serve a single site in a directory and not the entire directory.
 
@@ -116,21 +114,21 @@ To see a listing of all of your linked directories, run the `valet links` comman
 >
 > You can use `valet link` to serve the same project from multiple \(sub\)domains. To add a subdomain or another domain to your project run `valet link subdomain.app-name` from the project folder.
 
-**Securing Sites With TLS**
+### **Securing Sites With TLS**
 
 By default, Valet serves sites over plain HTTP. However, if you would like to serve a site over encrypted TLS using HTTP/2, use the `secure` command. For example, if your site is being served by Valet on the `laravel.test` domain, you should run the following command to secure it:
 
-```text
+```bash
 valet secure laravel
 ```
 
 To "unsecure" a site and revert back to serving its traffic over plain HTTP, use the `unsecure` command. Like the `secure` command, this command accepts the host name that you wish to unsecure:
 
-```text
+```bash
 valet unsecure laravel
 ```
 
-### [Sharing Sites](https://laravel.com/docs/7.x/valet#sharing-sites) <a id="sharing-sites"></a>
+## [Sharing Sites](https://laravel.com/docs/7.x/valet#sharing-sites)
 
 Valet even includes a command to share your local sites with the world, providing an easy way to test your site on mobile devices or share it with team members and clients. No additional software installation is required once Valet is installed.
 
@@ -160,11 +158,11 @@ If you have not run `valet secure` on the project, you can open up network acces
 
 Once you have updated your Nginx configuration, run the `valet restart` command to apply the configuration changes.
 
-### [Site Specific Environment Variables](https://laravel.com/docs/7.x/valet#site-specific-environment-variables) <a id="site-specific-environment-variables"></a>
+## [Site Specific Environment Variables](https://laravel.com/docs/7.x/valet#site-specific-environment-variables)
 
 Some applications using other frameworks may depend on server environment variables but do not provide a way for those variables to be configured within your project. Valet allows you to configure site specific environment variables by adding a `.valet-env.php` file within the root of your project. These variables will be added to the `$_SERVER` global array:
 
-```text
+```php
 <?php
 
 // Set $_SERVER['key'] to "value" for the foo.test site...
@@ -182,7 +180,7 @@ return [
 ];
 ```
 
-### [Proxying Services](https://laravel.com/docs/7.x/valet#proxying-services) <a id="proxying-services"></a>
+## [Proxying Services](https://laravel.com/docs/7.x/valet#proxying-services)
 
 Sometimes you may wish to proxy a Valet domain to another service on your local machine. For example, you may occasionally need to run Valet while also running a separate site in Docker; however, Valet and Docker can't both bind to port 80 at the same time.
 
@@ -204,7 +202,7 @@ You may use the `proxies` command to list all site configuration that are proxie
 valet proxies
 ```
 
-### [Custom Valet Drivers](https://laravel.com/docs/7.x/valet#custom-valet-drivers) <a id="custom-valet-drivers"></a>
+## [Custom Valet Drivers](https://laravel.com/docs/7.x/valet#custom-valet-drivers)
 
 You can write your own Valet "driver" to serve PHP applications running on another framework or CMS that is not natively supported by Valet. When you install Valet, a `~/.config/valet/Drivers` directory is created which contains a `SampleValetDriver.php` file. This file contains a sample driver implementation to demonstrate how to write a custom driver. Writing a driver only requires you to implement three methods: `serves`, `isStaticFile`, and `frontControllerPath`.
 
@@ -220,7 +218,7 @@ The `serves` method should return `true` if your driver should handle the incomi
 
 For example, let's pretend we are writing a `WordPressValetDriver`. Our `serves` method might look something like this:
 
-```text
+```php
 /**
  * Determine if the driver serves the request.
  *
@@ -239,7 +237,7 @@ public function serves($sitePath, $siteName, $uri)
 
 The `isStaticFile` should determine if the incoming request is for a file that is "static", such as an image or a stylesheet. If the file is static, the method should return the fully qualified path to the static file on disk. If the incoming request is not for a static file, the method should return `false`:
 
-```text
+```php
 /**
  * Determine if the incoming request is for a static file.
  *
@@ -266,7 +264,7 @@ public function isStaticFile($sitePath, $siteName, $uri)
 
 The `frontControllerPath` method should return the fully qualified path to your application's "front controller", which is typically your "index.php" file or equivalent:
 
-```text
+```php
 /**
  * Get the fully resolved path to the application's front controller.
  *
@@ -281,11 +279,11 @@ public function frontControllerPath($sitePath, $siteName, $uri)
 }
 ```
 
-#### [Local Drivers](https://laravel.com/docs/7.x/valet#local-drivers) <a id="local-drivers"></a>
+### [Local Drivers](https://laravel.com/docs/7.x/valet#local-drivers)
 
 If you would like to define a custom Valet driver for a single application, create a `LocalValetDriver.php` in the application's root directory. Your custom driver may extend the base `ValetDriver` class or extend an existing application specific driver such as the `LaravelValetDriver`:
 
-```text
+```php
 class LocalValetDriver extends LaravelValetDriver
 {
     /**
@@ -316,7 +314,7 @@ class LocalValetDriver extends LaravelValetDriver
 }
 ```
 
-### [Other Valet Commands](https://laravel.com/docs/7.x/valet#other-valet-commands) <a id="other-valet-commands"></a>
+## [Other Valet Commands](https://laravel.com/docs/7.x/valet#other-valet-commands)
 
 | Command | Description |
 | :--- | :--- |
@@ -329,7 +327,7 @@ class LocalValetDriver extends LaravelValetDriver
 | `valet trust` | Add sudoers files for Brew and Valet to allow Valet commands to be run without prompting for passwords. |
 | `valet uninstall` | Uninstall Valet: Shows instructions for manual uninstall; or pass the `--force` parameter to aggressively delete all of Valet. |
 
-### [Valet Directories & Files](https://laravel.com/docs/7.x/valet#valet-directories-and-files) <a id="valet-directories-and-files"></a>
+## [Valet Directories & Files](https://laravel.com/docs/7.x/valet#valet-directories-and-files)
 
 You may find the following directory and file information helpful while troubleshooting issues with your Valet environment:
 

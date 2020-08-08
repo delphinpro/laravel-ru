@@ -35,6 +35,7 @@
 
 ## Глубокое погружение <a id="digging-deeper"></a>
 
+* [Консоль Artisan](digging-deeper/artisan.md)
 * [Broadcasting](digging-deeper/broadcasting.md)
 * [События](digging-deeper/events.md)
 * [Очереди](digging-deeper/queues.md)

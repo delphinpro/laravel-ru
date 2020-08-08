@@ -6,7 +6,7 @@
 
 Все фасады Laravel определены в пространстве имен `Illuminate\Support\Facades`. Таким образом, мы можем легко получить доступ к такому фасаду:
 
-```text
+```php
 use Illuminate\Support\Facades\Cache;
 
 Route::get('/cache', function () {
@@ -22,6 +22,10 @@ Route::get('/cache', function () {
 
 Тем не менее, при использовании фасадов необходимо проявлять некоторую осторожность. Основная опасность фасадов — это ползучесть по классу. Так как фасады настолько просты в использовании и не требуют внедрения, можно легко позволить Вашим классам продолжать расти и использовать много фасадов в одном классе. Используя внедрение зависимостей, этот потенциал смягчается визуальной обратной связью, которую дает вам большой конструктор, что ваш класс растет слишком большим. Поэтому, при использовании фасадов, обратите особое внимание на размер вашего класса, чтобы сфера его ответственности оставалась узкой.
 
+{% hint style="info" %}
+
+{% endhint %}
+
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
 > При создании стороннего пакета, взаимодействующего с Laravel, лучше сделать внедрение [Laravel Contracts](contracts.md) вместо использования фасадов. Поскольку пакеты создаются вне самой Laravel, у вас не будет доступа к помощникам Laravel по тестированию фасадов.
@@ -32,7 +36,7 @@ Route::get('/cache', function () {
 
 Обычно невозможно имитировать или заглушить по-настоящему статический метод класса. Однако, поскольку фасады используют динамические методы для прокси вызова методов к объектам, разрешенным из сервисного контейнера, мы фактически можем тестировать фасады точно так же, как мы тестировали бы внедряемый экземпляр класса. Например, учитывая следующий маршрут:
 
-```text
+```php
 use Illuminate\Support\Facades\Cache;
 
 Route::get('/cache', function () {
@@ -42,7 +46,7 @@ Route::get('/cache', function () {
 
 We can write the following test to verify that the `Cache::get` method was called with the argument we expected:
 
-```text
+```php
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -61,11 +65,11 @@ public function testBasicExample()
 }
 ```
 
-### [Facades Vs. Helper Functions](https://laravel.com/docs/7.x/facades#facades-vs-helper-functions) <a id="facades-vs-helper-functions"></a>
+### Facades Vs. Helper Functions <a id="facades-vs-helper-functions"></a>
 
 In addition to facades, Laravel includes a variety of "helper" functions which can perform common tasks like generating views, firing events, dispatching jobs, or sending HTTP responses. Many of these helper functions perform the same function as a corresponding facade. For example, this facade call and helper call are equivalent:
 
-```text
+```php
 return View::make('profile');
 
 return view('profile');
@@ -73,7 +77,7 @@ return view('profile');
 
 There is absolutely no practical difference between facades and helper functions. When using helper functions, you may still test them exactly as you would the corresponding facade. For example, given the following route:
 
-```text
+```php
 Route::get('/cache', function () {
     return cache('key');
 });
@@ -81,7 +85,7 @@ Route::get('/cache', function () {
 
 Under the hood, the `cache` helper is going to call the `get` method on the class underlying the `Cache` facade. So, even though we are using the helper function, we can write the following test to verify that the method was called with the argument we expected:
 
-```text
+```php
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -100,13 +104,13 @@ public function testBasicExample()
 }
 ```
 
-## [How Facades Work](https://laravel.com/docs/7.x/facades#how-facades-work) <a id="how-facades-work"></a>
+## How Facades Work <a id="how-facades-work"></a>
 
 In a Laravel application, a facade is a class that provides access to an object from the container. The machinery that makes this work is in the `Facade` class. Laravel's facades, and any custom facades you create, will extend the base `Illuminate\Support\Facades\Facade` class.
 
 The `Facade` base class makes use of the `__callStatic()` magic-method to defer calls from your facade to an object resolved from the container. In the example below, a call is made to the Laravel cache system. By glancing at this code, one might assume that the static method `get` is being called on the `Cache` class:
 
-```text
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -135,7 +139,7 @@ Notice that near the top of the file we are "importing" the `Cache` facade. This
 
 If we look at that `Illuminate\Support\Facades\Cache` class, you'll see that there is no static method `get`:
 
-```text
+```php
 class Cache extends Facade
 {
     /**
@@ -149,11 +153,11 @@ class Cache extends Facade
 
 Instead, the `Cache` facade extends the base `Facade` class and defines the method `getFacadeAccessor()`. This method's job is to return the name of a service container binding. When a user references any static method on the `Cache` facade, Laravel resolves the `cache` binding from the [service container](https://laravel.com/docs/7.x/container) and runs the requested method \(in this case, `get`\) against that object.
 
-## [Real-Time Facades](https://laravel.com/docs/7.x/facades#real-time-facades) <a id="real-time-facades"></a>
+## Real-Time Facades <a id="real-time-facades"></a>
 
 Using real-time facades, you may treat any class in your application as if it were a facade. To illustrate how this can be used, let's examine an alternative. For example, let's assume our `Podcast` model has a `publish` method. However, in order to publish the podcast, we need to inject a `Publisher` instance:
 
-```text
+```php
 <?php
 
 namespace App;
@@ -180,7 +184,7 @@ class Podcast extends Model
 
 Injecting a publisher implementation into the method allows us to easily test the method in isolation since we can mock the injected publisher. However, it requires us to always pass a publisher instance each time we call the `publish` method. Using real-time facades, we can maintain the same testability while not being required to explicitly pass a `Publisher` instance. To generate a real-time facade, prefix the namespace of the imported class with `Facades`:
 
-```text
+```php
 <?php
 
 namespace App;
@@ -206,7 +210,7 @@ class Podcast extends Model
 
 When the real-time facade is used, the publisher implementation will be resolved out of the service container using the portion of the interface or class name that appears after the `Facades` prefix. When testing, we can use Laravel's built-in facade testing helpers to mock this method call:
 
-```text
+```php
 <?php
 
 namespace Tests\Feature;
@@ -236,7 +240,7 @@ class PodcastTest extends TestCase
 }
 ```
 
-## [Facade Class Reference](https://laravel.com/docs/7.x/facades#facade-class-reference) <a id="facade-class-reference"></a>
+## Facade Class Reference <a id="facade-class-reference"></a>
 
 Below you will find every facade and its underlying class. This is a useful tool for quickly digging into the API documentation for a given facade root. The [service container binding](https://laravel.com/docs/7.x/container) key is also included where applicable.
 

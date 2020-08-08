@@ -1,12 +1,12 @@
 # Развертывание
 
-### [Introduction](https://laravel.com/docs/7.x/deployment#introduction) <a id="introduction"></a>
+## Introduction
 
 When you're ready to deploy your Laravel application to production, there are some important things you can do to make sure your application is running as efficiently as possible. In this document, we'll cover some great starting points for making sure your Laravel application is deployed properly.
 
-### [Server Configuration](https://laravel.com/docs/7.x/deployment#server-configuration) <a id="server-configuration"></a>
+## Server Configuration
 
-#### [Nginx](https://laravel.com/docs/7.x/deployment#nginx) <a id="nginx"></a>
+### Nginx
 
 If you are deploying your application to a server that is running Nginx, you may use the following configuration file as a starting point for configuring your web server. Most likely, this file will need to be customized depending on your server's configuration. If you would like assistance in managing your server, consider using a service such as [Laravel Forge](https://forge.laravel.com/):
 
@@ -45,39 +45,51 @@ server {
 }
 ```
 
-### [Optimization](https://laravel.com/docs/7.x/deployment#optimization) <a id="optimization"></a>
+## Optimization
 
-#### [Autoloader Optimization](https://laravel.com/docs/7.x/deployment#autoloader-optimization) <a id="autoloader-optimization"></a>
+### Autoloader Optimization
 
 When deploying to production, make sure that you are optimizing Composer's class autoloader map so Composer can quickly find the proper file to load for a given class:
 
-```text
+```bash
 composer install --optimize-autoloader --no-dev
 ```
+
+{% hint style="info" %}
+
+{% endhint %}
 
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
 > In addition to optimizing the autoloader, you should always be sure to include a `composer.lock` file in your project's source control repository. Your project's dependencies can be installed much faster when a `composer.lock` file is present.
 
-#### [Optimizing Configuration Loading](https://laravel.com/docs/7.x/deployment#optimizing-configuration-loading) <a id="optimizing-configuration-loading"></a>
+### Optimizing Configuration Loading
 
 When deploying your application to production, you should make sure that you run the `config:cache` Artisan command during your deployment process:
 
-```text
+```bash
 php artisan config:cache
 ```
 
 This command will combine all of Laravel's configuration files into a single, cached file, which greatly reduces the number of trips the framework must make to the filesystem when loading your configuration values.
 
+{% hint style="warning" %}
+
+{% endhint %}
+
 > ![](https://laravel.com/img/callouts/exclamation.min.svg)
 >
 > If you execute the `config:cache` command during your deployment process, you should be sure that you are only calling the `env` function from within your configuration files. Once the configuration has been cached, the `.env` file will not be loaded and all calls to the `env` function will return `null`.
 
-#### [Optimizing Route Loading](https://laravel.com/docs/7.x/deployment#optimizing-route-loading) <a id="optimizing-route-loading"></a>
+### Optimizing Route Loading
 
 If you are building a large application with many routes, you should make sure that you are running the `route:cache` Artisan command during your deployment process:
 
-```text
+{% hint style="warning" %}
+
+{% endhint %}
+
+```bash
 php artisan route:cache
 ```
 
@@ -87,17 +99,17 @@ This command reduces all of your route registrations into a single method call w
 >
 > Since this feature uses PHP serialization, you may only cache the routes for applications that exclusively use controller based routes. PHP is not able to serialize Closures.
 
-#### [Optimizing View Loading](https://laravel.com/docs/7.x/deployment#optimizing-view-loading) <a id="optimizing-view-loading"></a>
+### Optimizing View Loading
 
 When deploying your application to production, you should make sure that you run the `view:cache` Artisan command during your deployment process:
 
-```text
+```bash
 php artisan view:cache
 ```
 
 This command precompiles all your Blade views so they are not compiled on demand, improving the performance of each request that returns a view.
 
-### [Deploying With Forge / Vapor](https://laravel.com/docs/7.x/deployment#deploying-with-forge-or-vapor) <a id="deploying-with-forge-or-vapor"></a>
+## Deploying With Forge / Vapor
 
 If you aren't quite ready to manage your own server configuration or aren't comfortable configuring all of the various services needed to run a robust Laravel application, [Laravel Forge](https://forge.laravel.com/) is a wonderful alternative.
 
