@@ -1,6 +1,6 @@
 # Фасады
 
-### Вступление
+## Вступление
 
 Фасады обеспечивают "статический" интерфейс к классам, которые доступны в [service container](service-container.md) приложения. Laravel имеет множество фасадов, которые обеспечивают доступ почти ко всем возможностям фреймворка. Фасады служат "статическими прокси" к базовым классам в сервисном контейнере, обеспечивая преимущество лаконичного, экспрессивного синтаксиса при сохранении большей тестируемости и гибкости по сравнению с традиционными статическими методами.
 
@@ -16,7 +16,7 @@ Route::get('/cache', function () {
 
 Во всей документации Laravel многие примеры будут использовать фасады для демонстрации различных особенностей фреймворка.
 
-### Когда использовать фасады
+## Когда использовать фасады
 
 Фасады имеют много преимуществ. Они обеспечивают лаконичный, запоминающийся синтаксис, который позволяет использовать функции Laravel, не запоминая длинные названия классов, которые необходимо вводить или настраивать вручную. Более того, благодаря уникальному использованию динамических методов PHP, они легко тестируются.
 
@@ -26,7 +26,7 @@ Route::get('/cache', function () {
 >
 > При создании стороннего пакета, взаимодействующего с Laravel, лучше сделать внедрение [Laravel Contracts](contracts.md) вместо использования фасадов. Поскольку пакеты создаются вне самой Laravel, у вас не будет доступа к помощникам Laravel по тестированию фасадов.
 
-#### Фасады Против Внедрения зависимостей
+### Фасады Против Внедрения зависимостей
 
 Одним из основных преимуществ внедрения зависимостей является возможность обмена реализациями внедряемого класса. Это полезно при тестировании, так как можно вводить имитацию или заглушку и утверждать, что различные методы были вызваны в заглушке.
 
@@ -61,7 +61,7 @@ public function testBasicExample()
 }
 ```
 
-#### [Facades Vs. Helper Functions](https://laravel.com/docs/7.x/facades#facades-vs-helper-functions) <a id="facades-vs-helper-functions"></a>
+### [Facades Vs. Helper Functions](https://laravel.com/docs/7.x/facades#facades-vs-helper-functions) <a id="facades-vs-helper-functions"></a>
 
 In addition to facades, Laravel includes a variety of "helper" functions which can perform common tasks like generating views, firing events, dispatching jobs, or sending HTTP responses. Many of these helper functions perform the same function as a corresponding facade. For example, this facade call and helper call are equivalent:
 
@@ -100,7 +100,7 @@ public function testBasicExample()
 }
 ```
 
-### [How Facades Work](https://laravel.com/docs/7.x/facades#how-facades-work) <a id="how-facades-work"></a>
+## [How Facades Work](https://laravel.com/docs/7.x/facades#how-facades-work) <a id="how-facades-work"></a>
 
 In a Laravel application, a facade is a class that provides access to an object from the container. The machinery that makes this work is in the `Facade` class. Laravel's facades, and any custom facades you create, will extend the base `Illuminate\Support\Facades\Facade` class.
 
@@ -149,7 +149,7 @@ class Cache extends Facade
 
 Instead, the `Cache` facade extends the base `Facade` class and defines the method `getFacadeAccessor()`. This method's job is to return the name of a service container binding. When a user references any static method on the `Cache` facade, Laravel resolves the `cache` binding from the [service container](https://laravel.com/docs/7.x/container) and runs the requested method \(in this case, `get`\) against that object.
 
-### [Real-Time Facades](https://laravel.com/docs/7.x/facades#real-time-facades) <a id="real-time-facades"></a>
+## [Real-Time Facades](https://laravel.com/docs/7.x/facades#real-time-facades) <a id="real-time-facades"></a>
 
 Using real-time facades, you may treat any class in your application as if it were a facade. To illustrate how this can be used, let's examine an alternative. For example, let's assume our `Podcast` model has a `publish` method. However, in order to publish the podcast, we need to inject a `Publisher` instance:
 
@@ -236,7 +236,7 @@ class PodcastTest extends TestCase
 }
 ```
 
-### [Facade Class Reference](https://laravel.com/docs/7.x/facades#facade-class-reference) <a id="facade-class-reference"></a>
+## [Facade Class Reference](https://laravel.com/docs/7.x/facades#facade-class-reference) <a id="facade-class-reference"></a>
 
 Below you will find every facade and its underlying class. This is a useful tool for quickly digging into the API documentation for a given facade root. The [service container binding](https://laravel.com/docs/7.x/container) key is also included where applicable.
 

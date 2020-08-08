@@ -21,7 +21,7 @@
 
 Laravel использует Composer для управления своими зависимостями. Поэтому, прежде чем использовать Laravel, убедитесь, что на вашем компьютере установлен Composer.
 
-**С помощью Laravel Installer**
+#### **С помощью Laravel Installer**
 
 Сначала скачайте Laravel installer, используя Composer:
 
@@ -43,7 +43,7 @@ composer global require laravel/installer
 laravel new blog
 ```
 
-**С помощью Composer Create-Project**
+#### **С помощью Composer Create-Project**
 
 Также, Вы можете установить Laravel, выполнив команду Composer `create-project` в Вашем терминале:
 
