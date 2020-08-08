@@ -3,30 +3,31 @@
 ## Вступление
 
 {% hint style="info" %}
-`Хотите быстро начать?` Установите пакет laravel/ui Composer и запустите php artisan ui vue --auth в свежем приложении Laravel. После переноса базы данных перейдите в браузер на http://your-app.test/register или любой другой URL, назначенный вашему приложению. Эти команды позаботятся о подмостках всей вашей системы аутентификации!
+__Хотите быстро начать?__  
+Установите с помощью Composer пакет laravel/ui и выполните команду php artisan ui vue --auth в свежем приложении Laravel. После миграции базы данных перейдите в браузер на `http://your-app.test/register`. Эти команды позаботятся о скелете всей системы аутентификации!
 {% endhint %}
 
-Laravel makes implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at `config/auth.php`, which contains several well documented options for tweaking the behavior of the authentication services.
+Ларавел делает внедрение аутентификации очень простым. На самом деле, практически все настроено для вас из коробки. Файл конфигурации аутентификации расположен по адресу `config/auth.php`. Он содержит несколько хорошо документированных опций для настройки поведения служб аутентификации.
 
-At its core, Laravel's authentication facilities are made up of "guards" and "providers". Guards define how users are authenticated for each request. For example, Laravel ships with a `session` guard which maintains state using session storage and cookies.
+В основе "Ларавел" аутентификации лежат "охранники (guards)" и "провайдеры (providers)". Охранники определяют способ аутентификации пользователей для каждого запроса. Например, Laravel поставляется с охранником `session`, который поддерживает состояние, используя сессии и cookies.
 
-Providers define how users are retrieved from your persistent storage. Laravel ships with support for retrieving users using Eloquent and the database query builder. However, you are free to define additional providers as needed for your application.
+Провайдеры определяют, как пользователи извлекаются из вашего постоянного хранилища. Laravel поставляется с поддержкой извлечения пользователей с помощью Eloquent и конструктора запросов к базе данных. Тем не менее, вы можете определить дополнительных провайдеров, необходимых для вашего приложения.
 
-Don't worry if this all sounds confusing now! Many applications will never need to modify the default authentication configuration.
+Не беспокойтесь, если сейчас все это звучит запутанно! Многим приложениям никогда не придется изменять конфигурацию аутентификации по умолчанию.
 
-### Database Considerations
+### О базе данных
 
-By default, Laravel includes an `App\User` [Eloquent model](../eloquent/getting-started.md) in your `app` directory. This model may be used with the default Eloquent authentication driver. If your application is not using Eloquent, you may use the `database` authentication driver which uses the Laravel query builder.
+По умолчанию Laravel размещает [Модель Eloquent](../eloquent/getting-started.md) `App\User` в каталоге `app`. Эта модель может быть использована с драйвером аутентификации Eloquent по умолчанию. Если ваше приложение не использует Eloquent, вы можете использовать драйвер аутентификации `database`, который использует конструктор запросов Laravel.
 
-When building the database schema for the `App\User` model, make sure the password column is at least 60 characters in length. Maintaining the default string column length of 255 characters would be a good choice.
+При построении схемы базы данных для модели `App\User` убедитесь, что столбец пароля имеет длину не менее 60 символов. Хорошим выбором будет сохранение длины столбца строки по умолчанию в 255 символов.
 
-Also, you should verify that your `users` \(or equivalent\) table contains a nullable, string `remember_token` column of 100 characters. This column will be used to store a token for users that select the "remember me" option when logging into your application.
+Также вы должны убедиться, что ваша таблица `users` \(или аналогичная\) содержит строковое поле строку `remember_token`, состоящую из 100 символов. Это поле должно быть nullable. Оно будет использоваться для хранения токена для пользователей, которые выбирают опцию "запомнить меня" при входе в приложение.
 
-## Authentication Quickstart
+## Аутентификация: быстрый старт
 
-### Routing
+### Маршрутизация
 
-Laravel's `laravel/ui` package provides a quick way to scaffold all of the routes and views you need for authentication using a few simple commands:
+Пакет `laravel/ui` предоставляет быстрый способ задания всех маршрутов и представлений, необходимых для аутентификации с помощью нескольких простых команд:
 
 ```text
 composer require laravel/ui
@@ -34,41 +35,41 @@ composer require laravel/ui
 php artisan ui vue --auth
 ```
 
-This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A `HomeController` will also be generated to handle post-login requests to your application's dashboard.
+Эта команда должна использоваться на вновь установленных приложениях и установит лейаут, представления регистрации и входа, а также маршруты для всех конечных точек аутентификации. Также будет сгенерирован `HomeController`, который будет обрабатывать запросы после входа на панель управления вашего приложения.
 
-The `laravel/ui` package also generates several pre-built authentication controllers, which are located in the `App\Http\Controllers\Auth` namespace. The `RegisterController` handles new user registration, the `LoginController` handles authentication, the `ForgotPasswordController` handles e-mailing links for resetting passwords, and the `ResetPasswordController` contains the logic to reset passwords. Each of these controllers uses a trait to include their necessary methods. For many applications, you will not need to modify these controllers at all.
+Пакет `laravel/ui` также генерирует несколько предустановленных контроллеров аутентификации, которые находятся в пространстве имен `App\Http\Controllers\Auth`. Пакет `RegisterController` обрабатывает регистрацию новых пользователей, `LoginController` — аутентификацию, `ForgotPasswordController` — ссылки на электронную почту для сброса паролей, а `ResetPasswordController` содержит логику сброса паролей. Каждый из этих контроллеров использует свой признак для включения необходимых методов. Для многих приложений, Вам не нужно будет изменять эти контроллеры вообще.
 
 {% hint style="info" %}
- If your application doesn’t need registration, you may disable it by removing the newly created `RegisterController` and modifying your route declaration: `Auth::routes(['register' => false]);`.
+ Если ваше приложение не нуждается в регистрации, вы можете отключить его, удалив только что созданный `RegisterController` и изменив декларацию маршрута: `Auth::routes(['register' => false]);`.
 {% endhint %}
 
-**Creating Applications Including Authentication**
+**Создание приложений, включающих аутентификацию**
 
-If you are starting a brand new application and would like to include the authentication scaffolding, you may use the `--auth` directive when creating your application. This command will create a new application with all of the authentication scaffolding compiled and installed:
+Если вы запускаете совершенно новое приложение и хотите сразу включить обвязку аутентификации, то можете использовать директиву `--auth` при создании. Эта команда создаст новое приложение со всей обвязкой для аутентификации, скомпилированной и установленной:
 
 ```text
 laravel new blog --auth
 ```
 
-### Views
+### Представления
 
-As mentioned in the previous section, the `laravel/ui` package's `php artisan ui vue --auth` command will create all of the views you need for authentication and place them in the `resources/views/auth` directory.
+Как упоминалось в предыдущем разделе, команда `php artisan ui vue --auth` из пакета `laravel/ui` создаст все представления, необходимые для аутентификации, и поместит их в каталог `resources/views/auth`.
 
-The `ui` command will also create a `resources/views/layouts` directory containing a base layout for your application. All of these views use the Bootstrap CSS framework, but you are free to customize them however you wish.
+Команда `ui` также создаст каталог `resources/views/layouts`, содержащий базовый макет для вашего приложения. Все эти представления используют фреймворк Bootstrap CSS, но вы можете настроить их, как пожелаете.
 
-### Authenticating
+### Аутентификация
 
-Now that you have routes and views setup for the included authentication controllers, you are ready to register and authenticate new users for your application! You may access your application in a browser since the authentication controllers already contain the logic \(via their traits\) to authenticate existing users and store new users in the database.
+Теперь, когда вы настроили маршруты и представления для входящих в комплект контроллеров аутентификации, вы готовы регистрировать и аутентифицировать новых пользователей! Вы можете получить доступ к приложению в браузере, так как контроллеры аутентификации уже содержат логику \(через их трейты\) для аутентификации существующих пользователей и хранения новых пользователей в базе данных.
 
-**Path Customization**
+**Настройка пути**
 
-When a user is successfully authenticated, they will be redirected to the `/home` URI. You can customize the post-authentication redirect path using the `HOME` constant defined in your `RouteServiceProvider`:
+Когда пользователь успешно аутентифицируется, он будет перенаправлен в URI `/home`. Вы можете настроить путь редиректа после аутентификации, используя константу `HOME`, определенную в вашем `RouteServiceProvider`:
 
 ```text
 public const HOME = '/home';
 ```
 
-If you need more robust customization of the response returned when a user is authenticated, Laravel provides an empty `authenticated(Request $request, $user)` method within the `AuthenticatesUsers` trait. This trait is used by the `LoginController` class that is installed into your application when using the `laravel/ui` package. Therefore, you can define your own `authenticated` method within the `LoginController` class:
+Если вам нужна более надежная настройка ответа, возвращаемого при аутентификации пользователя, Laravel предоставляет пустой метод `authenticated(Request $request, $user)` в трейте `AuthenticatesUsers`. Этот трейт используется классом `LoginController`, который устанавливается в ваше приложение при использовании пакета `laravel/ui`. Таким образом, Вы можете определить свой собственный метод `authenticated` в классе `LoginController`: 
 
 ```text
 /**
@@ -86,9 +87,9 @@ protected function authenticated(Request $request, $user)
 }
 ```
 
-**Username Customization**
+**Настройка имени пользователя**
 
-By default, Laravel uses the `email` field for authentication. If you would like to customize this, you may define a `username` method on your `LoginController`:
+По умолчанию, Laravel использует поле `email` для аутентификации. Если вы хотите изменить это, то можете определить метод `username` в классе `LoginController`:
 
 ```text
 public function username()
@@ -97,9 +98,9 @@ public function username()
 }
 ```
 
-**Guard Customization**
+**Настройка охранника**
 
-You may also customize the "guard" that is used to authenticate and register users. To get started, define a `guard` method on your `LoginController`, `RegisterController`, and `ResetPasswordController`. The method should return a guard instance:
+Вы также можете изменить охранника \("guard"\), который используется для аутентификации и регистрации пользователей. Для начала определите метод `duard` в контроллерах `LoginController`, `RegisterController` и `ResetPasswordController`. Метод должен возвращать экземпляр охраннника:
 
 ```text
 use Illuminate\Support\Facades\Auth;
@@ -110,13 +111,13 @@ protected function guard()
 }
 ```
 
-**Validation / Storage Customization**
+**Настройка валидации и хранилища**
 
-To modify the form fields that are required when a new user registers with your application, or to customize how new users are stored into your database, you may modify the `RegisterController` class. This class is responsible for validating and creating new users of your application.
+Для изменения полей формы, которые требуются при регистрации нового пользователя в вашем приложении, или для настройки способа хранения новых пользователей в вашей базе данных, вы можете изменить класс `RegisterController`. Этот класс отвечает за проверку и создание новых пользователей Вашего приложения.
 
-The `validator` method of the `RegisterController` contains the validation rules for new users of the application. You are free to modify this method as you wish.
+Метод `validator` класса `RegisterController` содержит правила валидации для новых пользователей приложения. Вы можете изменять этот метод по своему усмотрению.
 
-The `create` method of the `RegisterController` is responsible for creating new `App\User` records in your database using the [Eloquent ORM](../eloquent/getting-started.md). You are free to modify this method according to the needs of your database.
+Метод `create` класса `RegisterController` отвечает за создание новых записей `App\User` в вашей базе данных с помощью [Eloquent ORM](.../eloquent/getting-started.md). Вы можете свободно модифицировать этот метод в соответствии с потребностями вашей базы данных.
 
 ### Retrieving The Authenticated User
 
