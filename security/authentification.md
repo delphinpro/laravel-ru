@@ -29,7 +29,7 @@
 
 Пакет `laravel/ui` предоставляет быстрый способ задания всех маршрутов и представлений, необходимых для аутентификации с помощью нескольких простых команд:
 
-```text
+```bash
 composer require laravel/ui
 
 php artisan ui vue --auth
@@ -47,7 +47,7 @@ php artisan ui vue --auth
 
 Если вы запускаете совершенно новое приложение и хотите сразу включить обвязку аутентификации, то можете использовать директиву `--auth` при создании. Эта команда создаст новое приложение со всей обвязкой для аутентификации, скомпилированной и установленной:
 
-```text
+```bash
 laravel new blog --auth
 ```
 
@@ -65,13 +65,13 @@ laravel new blog --auth
 
 Когда пользователь успешно аутентифицируется, он будет перенаправлен в URI `/home`. Вы можете настроить путь редиректа после аутентификации, используя константу `HOME`, определенную в вашем `RouteServiceProvider`:
 
-```text
-public const HOME = '/home';
+```php
+public conpst HOME = '/home';
 ```
 
 Если вам нужна более тонкая настройка ответа, возвращаемого при аутентификации пользователя, Laravel предоставляет пустой метод `authenticated(Request $request, $user)` в трейте `AuthenticatesUsers`. Этот трейт используется классом `LoginController`, который устанавливается в ваше приложение при использовании пакета `laravel/ui`. Таким образом, Вы можете определить свой собственный метод `authenticated` в классе `LoginController`:
 
-```text
+```php
 /**
  * The user has been authenticated.
  *
@@ -91,7 +91,7 @@ protected function authenticated(Request $request, $user)
 
 По умолчанию, Laravel использует поле `email` для аутентификации. Если вы хотите изменить это, то можете определить метод `username` в классе `LoginController`:
 
-```text
+```php
 public function username()
 {
     return 'username';
@@ -102,7 +102,7 @@ public function username()
 
 Вы также можете изменить охранника \("guard"\), который используется для аутентификации и регистрации пользователей. Для начала определите метод `duard` в контроллерах `LoginController`, `RegisterController` и `ResetPasswordController`. Метод должен возвращать экземпляр охраннника:
 
-```text
+```php
 use Illuminate\Support\Facades\Auth;
 
 protected function guard()
@@ -123,7 +123,7 @@ protected function guard()
 
 Вы можете получить доступ к аутентифицированному пользователю через фасад `Auth`:
 
-```text
+```php
 use Illuminate\Support\Facades\Auth;
 
 // Get the currently authenticated user...
@@ -135,7 +135,7 @@ $id = Auth::id();
 
 В качестве альтернативы, после того, как пользователь аутентифицирован, вы можете получить доступ к нему через экземпляр `Illuminate\Http\Request`. Помните, что классы с type-hint будут автоматически вставляться в методы вашего контроллера:
 
-```text
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -161,7 +161,7 @@ class ProfileController extends Controller
 
 Чтобы определить, залогинен ли пользователь в приложении, вы можете использовать метод `check` фасада `Auth`, который вернет `true`, если пользователь аутентифицирован:
 
-```text
+```php
 use Illuminate\Support\Facades\Auth;
 
 if (Auth::check()) {
@@ -177,7 +177,7 @@ if (Auth::check()) {
 
 [Посредник в маршрутах](../the-basics/middleware.md) может использоваться только для того, чтобы разрешить авторизованным пользователям доступ к заданному маршруту. Laravel поставляется с посредником `auth`, который определяется в `Illuminate\Auth\Middleware\Authenticate`. Так как этот посредник уже зарегистрирован в HTTP ядре, все, что вам нужно сделать, это указать его в определении маршрута:
 
-```text
+```php
 Route::get('profile', function () {
     // Only authenticated users may enter...
 })->middleware('auth');
@@ -185,7 +185,7 @@ Route::get('profile', function () {
 
 Если Вы используете [контроллеры](../the-basics/controllers.md), то можете вызвать метод `middleware` напрямую из конструктора контроллера вместо того, чтобы указывать его в определении маршрута:
 
-```text
+```php
 public function __construct()
 {
     $this->middleware('auth');
@@ -196,7 +196,7 @@ public function __construct()
 
 Когда посредник `auth` обнаруживает неавторизованного пользователя, оно перенаправляет пользователя на [именованный маршрут](https://github.com/delphinpro/laravel-ru/tree/23145faa5557cb82ae9c1b23ff97487d9737edca/security/.../the-basics/routing.md#imenovannye-marshruty) `login`. Вы можете изменить это поведение, обновив функцию `redirectTo` в файле `app/Http/Middleware/Authenticate.php`:
 
-```text
+```php
 /**
  * Get the path the user should be redirected to.
  *
@@ -213,7 +213,7 @@ protected function redirectTo($request)
 
 При подключении посредника `auth` к маршруту, вы также можете указать, какой защитник должен использоваться для аутентификации пользователя. Указанный защитник должен соответствовать одному из ключей в массиве `guards` конфигурационного файла `auth.php`:
 
-```text
+```php
 public function __construct()
 {
     $this->middleware('auth:api');
@@ -226,7 +226,7 @@ public function __construct()
 
 Для этого Laravel предоставляет посредника `password.confirm`. Включение посредника `password.confirm` в маршрут перенаправит пользователей на экран, где они должны будут подтвердить свой пароль, прежде чем смогут продолжить работу:
 
-```text
+```php
 Route::get('/settings/security', function () {
     // Users must confirm their password before continuing...
 })->middleware(['auth', 'password.confirm']);
@@ -244,7 +244,7 @@ Route::get('/settings/security', function () {
 
 Мы получаем доступ к сервисам аутентификации Ларавела через [фасад](../architecture-concepts/facades.md) `Auth`, поэтому нужно убедиться, что фасад `Auth` импортирован в файле. Далее посмотрим на метод `attempt`:
 
-```text
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -283,7 +283,7 @@ class LoginController extends Controller
 
 При желании вы также можете добавить дополнительные условия к запросу на аутентификацию в дополнение к электронной почте и паролю пользователя. Например, мы можем проверить, что пользователь отмечен как "active":
 
-```text
+```php
 if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
     // The user is active, not suspended, and exists.
 }
@@ -299,7 +299,7 @@ if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) 
 
 Имя охранника, переданное в метод `guard` должно соответствовать одному из охранников, настроенных в конфигурационном файле `auth.php`:
 
-```text
+```php
 if (Auth::guard('admin')->attempt($credentials)) {
     //
 }
@@ -309,7 +309,7 @@ if (Auth::guard('admin')->attempt($credentials)) {
 
 Для выхода пользователей из приложения вы можете использовать метод `logout` фасада `Auth`. Это очистит информацию об аутентификации в сессии пользователя:
 
-```text
+```php
 Auth::logout();
 ```
 
@@ -317,7 +317,7 @@ Auth::logout();
 
 Если вы хотите обеспечить функциональность "запомнить меня", можете передать булевое значение в качестве второго аргумента методу `attempt`, который будет держать пользователя аутентифицированным бесконечно долго, или до тех пор, пока он вручную не выйдет из системы. Ваша таблица `users` должна содержать поле `remember_token`, которая будет использоваться для хранения токена "помнить меня".
 
-```text
+```php
 if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
     // The user is being remembered...
 }
@@ -329,7 +329,7 @@ if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
 
 Если вы "вспоминаете" пользователей, вы можете использовать метод `viaRemember` для определения того, был ли пользователь аутентифицирован с помощью cookie "помните меня":
 
-```text
+```php
 if (Auth::viaRemember()) {
     //
 }
@@ -341,7 +341,7 @@ if (Auth::viaRemember()) {
 
 Если Вам необходимо зарегистрировать существующий экземпляр пользователя, Вы можете вызвать метод `login` этого экземпляра пользователя. Данный объект должен реализовывать [контракт](../architecture-concepts/contracts.md) `Illuminate\Contracts\Auth\Authenticatable`. Модель `App\User`, входящая в состав Laravel, уже реализует этот интерфейс:
 
-```text
+```php
 Auth::login($user);
 
 // Login and "remember" the given user...
@@ -350,7 +350,7 @@ Auth::login($user, true);
 
 Вы можете указать экземпляр защитника, который хотите использовать:
 
-```text
+```php
 Auth::guard('admin')->login($user);
 ```
 
@@ -358,7 +358,7 @@ Auth::guard('admin')->login($user);
 
 Для входа пользователя в приложение по его ID можно воспользоваться методом `loginUsingId`. Этот метод принимает первичный ключ пользователя, которого вы хотите аутентифицировать:
 
-```text
+```php
 Auth::loginUsingId(1);
 
 // Login and "remember" the given user...
@@ -369,7 +369,7 @@ Auth::loginUsingId(1, true);
 
 Вы можете использовать метод `once` для входа пользователя в приложение для одного запроса. Сессии и куки-файлы использоваться не будут, что означает, что этот метод может быть полезен при построении API без состояния:
 
-```text
+```php
 if (Auth::once($credentials)) {
     //
 }
@@ -379,7 +379,7 @@ if (Auth::once($credentials)) {
 
 [HTTP-Basic аутентификация](https://en.wikipedia.org/wiki/Basic_access_authentication) обеспечивает быстрый способ аутентификации пользователей без настройки специальной страницы входа. Для начала добавьте [посредника](../the-basics/middleware.md) `auth.basic` к вашему маршруту. Посредник `auth.basic` включен в фреймворк Laravel, так что вам не нужно его определять:
 
-```text
+```php
 Route::get('profile', function () {
     // Only authenticated users may enter...
 })->middleware('auth.basic');
@@ -391,7 +391,7 @@ Route::get('profile', function () {
 
 Если вы используете PHP FastCGI, то HTTP-Basic аутентификация может работать некорректно. Добавьте следующие строки в файл `.htaccess`:
 
-```text
+```php
 RewriteCond %{HTTP:Authorization} ^(.+)$
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 ```
@@ -400,7 +400,7 @@ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 Вы также можете использовать базовую HTTP-аутентификацию без установки куки-файла идентификатора пользователя в сессии, что особенно полезно для API-аутентификации. Для этого [определите посредника](../the-basics/middleware.md), который вызывает метод `onceBasic`. Если метод `onceBasic` не возвращает ответ, то запрос может быть передан дальше в приложение:
 
-```text
+```php
 <?php
 
 namespace App\Http\Middleware;
@@ -426,7 +426,7 @@ class AuthenticateOnceWithBasicAuth
 
 Далее [зарегистрируйте посредника](../the-basics/middleware.md#registering-middleware) и добавьте его к маршруту:
 
-```text
+```php
 Route::get('api/user', function () {
     // Only authenticated users may enter...
 })->middleware('auth.basic.once');
@@ -436,7 +436,7 @@ Route::get('api/user', function () {
 
 Для ручного выхода пользователей вы можете использовать метод `logout` фасада `Auth`. Это очистит информацию об аутентификации в сессии пользователя:
 
-```text
+```php
 use Illuminate\Support\Facades\Auth;
 
 Auth::logout();
@@ -448,7 +448,7 @@ Laravel также обеспечивает механизм для аннули
 
 Прежде чем начать, вы должны убедиться, что посредник `Illuminate\Session\Middleware\AuthenticateSession` присутствует и не закомментирован в классе `app/Http/Kernel.php` в группе `web` посредников:
 
-```text
+```php
 'web' => [
     // ...
     \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -458,7 +458,7 @@ Laravel также обеспечивает механизм для аннули
 
 Затем, вы можете использовать метод `logoutOtherDevices` фасада `Auth`. Этот метод требует от пользователя указать свой текущий пароль, который ваше приложение должно принять через форму ввода:
 
-```text
+```php
 use Illuminate\Support\Facades\Auth;
 
 Auth::logoutOtherDevices($password);
@@ -472,9 +472,9 @@ Auth::logoutOtherDevices($password);
 
 ## Добавление пользовательских охранников
 
-Вы можете определить своих собственных охранников аутентификации, используя метод `extend` фасада `Auth`. Этот вызов следует поместить в `extend` внутри \[сервис-провайдера\] \(.../architecture-concepts/providers.md\). Поскольку Laravel уже поставляется с `AuthServiceProvider`, мы можем разместить код в этом провайдере:
+Вы можете определить своих собственных охранников аутентификации, используя метод `extend` фасада `Auth`. Этот вызов следует поместить в `extend` внутри [сервис-провайдера](../architecture-concepts/providers.md). Поскольку Laravel уже поставляется с `AuthServiceProvider`, мы можем разместить код в этом провайдере:
 
-```text
+```php
 <?php
 
 namespace App\Providers;
@@ -505,7 +505,7 @@ class AuthServiceProvider extends ServiceProvider
 
 Как видно в примере выше, функция обратного вызова, переданная в метод `extend` должна возвращать реализацию `Illuminate\Contracts\Auth\Guard`. Этот интерфейс содержит несколько методов, которые потребуется реализовать для определения пользовательского охранника. После того, как ваш пользовательский защитник будет определен, вы можете использовать этот защитник в конфигурации `guards` конфигурационного файла `auth.php`:
 
-```text
+```php
 'guards' => [
     'api' => [
         'driver' => 'jwt',
@@ -520,7 +520,7 @@ class AuthServiceProvider extends ServiceProvider
 
 Для начала вызовите метод `Auth::viaRequest` внутри метода `boot` вашего `AuthServiceProvider`. Метод `viaRequest` принимает в качестве первого аргумента имя драйвера аутентификации. Это имя может быть любой строкой, описывающей вашего пользовательского защитника. Второй аргумент, передаваемый методу, должен быть Closure, принимающий входящий HTTP-запрос и возвращающий экземпляр пользователя или, в случае неудачи аутентификации, `null`:
 
-```text
+```php
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -542,7 +542,7 @@ public function boot()
 
 После того, как ваш пользовательский драйвер аутентификации определен, используйте его в качестве драйвера в конфигурации `guards` конфигурационного файла `auth.php`:
 
-```text
+```php
 'guards' => [
     'api' => [
         'driver' => 'custom-token',
@@ -554,7 +554,7 @@ public function boot()
 
 Если вы не используете традиционную реляционную базу данных для хранения пользователей, вам придется расширить Laravel с помощью собственного поставщика аутентификации пользователей. Мы будем использовать метод `provider` фасада `Auth` для определения кастомного провайдера пользователей:
 
-```text
+```php
 <?php
 
 namespace App\Providers;
@@ -585,7 +585,7 @@ class AuthServiceProvider extends ServiceProvider
 
 После регистрации провайдера методом `provider`, Вы можете переключиться на нового провайдера в своем конфигурационном файле `auth.php`. Сначала определите `провайдера`, который использует Ваш новый драйвер:
 
-```text
+```php
 'providers' => [
     'users' => [
         'driver' => 'riak',
@@ -595,7 +595,7 @@ class AuthServiceProvider extends ServiceProvider
 
 Наконец, Вы можете использовать этот провайдер в конфигурации `guards`:
 
-```text
+```php
 'guards' => [
     'web' => [
         'driver' => 'session',
@@ -610,7 +610,7 @@ class AuthServiceProvider extends ServiceProvider
 
 Посмотрим на контракт `Illuminate\Contracts\Auth\UserProvider`:
 
-```text
+```php
 <?php
 
 namespace Illuminate\Contracts\Auth;
@@ -639,7 +639,7 @@ interface UserProvider
 
 Теперь, когда мы изучили каждый из методов `UserProvider`, давайте посмотрим на контракт `Authenticable`. Помните, что провайдер должен возвращать реализации этого интерфейса из методов `retrieveById`, `retrieveByToken` и `retrieveByCredentials`:
 
-```text
+```php
 <?php
 
 namespace Illuminate\Contracts\Auth;
@@ -661,7 +661,7 @@ interface Authenticatable
 
 Laravel генерирует различные [события](https://github.com/delphinpro/laravel-ru/tree/23145faa5557cb82ae9c1b23ff97487d9737edca/security/.../digging-deeper/events.md) во время процесса аутентификации. Вы можете повесить слушателей к этим событиям в вашем `EventServiceProvider`:
 
-```text
+```php
 /**
  * The event listener mappings for the application.
  *
