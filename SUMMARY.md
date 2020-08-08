@@ -24,8 +24,16 @@
 * [Посредники \(Middleware\)](the-basics/middleware.md)
 * [CSRF защита](the-basics/csrf-protection.md)
 * [Сессии](the-basics/session.md)
+* [Валидация](the-basics/validation.md)
+
+## Безопасность <a id="security"></a>
+
+* [Авторизация](security/authorization.md)
 
 ## Глубокое погружение <a id="digging-deeper"></a>
 
+* [Broadcasting](digging-deeper/broadcasting.md)
+* [Events](digging-deeper/events.md)
 * [Очереди](digging-deeper/queues.md)
+* [Task Scheduling](digging-deeper/task-scheduling.md)
 

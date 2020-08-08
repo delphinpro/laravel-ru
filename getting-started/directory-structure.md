@@ -1,126 +1,126 @@
 # Структура директорий
 
-### [Introduction](https://laravel.com/docs/7.x/structure#introduction) <a id="introduction"></a>
+## Вступление
 
-The default Laravel application structure is intended to provide a great starting point for both large and small applications. But you are free to organize your application however you like. Laravel imposes almost no restrictions on where any given class is located - as long as Composer can autoload the class.
+Структура приложения Laravel по умолчанию предназначена для обеспечения отличной отправной точки как для больших, так и для маленьких приложений. Но вы можете организовать свое приложение так, как вам нравится. Laravel практически не накладывает никаких ограничений на то, где находится тот или иной класс —до тех пор, пока Composer может автоматически загрузить класс.
 
-**Where Is The Models Directory?**
+**Где находится каталог моделей?**
 
-When getting started with Laravel, many developers are confused by the lack of a `models` directory. However, the lack of such a directory is intentional. We find the word "models" ambiguous since it means many different things to many different people. Some developers refer to an application's "model" as the totality of all of its business logic, while others refer to "models" as classes that interact with a relational database.
+Приступая к работе с Laravel, многие разработчики путаются из-за отсутствия каталога `models`. Однако отсутствие такого каталога является преднамеренным. Слово "модели" мы находим неоднозначным, так как для многих людей оно означает много разных вещей. Одни разработчики называют "модель" приложения как совокупность всей его бизнес-логики, другие - "модели" как классы, взаимодействующие с реляционной базой данных.
 
-For this reason, we choose to place Eloquent models in the `app` directory by default, and allow the developer to place them somewhere else if they choose.
+По этой причине по умолчанию мы решили поместить модели Eloquent в каталог `app` и позволить разработчику разместить их где-нибудь в другом месте, если он захочет.
 
-### [The Root Directory](https://laravel.com/docs/7.x/structure#the-root-directory) <a id="the-root-directory"></a>
+## Корневой каталог
 
-**The App Directory**
+### **Каталог `App`**
 
-The `app` directory contains the core code of your application. We'll explore this directory in more detail soon; however, almost all of the classes in your application will be in this directory.
+Каталог `app` содержит основной код вашего приложения. Ниже мы рассмотрим этот каталог более подробно. Почти все классы вашего приложения будут находиться в этом каталоге.
 
-**The Bootstrap Directory**
+### **Каталог `Bootstrap`**
 
-The `bootstrap` directory contains the `app.php` file which bootstraps the framework. This directory also houses a `cache` directory which contains framework generated files for performance optimization such as the route and services cache files.
+Каталог `bootstrap` содержит файл `app.php`, который загружает фреймворк. Здесь также  присутствует каталог `cache`, который содержит файлы, сгенерированные фреймворком для оптимизации производительности.
 
-**The Config Directory**
+### **Каталог `Config`**
 
-The `config` directory, as the name implies, contains all of your application's configuration files. It's a great idea to read through all of these files and familiarize yourself with all of the options available to you.
+Каталог `config`, как следует из названия, содержит все конфигурационные файлы приложения. Это отличная идея, чтобы прочитать все эти файлы и ознакомиться со всеми доступными опциями.
 
-**The Database Directory**
+### **Каталог `Database`**
 
-The `database` directory contains your database migrations, model factories, and seeds. If you wish, you may also use this directory to hold an SQLite database.
+В каталоге `database` содержатся миграции базы данных, фабрики моделей и сиды. При желании вы также можете использовать этот каталог для хранения БД SQLite.
 
-**The Public Directory**
+### **Каталог `Public`**
 
-The `public` directory contains the `index.php` file, which is the entry point for all requests entering your application and configures autoloading. This directory also houses your assets such as images, JavaScript, and CSS.
+Каталог `public` содержит файл `index.php`, который является точкой входа для всех запросов, поступающих в ваше приложение, и настраивает автозагрузку. Этот каталог также содержит статичные файлы, такие как изображения, JavaScript и CSS.
 
-**The Resources Directory**
+### **Каталог `Resources`**
 
-The `resources` directory contains your views as well as your raw, un-compiled assets such as LESS, SASS, or JavaScript. This directory also houses all of your language files.
+Каталог `resources` содержит ваши представления \(views\), а также ваши необработанные, некомпилированные ассеты, такие как LESS, SASS или JavaScript. Здесь также располагаются все языковые файлы.
 
-**The Routes Directory**
+### **Каталог `Routes`**
 
-The `routes` directory contains all of the route definitions for your application. By default, several route files are included with Laravel: `web.php`, `api.php`, `console.php` and `channels.php`.
+Каталог `routes` содержит все определения маршрутов для приложения. По умолчанию в Laravel включено несколько файлов с маршрутами: `web.php`, `api.php`, `console.php` и `channels.php`.
 
-The `web.php` file contains routes that the `RouteServiceProvider` places in the `web` middleware group, which provides session state, CSRF protection, and cookie encryption. If your application does not offer a stateless, RESTful API, all of your routes will most likely be defined in the `web.php` file.
+Файл `web.php` содержит маршруты, которые `RouteServiceProvider` помещает в группу веб-посредников, обеспечивающую состояние сессии, защиту от CSRF и шифрование cookie-файлов. Если ваше приложение не предлагает RESTful API, все ваши маршруты, скорее всего, будут определены в файле `web.php`.
 
-The `api.php` file contains routes that the `RouteServiceProvider` places in the `api` middleware group, which provides rate limiting. These routes are intended to be stateless, so requests entering the application through these routes are intended to be authenticated via tokens and will not have access to session state.
+Файл `api.php` содержит маршруты, которые `RouteServiceProvider` помещает в группу api-посредников, что обеспечивает ограничение скорости. Эти маршруты предназначены для апатридов, поэтому запросы, поступающие в приложение по этим маршрутам, предназначены для аутентификации с помощью токенов и не будут иметь доступа к состоянию сессии.
 
-The `console.php` file is where you may define all of your Closure based console commands. Each Closure is bound to a command instance allowing a simple approach to interacting with each command's IO methods. Even though this file does not define HTTP routes, it defines console based entry points \(routes\) into your application.
+В файле `console.php` вы можете определить консольные команды, основанные на Closure. Каждая Closure привязана к экземпляру команды, что позволяет использовать простой подход к взаимодействию с IO-методами каждой команды. Несмотря на то, что этот файл не определяет HTTP-маршруты, он определяет консольные точки входа \(маршруты\) в ваше приложение.
 
-The `channels.php` file is where you may register all of the event broadcasting channels that your application supports.
+В файле `channels.php` вы можете зарегистрировать все каналы трансляции событий, которые поддерживает ваше приложение.
 
-**The Storage Directory**
+### **Каталог `Storage`**
 
-The `storage` directory contains your compiled Blade templates, file based sessions, file caches, and other files generated by the framework. This directory is segregated into `app`, `framework`, and `logs` directories. The `app` directory may be used to store any files generated by your application. The `framework` directory is used to store framework generated files and caches. Finally, the `logs` directory contains your application's log files.
+Каталог `storage` содержит скомпилированные шаблоны Blade, файловые сессии, файловые кэши и другие файлы, сгенерированные фреймворком. Этот каталог разделен на каталоги `app`, `framework` и `logs`. Каталог `app` может использоваться для хранения любых файлов, сгенерированных вашим приложением. Каталог `framework` используется для хранения файлов и кэшей, сгенерированных фреймворком. Наконец, каталог `logs` содержит файлы журналов вашего приложения.
 
-The `storage/app/public` directory may be used to store user-generated files, such as profile avatars, that should be publicly accessible. You should create a symbolic link at `public/storage` which points to this directory. You may create the link using the `php artisan storage:link` command.
+Каталог `storage/app/public` может использоваться для хранения пользовательских файлов, таких как профильные аватары, которые должны быть общедоступны. Вы должны создать на `public/storage` символическую ссылку, указывающую на этот каталог. Вы можете создать ссылку, используя команду `php artisan storage:link`.
 
-**The Tests Directory**
+### **Каталог `Tests`**
 
-The `tests` directory contains your automated tests. An example [PHPUnit](https://phpunit.de/) test is provided out of the box. Each test class should be suffixed with the word `Test`. You may run your tests using the `phpunit` or `php vendor/bin/phpunit` commands.
+Каталог `tests` содержит автоматизированные тесты. Пример теста PHPUnit предоставляется из коробки. Каждый класс теста должен быть дополнен словом Test. Вы можете запускать свои тесты, используя команды `phpunit` или `php vendor/bin/phpunit`.
 
-**The Vendor Directory**
+### **Каталог `Vendor`**
 
-The `vendor` directory contains your [Composer](https://getcomposer.org/) dependencies.
+Каталог `vendor` содержит [Composer](https://getcomposer.org/) зависимости.
 
-### [The App Directory](https://laravel.com/docs/7.x/structure#the-app-directory) <a id="the-app-directory"></a>
+## Каталог приложения
 
-The majority of your application is housed in the `app` directory. By default, this directory is namespaced under `App` and is autoloaded by Composer using the [PSR-4 autoloading standard](https://www.php-fig.org/psr/psr-4/).
+Большая часть вашего приложения находится в каталоге `app`. По умолчанию этот каталог находится в пространстве имен `App` и автоматически загружается Composer по [стандарту автозагрузки PSR-4](https://www.php-fig.org/psr/psr-4/).
 
-The `app` directory contains a variety of additional directories such as `Console`, `Http`, and `Providers`. Think of the `Console` and `Http` directories as providing an API into the core of your application. The HTTP protocol and CLI are both mechanisms to interact with your application, but do not actually contain application logic. In other words, they are two ways of issuing commands to your application. The `Console` directory contains all of your Artisan commands, while the `Http` directory contains your controllers, middleware, and requests.
+Каталог `app` содержит множество дополнительных каталогов, таких как `Console`, `Http` и `Providers`. Считайте, что каталоги `Console` и `Http` предоставляют API в ядро вашего приложения. Протокол HTTP и CLI являются механизмами взаимодействия с приложением, но на самом деле не содержат логики приложения. Другими словами, они являются двумя способами выдачи команд приложению. Каталог `Console` содержит команды Artisan, в то время как каталог `Http` содержит контроллеры, посредники и запросы.
 
-A variety of other directories will be generated inside the `app` directory as you use the `make` Artisan commands to generate classes. So, for example, the `app/Jobs` directory will not exist until you execute the `make:job` Artisan command to generate a job class.
+Внутри каталога приложения будет сгенерирован ряд других каталогов, так как для генерации классов вы используете Artisan команды `make`. Так, например, каталог `app/Jobs` не будет существовать до тех пор, пока вы не выполните Artisan команду `make:job` для генерации класса job.
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> Many of the classes in the `app` directory can be generated by Artisan via commands. To review the available commands, run the `php artisan list make` command in your terminal.
+{% hint style="info" %}
+Многие из классов в каталоге приложений могут быть сгенерированы Artisan с помощью команд. Чтобы просмотреть доступные команды, выполните `php artisan list make` в терминале.
+{% endhint %}
 
-**The Broadcasting Directory**
+### **Каталог `Broadcasting`**
 
 The `Broadcasting` directory contains all of the broadcast channel classes for your application. These classes are generated using the `make:channel` command. This directory does not exist by default, but will be created for you when you create your first channel. To learn more about channels, check out the documentation on [event broadcasting](https://laravel.com/docs/7.x/broadcasting).
 
-**The Console Directory**
+### **Каталог `Console`**
 
 The `Console` directory contains all of the custom Artisan commands for your application. These commands may be generated using the `make:command` command. This directory also houses your console kernel, which is where your custom Artisan commands are registered and your [scheduled tasks](https://laravel.com/docs/7.x/scheduling) are defined.
 
-**The Events Directory**
+### **Каталог `Events`**
 
 This directory does not exist by default, but will be created for you by the `event:generate` and `make:event` Artisan commands. The `Events` directory houses [event classes](https://laravel.com/docs/7.x/events). Events may be used to alert other parts of your application that a given action has occurred, providing a great deal of flexibility and decoupling.
 
-**The Exceptions Directory**
+### **Каталог `Exceptions`**
 
 The `Exceptions` directory contains your application's exception handler and is also a good place to place any exceptions thrown by your application. If you would like to customize how your exceptions are logged or rendered, you should modify the `Handler` class in this directory.
 
-**The Http Directory**
+### **Каталог `Http`**
 
 The `Http` directory contains your controllers, middleware, and form requests. Almost all of the logic to handle requests entering your application will be placed in this directory.
 
-**The Jobs Directory**
+### **Каталог `Jobs`**
 
 This directory does not exist by default, but will be created for you if you execute the `make:job` Artisan command. The `Jobs` directory houses the [queueable jobs](https://laravel.com/docs/7.x/queues) for your application. Jobs may be queued by your application or run synchronously within the current request lifecycle. Jobs that run synchronously during the current request are sometimes referred to as "commands" since they are an implementation of the [command pattern](https://en.wikipedia.org/wiki/Command_pattern).
 
-**The Listeners Directory**
+### **Каталог `Listeners`**
 
 This directory does not exist by default, but will be created for you if you execute the `event:generate` or `make:listener` Artisan commands. The `Listeners` directory contains the classes that handle your [events](https://laravel.com/docs/7.x/events). Event listeners receive an event instance and perform logic in response to the event being fired. For example, a `UserRegistered` event might be handled by a `SendWelcomeEmail` listener.
 
-**The Mail Directory**
+### **Каталог `Mail`**
 
 This directory does not exist by default, but will be created for you if you execute the `make:mail` Artisan command. The `Mail` directory contains all of your classes that represent emails sent by your application. Mail objects allow you to encapsulate all of the logic of building an email in a single, simple class that may be sent using the `Mail::send` method.
 
-**The Notifications Directory**
+### **Каталог `Notifications`**
 
 This directory does not exist by default, but will be created for you if you execute the `make:notification` Artisan command. The `Notifications` directory contains all of the "transactional" notifications that are sent by your application, such as simple notifications about events that happen within your application. Laravel's notification features abstracts sending notifications over a variety of drivers such as email, Slack, SMS, or stored in a database.
 
-**The Policies Directory**
+### **Каталог `Policies`**
 
 This directory does not exist by default, but will be created for you if you execute the `make:policy` Artisan command. The `Policies` directory contains the authorization policy classes for your application. Policies are used to determine if a user can perform a given action against a resource. For more information, check out the [authorization documentation](https://laravel.com/docs/7.x/authorization).
 
-**The Providers Directory**
+### **Каталог `Providers`**
 
 The `Providers` directory contains all of the [service providers](https://laravel.com/docs/7.x/providers) for your application. Service providers bootstrap your application by binding services in the service container, registering events, or performing any other tasks to prepare your application for incoming requests.
 
 In a fresh Laravel application, this directory will already contain several providers. You are free to add your own providers to this directory as needed.
 
-**The Rules Directory**
+### **Каталог `Rules`**
 
 This directory does not exist by default, but will be created for you if you execute the `make:rule` Artisan command. The `Rules` directory contains the custom validation rule objects for your application. Rules are used to encapsulate complicated validation logic in a simple object. For more information, check out the [validation documentation](https://laravel.com/docs/7.x/validation).
 
