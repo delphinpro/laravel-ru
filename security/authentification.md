@@ -69,7 +69,7 @@ laravel new blog --auth
 public const HOME = '/home';
 ```
 
-Если вам нужна более надежная настройка ответа, возвращаемого при аутентификации пользователя, Laravel предоставляет пустой метод `authenticated(Request $request, $user)` в трейте `AuthenticatesUsers`. Этот трейт используется классом `LoginController`, который устанавливается в ваше приложение при использовании пакета `laravel/ui`. Таким образом, Вы можете определить свой собственный метод `authenticated` в классе `LoginController`:
+Если вам нужна более тонкая настройка ответа, возвращаемого при аутентификации пользователя, Laravel предоставляет пустой метод `authenticated(Request $request, $user)` в трейте `AuthenticatesUsers`. Этот трейт используется классом `LoginController`, который устанавливается в ваше приложение при использовании пакета `laravel/ui`. Таким образом, Вы можете определить свой собственный метод `authenticated` в классе `LoginController`:
 
 ```text
 /**
@@ -119,9 +119,9 @@ protected function guard()
 
 Метод `create` класса `RegisterController` отвечает за создание новых записей `App\User` в вашей базе данных с помощью [Eloquent ORM](https://github.com/delphinpro/laravel-ru/tree/64b8c8bfab1f58e5d4b59e9575dbebc0b0462765/security/.../eloquent/getting-started.md). Вы можете свободно модифицировать этот метод в соответствии с потребностями вашей базы данных.
 
-### Retrieving The Authenticated User
+### Получение аутентифицированного пользователя
 
-You may access the authenticated user via the `Auth` facade:
+Вы можете получить доступ к аутентифицированному пользователю через фасад `Auth`:
 
 ```text
 use Illuminate\Support\Facades\Auth;
@@ -133,7 +133,7 @@ $user = Auth::user();
 $id = Auth::id();
 ```
 
-Alternatively, once a user is authenticated, you may access the authenticated user via an `Illuminate\Http\Request` instance. Remember, type-hinted classes will automatically be injected into your controller methods:
+В качестве альтернативы, после того, как пользователь аутентифицирован, вы можете получить доступ к нему через экземпляр `Illuminate\Http\Request`. Помните, что классы с type-hint будут автоматически вставляться в методы вашего контроллера:
 
 ```text
 <?php
@@ -157,25 +157,25 @@ class ProfileController extends Controller
 }
 ```
 
-**Determining If The Current User Is Authenticated**
+**Определение, является ли текущий пользователь аутентифицированным.**
 
-To determine if the user is already logged into your application, you may use the `check` method on the `Auth` facade, which will return `true` if the user is authenticated:
+Чтобы определить, залогинен ли пользователь в приложении, вы можете использовать метод `check` фасада `Auth`, который вернет `true`, если пользователь аутентифицирован:
 
 ```text
 use Illuminate\Support\Facades\Auth;
 
 if (Auth::check()) {
-    // The user is logged in...
+    // Пользователь залогинен...
 }
 ```
 
 {% hint style="info" %}
-> Even though it is possible to determine if a user is authenticated using the `check` method, you will typically use a middleware to verify that the user is authenticated before allowing the user access to certain routes / controllers. To learn more about this, check out the documentation on [protecting routes](authentification.md#zashishennye-marshruty).
+Несмотря на то, что можно определить, является ли пользователь аутентифицированным с помощью метода `check`, вы обычно будете использовать посредика для проверки подлинности пользователя, прежде чем разрешить ему доступ к определенным маршрутам / контроллерам. Чтобы узнать больше об этом, ознакомьтесь с документацией по [защите маршрутов] (authentictification.md#zashishennye-marshruty).
 {% endhint %}
 
 ### Защищенные маршруты
 
-[Route middleware](../the-basics/middleware.md) can be used to only allow authenticated users to access a given route. Laravel ships with an `auth` middleware, which is defined at `Illuminate\Auth\Middleware\Authenticate`. Since this middleware is already registered in your HTTP kernel, all you need to do is attach the middleware to a route definition:
+[Посредник в маршрутах](../the-basics/middleware.md) может использоваться только для того, чтобы разрешить авторизованным пользователям доступ к заданному маршруту. Laravel поставляется с посредником `auth`, который определяется в `Illuminate\Auth\Middleware\Authenticate`. Так как этот посредник уже зарегистрирован в HTTP ядре, все, что вам нужно сделать, это указать его в определении маршрута:
 
 ```text
 Route::get('profile', function () {
@@ -183,7 +183,7 @@ Route::get('profile', function () {
 })->middleware('auth');
 ```
 
-If you are using [controllers](../the-basics/controllers.md), you may call the `middleware` method from the controller's constructor instead of attaching it in the route definition directly:
+Если Вы используете [контроллеры](../the-basics/controllers.md), то можете вызвать метод `middleware` напрямую из конструктора контроллера вместо того, чтобы указывать его в определении маршрута:
 
 ```text
 public function __construct()
@@ -192,9 +192,9 @@ public function __construct()
 }
 ```
 
-**Redirecting Unauthenticated Users**
+**Перенаправление неавторизованных пользователей**
 
-When the `auth` middleware detects an unauthorized user, it will redirect the user to the `login` [named route](../the-basics/routing.md#imenovannye-marshruty). You may modify this behavior by updating the `redirectTo` function in your `app/Http/Middleware/Authenticate.php` file:
+Когда посредник `auth` обнаруживает неавторизованного пользователя, оно перенаправляет пользователя на [именованный маршрут](.../the-basics/routing.md#imenovannye-marshruty) `login`. Вы можете изменить это поведение, обновив функцию `redirectTo` в файле `app/Http/Middleware/Authenticate.php`:
 
 ```text
 /**
@@ -209,9 +209,9 @@ protected function redirectTo($request)
 }
 ```
 
-**Specifying A Guard**
+**Определение охранника (guard)**
 
-When attaching the `auth` middleware to a route, you may also specify which guard should be used to authenticate the user. The guard specified should correspond to one of the keys in the `guards` array of your `auth.php` configuration file:
+При подключении посредника `auth` к маршруту, вы также можете указать, какой защитник должен использоваться для аутентификации пользователя. Указанный защитник должен соответствовать одному из ключей в массиве `guards` конфигурационного файла `auth.php`:
 
 ```text
 public function __construct()
@@ -220,11 +220,11 @@ public function __construct()
 }
 ```
 
-### Password Confirmation
+### Подтверждение пароля
 
-Sometimes, you may wish to require the user to confirm their password before accessing a specific area of your application. For example, you may require this before the user modifies any billing settings within the application.
+Иногда может возникнуть необходимость потребовать от пользователя подтвердить свой пароль перед тем, как получить доступ к определенной области применения. Например, это может потребоваться до того, как пользователь изменит какие-либо параметры выставления счетов в приложении.
 
-To accomplish this, Laravel provides a `password.confirm` middleware. Attaching the `password.confirm` middleware to a route will redirect users to a screen where they need to confirm their password before they can continue:
+Для этого Laravel предоставляет посредника `password.confirm`. Включение посредника `password.confirm` в маршрут перенаправит пользователей на экран, где они должны будут подтвердить свой пароль, прежде чем смогут продолжить работу:
 
 ```text
 Route::get('/settings/security', function () {
@@ -232,17 +232,17 @@ Route::get('/settings/security', function () {
 })->middleware(['auth', 'password.confirm']);
 ```
 
-After the user has successfully confirmed their password, the user is redirected to the route they originally tried to access. By default, after confirming their password, the user will not have to confirm their password again for three hours. You are free to customize the length of time before the user must re-confirm their password using the `auth.password_timeout` configuration option.
+После того, как пользователь успешно подтвердил свой пароль, он перенаправляется на маршрут, к которому изначально пытался получить доступ. По умолчанию, после подтверждения пароля, пользователю не придется подтверждать свой пароль еще раз в течение трех часов. Вы можете настроить время, в течение которого пользователь должен будет повторно подтвердить пароль с помощью опции `auth.password_timeout`.
 
-### Login Throttling
+### Ограничение входа
 
-If you are using Laravel's built-in `LoginController` class, the `Illuminate\Foundation\Auth\ThrottlesLogins` trait will already be included in your controller. By default, the user will not be able to login for one minute if they fail to provide the correct credentials after several attempts. The throttling is unique to the user's username / e-mail address and their IP address.
+Если вы используете встроенный в Laravel класс `LoginController`, то трейт `Illuminate\Foundation\Auth\ThrottlesLogins` уже будет включен в контроллер. По умолчанию пользователь не сможет войти в систему в течение одной минуты, если после нескольких попыток не сможет предоставить правильные учетные данные. Ограничение уникально для имени пользователя / адреса электронной почты и его IP-адреса.
 
-## Manually Authenticating Users
+## Ручная аутентификация пользователей
 
-Note that you are not required to use the authentication controllers included with Laravel. If you choose to remove these controllers, you will need to manage user authentication using the Laravel authentication classes directly. Don't worry, it's a cinch!
+Обратите внимание, что вы не обязаны использовать контроллеры аутентификации, входящие в комплект Laravel. Если вы решите удалить эти контроллеры, вам нужно будет управлять аутентификацией пользователей, используя классы аутентификации Laravel напрямую. Не волнуйтесь, это cinch!
 
-We will access Laravel's authentication services via the `Auth` [facade](../architecture-concepts/facades.md), so we'll need to make sure to import the `Auth` facade at the top of the class. Next, let's check out the `attempt` method:
+Мы получаем доступ к сервисам аутентификации Ларавела через [фасад](../architecture-concepts/facades.md) `Auth`, поэтому нужно убедиться, что фасад `Auth` импортирован  в файле. Далее посмотрим на метод `attempt`:
 
 ```text
 <?php
@@ -273,11 +273,11 @@ class LoginController extends Controller
 }
 ```
 
-The `attempt` method accepts an array of key / value pairs as its first argument. The values in the array will be used to find the user in your database table. So, in the example above, the user will be retrieved by the value of the `email` column. If the user is found, the hashed password stored in the database will be compared with the `password` value passed to the method via the array. You should not hash the password specified as the `password` value, since the framework will automatically hash the value before comparing it to the hashed password in the database. If the two hashed passwords match an authenticated session will be started for the user.
+Метод `attempt` принимает массив пар ключ/значение в качестве первого аргумента. Значения в массиве будут использованы для поиска пользователя в таблице базы данных. Таким образом, в приведенном выше примере пользователь будет найден по значению поля `email`. Если пользователь найден, то хэшированный пароль, хранящийся в БД, будет сравнен со значением `password`, переданным методу через массив. Не следует хэшировать пароль, указанный в качестве значения `password`, так как фреймворк автоматически хэширует значение перед сравнением с хэшированным паролем в БД. Если два хэшированных пароля совпадут, то для пользователя будет запущена аутентифицированная сессия.
 
-The `attempt` method will return `true` if authentication was successful. Otherwise, `false` will be returned.
+Метод `attempt` вернет `true`, если аутентификация прошла успешно. В противном случае будет возвращено `false`.
 
-The `intended` method on the redirector will redirect the user to the URL they were attempting to access before being intercepted by the authentication middleware. A fallback URI may be given to this method in case the intended destination is not available.
+Метод `intended` редиректора будет перенаправлять пользователя на URL, к которому он пытался получить доступ, прежде чем он будет перехвачен посредником для аутентификации. В случае недоступности предполагаемого адресата этому методу может быть предоставлен резервный URI.
 
 **Specifying Additional Conditions**
 
