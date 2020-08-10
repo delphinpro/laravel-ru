@@ -8,31 +8,45 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 
 ### Arrays & Objects
 
-[Arr::accessible](https://laravel.com/docs/7.x/helpers#method-array-accessible)[Arr::add](https://laravel.com/docs/7.x/helpers#method-array-add)[Arr::collapse](https://laravel.com/docs/7.x/helpers#method-array-collapse)[Arr::crossJoin](https://laravel.com/docs/7.x/helpers#method-array-crossjoin)[Arr::divide](https://laravel.com/docs/7.x/helpers#method-array-divide)[Arr::dot](https://laravel.com/docs/7.x/helpers#method-array-dot)[Arr::except](https://laravel.com/docs/7.x/helpers#method-array-except)[Arr::exists](https://laravel.com/docs/7.x/helpers#method-array-exists)[Arr::first](https://laravel.com/docs/7.x/helpers#method-array-first)[Arr::flatten](https://laravel.com/docs/7.x/helpers#method-array-flatten)[Arr::forget](https://laravel.com/docs/7.x/helpers#method-array-forget)[Arr::get](https://laravel.com/docs/7.x/helpers#method-array-get)[Arr::has](https://laravel.com/docs/7.x/helpers#method-array-has)[Arr::hasAny](https://laravel.com/docs/7.x/helpers#method-array-hasany)[Arr::isAssoc](https://laravel.com/docs/7.x/helpers#method-array-isassoc)[Arr::last](https://laravel.com/docs/7.x/helpers#method-array-last)[Arr::only](https://laravel.com/docs/7.x/helpers#method-array-only)[Arr::pluck](https://laravel.com/docs/7.x/helpers#method-array-pluck)[Arr::prepend](https://laravel.com/docs/7.x/helpers#method-array-prepend)[Arr::pull](https://laravel.com/docs/7.x/helpers#method-array-pull)[Arr::query](https://laravel.com/docs/7.x/helpers#method-array-query)[Arr::random](https://laravel.com/docs/7.x/helpers#method-array-random)[Arr::set](https://laravel.com/docs/7.x/helpers#method-array-set)[Arr::shuffle](https://laravel.com/docs/7.x/helpers#method-array-shuffle)[Arr::sort](https://laravel.com/docs/7.x/helpers#method-array-sort)[Arr::sortRecursive](https://laravel.com/docs/7.x/helpers#method-array-sort-recursive)[Arr::where](https://laravel.com/docs/7.x/helpers#method-array-where)[Arr::wrap](https://laravel.com/docs/7.x/helpers#method-array-wrap)[data\_fill](https://laravel.com/docs/7.x/helpers#method-data-fill)[data\_get](https://laravel.com/docs/7.x/helpers#method-data-get)[data\_set](https://laravel.com/docs/7.x/helpers#method-data-set)[head](https://laravel.com/docs/7.x/helpers#method-head)[last](https://laravel.com/docs/7.x/helpers#method-last)
+[Arr::accessible](#method-array-accessible)
+[Arr::add](#method-array-add)
+[Arr::collapse](#method-array-collapse)
+[Arr::crossJoin](#method-array-crossjoin)
+[Arr::divide](#method-array-divide)
+[Arr::dot](#method-array-dot)[Arr::except](#method-array-except)[Arr::exists](#method-array-exists)[Arr::first](#method-array-first)[Arr::flatten](#method-array-flatten)[Arr::forget](#method-array-forget)[Arr::get](#method-array-get)[Arr::has](#method-array-has)[Arr::hasAny](#method-array-hasany)[Arr::isAssoc](#method-array-isassoc)[Arr::last](#method-array-last)[Arr::only](#method-array-only)[Arr::pluck](#method-array-pluck)[Arr::prepend](#method-array-prepend)[Arr::pull](#method-array-pull)[Arr::query](#method-array-query)[Arr::random](#method-array-random)[Arr::set](#method-array-set)[Arr::shuffle](#method-array-shuffle)[Arr::sort](#method-array-sort)[Arr::sortRecursive](#method-array-sort-recursive)[Arr::where](#method-array-where)[Arr::wrap](#method-array-wrap)[data\_fill](#method-data-fill)[data\_get](#method-data-get)[data\_set](#method-data-set)[head](#method-head)[last](#method-last)
 
 ### Paths
 
-[app\_path](https://laravel.com/docs/7.x/helpers#method-app-path)[base\_path](https://laravel.com/docs/7.x/helpers#method-base-path)[config\_path](https://laravel.com/docs/7.x/helpers#method-config-path)[database\_path](https://laravel.com/docs/7.x/helpers#method-database-path)[mix](https://laravel.com/docs/7.x/helpers#method-mix)[public\_path](https://laravel.com/docs/7.x/helpers#method-public-path)[resource\_path](https://laravel.com/docs/7.x/helpers#method-resource-path)[storage\_path](https://laravel.com/docs/7.x/helpers#method-storage-path)
+<div style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));">
+<span>[app\_path](#method-app-path)</span>
+<span>[base\_path](#method-base-path)</span>
+<span>[config\_path](#method-config-path)</span>
+<span>[database\_path](#method-database-path)</span>
+<span>[mix](#method-mix)</span>
+<span>[public\_path](#method-public-path)</span>
+<span>[resource\_path](#method-resource-path)</span>
+<span>[storage\_path](#method-storage-path)</span>
+</div>
 
 ### Strings
 
-[\_\_](https://laravel.com/docs/7.x/helpers#method-__)[class\_basename](https://laravel.com/docs/7.x/helpers#method-class-basename)[e](https://laravel.com/docs/7.x/helpers#method-e)[preg\_replace\_array](https://laravel.com/docs/7.x/helpers#method-preg-replace-array)[Str::after](https://laravel.com/docs/7.x/helpers#method-str-after)[Str::afterLast](https://laravel.com/docs/7.x/helpers#method-str-after-last)[Str::ascii](https://laravel.com/docs/7.x/helpers#method-str-ascii)[Str::before](https://laravel.com/docs/7.x/helpers#method-str-before)[Str::beforeLast](https://laravel.com/docs/7.x/helpers#method-str-before-last)[Str::between](https://laravel.com/docs/7.x/helpers#method-str-between)[Str::camel](https://laravel.com/docs/7.x/helpers#method-camel-case)[Str::contains](https://laravel.com/docs/7.x/helpers#method-str-contains)[Str::containsAll](https://laravel.com/docs/7.x/helpers#method-str-contains-all)[Str::endsWith](https://laravel.com/docs/7.x/helpers#method-ends-with)[Str::finish](https://laravel.com/docs/7.x/helpers#method-str-finish)[Str::is](https://laravel.com/docs/7.x/helpers#method-str-is)[Str::isAscii](https://laravel.com/docs/7.x/helpers#method-str-is-ascii)[Str::isUuid](https://laravel.com/docs/7.x/helpers#method-str-is-uuid)[Str::kebab](https://laravel.com/docs/7.x/helpers#method-kebab-case)[Str::length](https://laravel.com/docs/7.x/helpers#method-str-length)[Str::limit](https://laravel.com/docs/7.x/helpers#method-str-limit)[Str::lower](https://laravel.com/docs/7.x/helpers#method-str-lower)[Str::orderedUuid](https://laravel.com/docs/7.x/helpers#method-str-ordered-uuid)[Str::plural](https://laravel.com/docs/7.x/helpers#method-str-plural)[Str::random](https://laravel.com/docs/7.x/helpers#method-str-random)[Str::replaceArray](https://laravel.com/docs/7.x/helpers#method-str-replace-array)[Str::replaceFirst](https://laravel.com/docs/7.x/helpers#method-str-replace-first)[Str::replaceLast](https://laravel.com/docs/7.x/helpers#method-str-replace-last)[Str::singular](https://laravel.com/docs/7.x/helpers#method-str-singular)[Str::slug](https://laravel.com/docs/7.x/helpers#method-str-slug)[Str::snake](https://laravel.com/docs/7.x/helpers#method-snake-case)[Str::start](https://laravel.com/docs/7.x/helpers#method-str-start)[Str::startsWith](https://laravel.com/docs/7.x/helpers#method-starts-with)[Str::studly](https://laravel.com/docs/7.x/helpers#method-studly-case)[Str::substr](https://laravel.com/docs/7.x/helpers#method-str-substr)[Str::title](https://laravel.com/docs/7.x/helpers#method-title-case)[Str::ucfirst](https://laravel.com/docs/7.x/helpers#method-str-ucfirst)[Str::upper](https://laravel.com/docs/7.x/helpers#method-str-upper)[Str::uuid](https://laravel.com/docs/7.x/helpers#method-str-uuid)[Str::words](https://laravel.com/docs/7.x/helpers#method-str-words)[trans](https://laravel.com/docs/7.x/helpers#method-trans)[trans\_choice](https://laravel.com/docs/7.x/helpers#method-trans-choice)
+[\_\_](#method-__)[class\_basename](#method-class-basename)[e](#method-e)[preg\_replace\_array](#method-preg-replace-array)[Str::after](#method-str-after)[Str::afterLast](#method-str-after-last)[Str::ascii](#method-str-ascii)[Str::before](#method-str-before)[Str::beforeLast](#method-str-before-last)[Str::between](#method-str-between)[Str::camel](#method-camel-case)[Str::contains](#method-str-contains)[Str::containsAll](#method-str-contains-all)[Str::endsWith](#method-ends-with)[Str::finish](#method-str-finish)[Str::is](#method-str-is)[Str::isAscii](#method-str-is-ascii)[Str::isUuid](#method-str-is-uuid)[Str::kebab](#method-kebab-case)[Str::length](#method-str-length)[Str::limit](#method-str-limit)[Str::lower](#method-str-lower)[Str::orderedUuid](#method-str-ordered-uuid)[Str::plural](#method-str-plural)[Str::random](#method-str-random)[Str::replaceArray](#method-str-replace-array)[Str::replaceFirst](#method-str-replace-first)[Str::replaceLast](#method-str-replace-last)[Str::singular](#method-str-singular)[Str::slug](#method-str-slug)[Str::snake](#method-snake-case)[Str::start](#method-str-start)[Str::startsWith](#method-starts-with)[Str::studly](#method-studly-case)[Str::substr](#method-str-substr)[Str::title](#method-title-case)[Str::ucfirst](#method-str-ucfirst)[Str::upper](#method-str-upper)[Str::uuid](#method-str-uuid)[Str::words](#method-str-words)[trans](#method-trans)[trans\_choice](#method-trans-choice)
 
-#### [Fluent Strings](https://laravel.com/docs/7.x/helpers#fluent-strings) <a id="fluent-strings"></a>
+#### [Fluent Strings](#fluent-strings) <a id="fluent-strings"></a>
 
-[after](https://laravel.com/docs/7.x/helpers#method-fluent-str-after)[afterLast](https://laravel.com/docs/7.x/helpers#method-fluent-str-after-last)[append](https://laravel.com/docs/7.x/helpers#method-fluent-str-append)[ascii](https://laravel.com/docs/7.x/helpers#method-fluent-str-ascii)[basename](https://laravel.com/docs/7.x/helpers#method-fluent-str-basename)[before](https://laravel.com/docs/7.x/helpers#method-fluent-str-before)[beforeLast](https://laravel.com/docs/7.x/helpers#method-fluent-str-before-last)[camel](https://laravel.com/docs/7.x/helpers#method-fluent-str-camel)[contains](https://laravel.com/docs/7.x/helpers#method-fluent-str-contains)[containsAll](https://laravel.com/docs/7.x/helpers#method-fluent-str-contains-all)[dirname](https://laravel.com/docs/7.x/helpers#method-fluent-str-dirname)[endsWith](https://laravel.com/docs/7.x/helpers#method-fluent-str-ends-with)[exactly](https://laravel.com/docs/7.x/helpers#method-fluent-str-exactly)[explode](https://laravel.com/docs/7.x/helpers#method-fluent-str-explode)[finish](https://laravel.com/docs/7.x/helpers#method-fluent-str-finish)[is](https://laravel.com/docs/7.x/helpers#method-fluent-str-is)[isAscii](https://laravel.com/docs/7.x/helpers#method-fluent-str-is-ascii)[isEmpty](https://laravel.com/docs/7.x/helpers#method-fluent-str-is-empty)[isNotEmpty](https://laravel.com/docs/7.x/helpers#method-fluent-str-is-not-empty)[kebab](https://laravel.com/docs/7.x/helpers#method-fluent-str-kebab)[length](https://laravel.com/docs/7.x/helpers#method-fluent-str-length)[limit](https://laravel.com/docs/7.x/helpers#method-fluent-str-limit)[lower](https://laravel.com/docs/7.x/helpers#method-fluent-str-lower)[ltrim](https://laravel.com/docs/7.x/helpers#method-fluent-str-ltrim)[match](https://laravel.com/docs/7.x/helpers#method-fluent-str-match)[matchAll](https://laravel.com/docs/7.x/helpers#method-fluent-str-match-all)[plural](https://laravel.com/docs/7.x/helpers#method-fluent-str-plural)[prepend](https://laravel.com/docs/7.x/helpers#method-fluent-str-prepend)[replace](https://laravel.com/docs/7.x/helpers#method-fluent-str-replace)[replaceArray](https://laravel.com/docs/7.x/helpers#method-fluent-str-replace-array)[replaceFirst](https://laravel.com/docs/7.x/helpers#method-fluent-str-replace-first)[replaceLast](https://laravel.com/docs/7.x/helpers#method-fluent-str-replace-last)[replaceMatches](https://laravel.com/docs/7.x/helpers#method-fluent-str-replace-matches)[rtrim](https://laravel.com/docs/7.x/helpers#method-fluent-str-rtrim)[singular](https://laravel.com/docs/7.x/helpers#method-fluent-str-singular)[slug](https://laravel.com/docs/7.x/helpers#method-fluent-str-slug)[snake](https://laravel.com/docs/7.x/helpers#method-fluent-str-snake)[split](https://laravel.com/docs/7.x/helpers#method-fluent-str-split)[start](https://laravel.com/docs/7.x/helpers#method-fluent-str-start)[startsWith](https://laravel.com/docs/7.x/helpers#method-fluent-str-starts-with)[studly](https://laravel.com/docs/7.x/helpers#method-fluent-str-studly)[substr](https://laravel.com/docs/7.x/helpers#method-fluent-str-substr)[title](https://laravel.com/docs/7.x/helpers#method-fluent-str-title)[trim](https://laravel.com/docs/7.x/helpers#method-fluent-str-trim)[ucfirst](https://laravel.com/docs/7.x/helpers#method-fluent-str-ucfirst)[upper](https://laravel.com/docs/7.x/helpers#method-fluent-str-upper)[when](https://laravel.com/docs/7.x/helpers#method-fluent-str-when)[whenEmpty](https://laravel.com/docs/7.x/helpers#method-fluent-str-when-empty)[words](https://laravel.com/docs/7.x/helpers#method-fluent-str-words)
+[after](#method-fluent-str-after)[afterLast](#method-fluent-str-after-last)[append](#method-fluent-str-append)[ascii](#method-fluent-str-ascii)[basename](#method-fluent-str-basename)[before](#method-fluent-str-before)[beforeLast](#method-fluent-str-before-last)[camel](#method-fluent-str-camel)[contains](#method-fluent-str-contains)[containsAll](#method-fluent-str-contains-all)[dirname](#method-fluent-str-dirname)[endsWith](#method-fluent-str-ends-with)[exactly](#method-fluent-str-exactly)[explode](#method-fluent-str-explode)[finish](#method-fluent-str-finish)[is](#method-fluent-str-is)[isAscii](#method-fluent-str-is-ascii)[isEmpty](#method-fluent-str-is-empty)[isNotEmpty](#method-fluent-str-is-not-empty)[kebab](#method-fluent-str-kebab)[length](#method-fluent-str-length)[limit](#method-fluent-str-limit)[lower](#method-fluent-str-lower)[ltrim](#method-fluent-str-ltrim)[match](#method-fluent-str-match)[matchAll](#method-fluent-str-match-all)[plural](#method-fluent-str-plural)[prepend](#method-fluent-str-prepend)[replace](#method-fluent-str-replace)[replaceArray](#method-fluent-str-replace-array)[replaceFirst](#method-fluent-str-replace-first)[replaceLast](#method-fluent-str-replace-last)[replaceMatches](#method-fluent-str-replace-matches)[rtrim](#method-fluent-str-rtrim)[singular](#method-fluent-str-singular)[slug](#method-fluent-str-slug)[snake](#method-fluent-str-snake)[split](#method-fluent-str-split)[start](#method-fluent-str-start)[startsWith](#method-fluent-str-starts-with)[studly](#method-fluent-str-studly)[substr](#method-fluent-str-substr)[title](#method-fluent-str-title)[trim](#method-fluent-str-trim)[ucfirst](#method-fluent-str-ucfirst)[upper](#method-fluent-str-upper)[when](#method-fluent-str-when)[whenEmpty](#method-fluent-str-when-empty)[words](#method-fluent-str-words)
 
 ### URLs
 
-[action](https://laravel.com/docs/7.x/helpers#method-action)[asset](https://laravel.com/docs/7.x/helpers#method-asset)[route](https://laravel.com/docs/7.x/helpers#method-route)[secure\_asset](https://laravel.com/docs/7.x/helpers#method-secure-asset)[secure\_url](https://laravel.com/docs/7.x/helpers#method-secure-url)[url](https://laravel.com/docs/7.x/helpers#method-url)
+[action](#method-action)[asset](#method-asset)[route](#method-route)[secure\_asset](#method-secure-asset)[secure\_url](#method-secure-url)[url](#method-url)
 
 ### Miscellaneous
 
-[abort](https://laravel.com/docs/7.x/helpers#method-abort)[abort\_if](https://laravel.com/docs/7.x/helpers#method-abort-if)[abort\_unless](https://laravel.com/docs/7.x/helpers#method-abort-unless)[app](https://laravel.com/docs/7.x/helpers#method-app)[auth](https://laravel.com/docs/7.x/helpers#method-auth)[back](https://laravel.com/docs/7.x/helpers#method-back)[bcrypt](https://laravel.com/docs/7.x/helpers#method-bcrypt)[blank](https://laravel.com/docs/7.x/helpers#method-blank)[broadcast](https://laravel.com/docs/7.x/helpers#method-broadcast)[cache](https://laravel.com/docs/7.x/helpers#method-cache)[class\_uses\_recursive](https://laravel.com/docs/7.x/helpers#method-class-uses-recursive)[collect](https://laravel.com/docs/7.x/helpers#method-collect)[config](https://laravel.com/docs/7.x/helpers#method-config)[cookie](https://laravel.com/docs/7.x/helpers#method-cookie)[csrf\_field](https://laravel.com/docs/7.x/helpers#method-csrf-field)[csrf\_token](https://laravel.com/docs/7.x/helpers#method-csrf-token)[dd](https://laravel.com/docs/7.x/helpers#method-dd)[dispatch](https://laravel.com/docs/7.x/helpers#method-dispatch)[dispatch\_now](https://laravel.com/docs/7.x/helpers#method-dispatch-now)[dump](https://laravel.com/docs/7.x/helpers#method-dump)[env](https://laravel.com/docs/7.x/helpers#method-env)[event](https://laravel.com/docs/7.x/helpers#method-event)[factory](https://laravel.com/docs/7.x/helpers#method-factory)[filled](https://laravel.com/docs/7.x/helpers#method-filled)[info](https://laravel.com/docs/7.x/helpers#method-info)[logger](https://laravel.com/docs/7.x/helpers#method-logger)[method\_field](https://laravel.com/docs/7.x/helpers#method-method-field)[now](https://laravel.com/docs/7.x/helpers#method-now)[old](https://laravel.com/docs/7.x/helpers#method-old)[optional](https://laravel.com/docs/7.x/helpers#method-optional)[policy](https://laravel.com/docs/7.x/helpers#method-policy)[redirect](https://laravel.com/docs/7.x/helpers#method-redirect)[report](https://laravel.com/docs/7.x/helpers#method-report)[request](https://laravel.com/docs/7.x/helpers#method-request)[rescue](https://laravel.com/docs/7.x/helpers#method-rescue)[resolve](https://laravel.com/docs/7.x/helpers#method-resolve)[response](https://laravel.com/docs/7.x/helpers#method-response)[retry](https://laravel.com/docs/7.x/helpers#method-retry)[session](https://laravel.com/docs/7.x/helpers#method-session)[tap](https://laravel.com/docs/7.x/helpers#method-tap)[throw\_if](https://laravel.com/docs/7.x/helpers#method-throw-if)[throw\_unless](https://laravel.com/docs/7.x/helpers#method-throw-unless)[today](https://laravel.com/docs/7.x/helpers#method-today)[trait\_uses\_recursive](https://laravel.com/docs/7.x/helpers#method-trait-uses-recursive)[transform](https://laravel.com/docs/7.x/helpers#method-transform)[validator](https://laravel.com/docs/7.x/helpers#method-validator)[value](https://laravel.com/docs/7.x/helpers#method-value)[view](https://laravel.com/docs/7.x/helpers#method-view)[with](https://laravel.com/docs/7.x/helpers#method-with)
+[abort](#method-abort)[abort\_if](#method-abort-if)[abort\_unless](#method-abort-unless)[app](#method-app)[auth](#method-auth)[back](#method-back)[bcrypt](#method-bcrypt)[blank](#method-blank)[broadcast](#method-broadcast)[cache](#method-cache)[class\_uses\_recursive](#method-class-uses-recursive)[collect](#method-collect)[config](#method-config)[cookie](#method-cookie)[csrf\_field](#method-csrf-field)[csrf\_token](#method-csrf-token)[dd](#method-dd)[dispatch](#method-dispatch)[dispatch\_now](#method-dispatch-now)[dump](#method-dump)[env](#method-env)[event](#method-event)[factory](#method-factory)[filled](#method-filled)[info](#method-info)[logger](#method-logger)[method\_field](#method-method-field)[now](#method-now)[old](#method-old)[optional](#method-optional)[policy](#method-policy)[redirect](#method-redirect)[report](#method-report)[request](#method-request)[rescue](#method-rescue)[resolve](#method-resolve)[response](#method-response)[retry](#method-retry)[session](#method-session)[tap](#method-tap)[throw\_if](#method-throw-if)[throw\_unless](#method-throw-unless)[today](#method-today)[trait\_uses\_recursive](#method-trait-uses-recursive)[transform](#method-transform)[validator](#method-validator)[value](#method-value)[view](#method-view)[with](#method-with)
 
 ## Method Listing
 
-### [Arrays & Objects](https://laravel.com/docs/7.x/helpers#arrays) <a id="arrays"></a>
+### [Arrays & Objects](#arrays) <a id="arrays"></a>
 
 #### **Arr::accessible\(\)**
 
@@ -735,7 +749,7 @@ $last = last($array);
 // 300
 ```
 
-### [Paths](https://laravel.com/docs/7.x/helpers#paths) <a id="paths"></a>
+### [Paths](#paths) <a id="paths"></a>
 
 **app\_path\(\)**
 
@@ -815,7 +829,7 @@ $path = storage_path();
 $path = storage_path('app/file.txt');
 ```
 
-### [Strings](https://laravel.com/docs/7.x/helpers#strings) <a id="strings"></a>
+### [Strings](#strings) <a id="strings"></a>
 
 **\_\_\(\)**
 
@@ -1385,7 +1399,7 @@ echo trans_choice('messages.notifications', $unreadCount);
 
 If the specified translation key does not exist, the `trans_choice` function will return the given key. So, using the example above, the `trans_choice` function would return `messages.notifications` if the translation key does not exist.
 
-### [Fluent Strings](https://laravel.com/docs/7.x/helpers#fluent-strings) <a id="fluent-strings"></a>
+### [Fluent Strings](#fluent-strings) <a id="fluent-strings"></a>
 
 Fluent strings provide a more fluent, object-oriented interface for working with string values, allowing you to chain multiple string operations together using a more readable syntax compared to traditional string operations.
 
@@ -2130,7 +2144,7 @@ $string = Str::of('Perfectly balanced, as all things should be.')->words(3, ' >>
 // Perfectly balanced, as >>>
 ```
 
-### [URLs](https://laravel.com/docs/7.x/helpers#urls) <a id="urls"></a>
+### [URLs](#urls) <a id="urls"></a>
 
 **action\(\)**
 
@@ -2222,7 +2236,7 @@ $full = url()->full();
 $previous = url()->previous();
 ```
 
-### [Miscellaneous](https://laravel.com/docs/7.x/helpers#miscellaneous) <a id="miscellaneous"></a>
+### [Miscellaneous](#miscellaneous) <a id="miscellaneous"></a>
 
 **abort\(\)**
 
@@ -2323,7 +2337,7 @@ blank(false);
 // false
 ```
 
-For the inverse of `blank`, see the [`filled`](https://laravel.com/docs/7.x/helpers#method-filled) method.
+For the inverse of `blank`, see the [`filled`](#method-filled) method.
 
 **broadcast\(\)**
 
@@ -2417,7 +2431,7 @@ dd($value);
 dd($value1, $value2, $value3, ...);
 ```
 
-If you do not want to halt the execution of your script, use the [`dump`](https://laravel.com/docs/7.x/helpers#method-dump) function instead.
+If you do not want to halt the execution of your script, use the [`dump`](#method-dump) function instead.
 
 **dispatch\(\)**
 
@@ -2445,7 +2459,7 @@ dump($value);
 dump($value1, $value2, $value3, ...);
 ```
 
-If you want to stop executing the script after dumping the variables, use the [`dd`](https://laravel.com/docs/7.x/helpers#method-dd) function instead.
+If you want to stop executing the script after dumping the variables, use the [`dd`](#method-dd) function instead.
 
 **env\(\)**
 
@@ -2497,7 +2511,7 @@ filled(collect());
 // false
 ```
 
-For the inverse of `filled`, see the [`blank`](https://laravel.com/docs/7.x/helpers#method-blank) method.
+For the inverse of `filled`, see the [`blank`](#method-blank) method.
 
 **info\(\)**
 
@@ -2766,7 +2780,7 @@ $traits = trait_uses_recursive(\Illuminate\Notifications\Notifiable::class);
 
 **transform\(\)**
 
-The `transform` function executes a `Closure` on a given value if the value is not [blank](https://laravel.com/docs/7.x/helpers#method-blank) and returns the result of the `Closure`:
+The `transform` function executes a `Closure` on a given value if the value is not [blank](#method-blank) and returns the result of the `Closure`:
 
 ```text
 $callback = function ($value) {
