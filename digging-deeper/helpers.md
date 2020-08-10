@@ -8,45 +8,31 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 
 ### Arrays & Objects
 
-[Arr::accessible](#method-array-accessible)
-[Arr::add](#method-array-add)
-[Arr::collapse](#method-array-collapse)
-[Arr::crossJoin](#method-array-crossjoin)
-[Arr::divide](#method-array-divide)
-[Arr::dot](#method-array-dot)[Arr::except](#method-array-except)[Arr::exists](#method-array-exists)[Arr::first](#method-array-first)[Arr::flatten](#method-array-flatten)[Arr::forget](#method-array-forget)[Arr::get](#method-array-get)[Arr::has](#method-array-has)[Arr::hasAny](#method-array-hasany)[Arr::isAssoc](#method-array-isassoc)[Arr::last](#method-array-last)[Arr::only](#method-array-only)[Arr::pluck](#method-array-pluck)[Arr::prepend](#method-array-prepend)[Arr::pull](#method-array-pull)[Arr::query](#method-array-query)[Arr::random](#method-array-random)[Arr::set](#method-array-set)[Arr::shuffle](#method-array-shuffle)[Arr::sort](#method-array-sort)[Arr::sortRecursive](#method-array-sort-recursive)[Arr::where](#method-array-where)[Arr::wrap](#method-array-wrap)[data\_fill](#method-data-fill)[data\_get](#method-data-get)[data\_set](#method-data-set)[head](#method-head)[last](#method-last)
+[Arr::accessible](helpers.md#method-array-accessible) [Arr::add](helpers.md#method-array-add) [Arr::collapse](helpers.md#method-array-collapse) [Arr::crossJoin](helpers.md#method-array-crossjoin) [Arr::divide](helpers.md#method-array-divide) [Arr::dot](helpers.md#method-array-dot)[Arr::except](helpers.md#method-array-except)[Arr::exists](helpers.md#method-array-exists)[Arr::first](helpers.md#method-array-first)[Arr::flatten](helpers.md#method-array-flatten)[Arr::forget](helpers.md#method-array-forget)[Arr::get](helpers.md#method-array-get)[Arr::has](helpers.md#method-array-has)[Arr::hasAny](helpers.md#method-array-hasany)[Arr::isAssoc](helpers.md#method-array-isassoc)[Arr::last](helpers.md#method-array-last)[Arr::only](helpers.md#method-array-only)[Arr::pluck](helpers.md#method-array-pluck)[Arr::prepend](helpers.md#method-array-prepend)[Arr::pull](helpers.md#method-array-pull)[Arr::query](helpers.md#method-array-query)[Arr::random](helpers.md#method-array-random)[Arr::set](helpers.md#method-array-set)[Arr::shuffle](helpers.md#method-array-shuffle)[Arr::sort](helpers.md#method-array-sort)[Arr::sortRecursive](helpers.md#method-array-sort-recursive)[Arr::where](helpers.md#method-array-where)[Arr::wrap](helpers.md#method-array-wrap)[data\_fill](helpers.md#method-data-fill)[data\_get](helpers.md#method-data-get)[data\_set](helpers.md#method-data-set)[head](helpers.md#method-head)[last](helpers.md#method-last)
 
 ### Paths
 
-<p style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));">
-<span>[app\_path](#method-app-path)</span>
-<span>[base\_path](#method-base-path)</span>
-<span>[config\_path](#method-config-path)</span>
-<span>[database\_path](#method-database-path)</span>
-<span>[mix](#method-mix)</span>
-<span>[public\_path](#method-public-path)</span>
-<span>[resource\_path](#method-resource-path)</span>
-<span>[storage\_path](#method-storage-path)</span>
-</p>
+ \[app\\_path\]\(\#method-app-path\) \[base\\_path\]\(\#method-base-path\) \[config\\_path\]\(\#method-config-path\) \[database\\_path\]\(\#method-database-path\) \[mix\]\(\#method-mix\) \[public\\_path\]\(\#method-public-path\) \[resource\\_path\]\(\#method-resource-path\) \[storage\\_path\]\(\#method-storage-path\)
 
 ### Strings
 
-[\_\_](#method-__)[class\_basename](#method-class-basename)[e](#method-e)[preg\_replace\_array](#method-preg-replace-array)[Str::after](#method-str-after)[Str::afterLast](#method-str-after-last)[Str::ascii](#method-str-ascii)[Str::before](#method-str-before)[Str::beforeLast](#method-str-before-last)[Str::between](#method-str-between)[Str::camel](#method-camel-case)[Str::contains](#method-str-contains)[Str::containsAll](#method-str-contains-all)[Str::endsWith](#method-ends-with)[Str::finish](#method-str-finish)[Str::is](#method-str-is)[Str::isAscii](#method-str-is-ascii)[Str::isUuid](#method-str-is-uuid)[Str::kebab](#method-kebab-case)[Str::length](#method-str-length)[Str::limit](#method-str-limit)[Str::lower](#method-str-lower)[Str::orderedUuid](#method-str-ordered-uuid)[Str::plural](#method-str-plural)[Str::random](#method-str-random)[Str::replaceArray](#method-str-replace-array)[Str::replaceFirst](#method-str-replace-first)[Str::replaceLast](#method-str-replace-last)[Str::singular](#method-str-singular)[Str::slug](#method-str-slug)[Str::snake](#method-snake-case)[Str::start](#method-str-start)[Str::startsWith](#method-starts-with)[Str::studly](#method-studly-case)[Str::substr](#method-str-substr)[Str::title](#method-title-case)[Str::ucfirst](#method-str-ucfirst)[Str::upper](#method-str-upper)[Str::uuid](#method-str-uuid)[Str::words](#method-str-words)[trans](#method-trans)[trans\_choice](#method-trans-choice)
+[\_\_](helpers.md#method-__)[class\_basename](helpers.md#method-class-basename)[e](helpers.md#method-e)[preg\_replace\_array](helpers.md#method-preg-replace-array)[Str::after](helpers.md#method-str-after)[Str::afterLast](helpers.md#method-str-after-last)[Str::ascii](helpers.md#method-str-ascii)[Str::before](helpers.md#method-str-before)[Str::beforeLast](helpers.md#method-str-before-last)[Str::between](helpers.md#method-str-between)[Str::camel](helpers.md#method-camel-case)[Str::contains](helpers.md#method-str-contains)[Str::containsAll](helpers.md#method-str-contains-all)[Str::endsWith](helpers.md#method-ends-with)[Str::finish](helpers.md#method-str-finish)[Str::is](helpers.md#method-str-is)[Str::isAscii](helpers.md#method-str-is-ascii)[Str::isUuid](helpers.md#method-str-is-uuid)[Str::kebab](helpers.md#method-kebab-case)[Str::length](helpers.md#method-str-length)[Str::limit](helpers.md#method-str-limit)[Str::lower](helpers.md#method-str-lower)[Str::orderedUuid](helpers.md#method-str-ordered-uuid)[Str::plural](helpers.md#method-str-plural)[Str::random](helpers.md#method-str-random)[Str::replaceArray](helpers.md#method-str-replace-array)[Str::replaceFirst](helpers.md#method-str-replace-first)[Str::replaceLast](helpers.md#method-str-replace-last)[Str::singular](helpers.md#method-str-singular)[Str::slug](helpers.md#method-str-slug)[Str::snake](helpers.md#method-snake-case)[Str::start](helpers.md#method-str-start)[Str::startsWith](helpers.md#method-starts-with)[Str::studly](helpers.md#method-studly-case)[Str::substr](helpers.md#method-str-substr)[Str::title](helpers.md#method-title-case)[Str::ucfirst](helpers.md#method-str-ucfirst)[Str::upper](helpers.md#method-str-upper)[Str::uuid](helpers.md#method-str-uuid)[Str::words](helpers.md#method-str-words)[trans](helpers.md#method-trans)[trans\_choice](helpers.md#method-trans-choice)
 
-#### [Fluent Strings](#fluent-strings) <a id="fluent-strings"></a>
+### Fluent Strings
 
-[after](#method-fluent-str-after)[afterLast](#method-fluent-str-after-last)[append](#method-fluent-str-append)[ascii](#method-fluent-str-ascii)[basename](#method-fluent-str-basename)[before](#method-fluent-str-before)[beforeLast](#method-fluent-str-before-last)[camel](#method-fluent-str-camel)[contains](#method-fluent-str-contains)[containsAll](#method-fluent-str-contains-all)[dirname](#method-fluent-str-dirname)[endsWith](#method-fluent-str-ends-with)[exactly](#method-fluent-str-exactly)[explode](#method-fluent-str-explode)[finish](#method-fluent-str-finish)[is](#method-fluent-str-is)[isAscii](#method-fluent-str-is-ascii)[isEmpty](#method-fluent-str-is-empty)[isNotEmpty](#method-fluent-str-is-not-empty)[kebab](#method-fluent-str-kebab)[length](#method-fluent-str-length)[limit](#method-fluent-str-limit)[lower](#method-fluent-str-lower)[ltrim](#method-fluent-str-ltrim)[match](#method-fluent-str-match)[matchAll](#method-fluent-str-match-all)[plural](#method-fluent-str-plural)[prepend](#method-fluent-str-prepend)[replace](#method-fluent-str-replace)[replaceArray](#method-fluent-str-replace-array)[replaceFirst](#method-fluent-str-replace-first)[replaceLast](#method-fluent-str-replace-last)[replaceMatches](#method-fluent-str-replace-matches)[rtrim](#method-fluent-str-rtrim)[singular](#method-fluent-str-singular)[slug](#method-fluent-str-slug)[snake](#method-fluent-str-snake)[split](#method-fluent-str-split)[start](#method-fluent-str-start)[startsWith](#method-fluent-str-starts-with)[studly](#method-fluent-str-studly)[substr](#method-fluent-str-substr)[title](#method-fluent-str-title)[trim](#method-fluent-str-trim)[ucfirst](#method-fluent-str-ucfirst)[upper](#method-fluent-str-upper)[when](#method-fluent-str-when)[whenEmpty](#method-fluent-str-when-empty)[words](#method-fluent-str-words)
+[after](helpers.md#method-fluent-str-after)[afterLast](helpers.md#method-fluent-str-after-last)[append](helpers.md#method-fluent-str-append)[ascii](helpers.md#method-fluent-str-ascii)[basename](helpers.md#method-fluent-str-basename)[before](helpers.md#method-fluent-str-before)[beforeLast](helpers.md#method-fluent-str-before-last)[camel](helpers.md#method-fluent-str-camel)[contains](helpers.md#method-fluent-str-contains)[containsAll](helpers.md#method-fluent-str-contains-all)[dirname](helpers.md#method-fluent-str-dirname)[endsWith](helpers.md#method-fluent-str-ends-with)[exactly](helpers.md#method-fluent-str-exactly)[explode](helpers.md#method-fluent-str-explode)[finish](helpers.md#method-fluent-str-finish)[is](helpers.md#method-fluent-str-is)[isAscii](helpers.md#method-fluent-str-is-ascii)[isEmpty](helpers.md#method-fluent-str-is-empty)[isNotEmpty](helpers.md#method-fluent-str-is-not-empty)[kebab](helpers.md#method-fluent-str-kebab)[length](helpers.md#method-fluent-str-length)[limit](helpers.md#method-fluent-str-limit)[lower](helpers.md#method-fluent-str-lower)[ltrim](helpers.md#method-fluent-str-ltrim)[match](helpers.md#method-fluent-str-match)[matchAll](helpers.md#method-fluent-str-match-all)[plural](helpers.md#method-fluent-str-plural)[prepend](helpers.md#method-fluent-str-prepend)[replace](helpers.md#method-fluent-str-replace)[replaceArray](helpers.md#method-fluent-str-replace-array)[replaceFirst](helpers.md#method-fluent-str-replace-first)[replaceLast](helpers.md#method-fluent-str-replace-last)[replaceMatches](helpers.md#method-fluent-str-replace-matches)[rtrim](helpers.md#method-fluent-str-rtrim)[singular](helpers.md#method-fluent-str-singular)[slug](helpers.md#method-fluent-str-slug)[snake](helpers.md#method-fluent-str-snake)[split](helpers.md#method-fluent-str-split)[start](helpers.md#method-fluent-str-start)[startsWith](helpers.md#method-fluent-str-starts-with)[studly](helpers.md#method-fluent-str-studly)[substr](helpers.md#method-fluent-str-substr)[title](helpers.md#method-fluent-str-title)[trim](helpers.md#method-fluent-str-trim)[ucfirst](helpers.md#method-fluent-str-ucfirst)[upper](helpers.md#method-fluent-str-upper)[when](helpers.md#method-fluent-str-when)[whenEmpty](helpers.md#method-fluent-str-when-empty)[words](helpers.md#method-fluent-str-words)
 
 ### URLs
 
-[action](#method-action)[asset](#method-asset)[route](#method-route)[secure\_asset](#method-secure-asset)[secure\_url](#method-secure-url)[url](#method-url)
+[action](helpers.md#method-action)[asset](helpers.md#method-asset)[route](helpers.md#method-route)[secure\_asset](helpers.md#method-secure-asset)[secure\_url](helpers.md#method-secure-url)[url](helpers.md#method-url)
 
 ### Miscellaneous
 
-[abort](#method-abort)[abort\_if](#method-abort-if)[abort\_unless](#method-abort-unless)[app](#method-app)[auth](#method-auth)[back](#method-back)[bcrypt](#method-bcrypt)[blank](#method-blank)[broadcast](#method-broadcast)[cache](#method-cache)[class\_uses\_recursive](#method-class-uses-recursive)[collect](#method-collect)[config](#method-config)[cookie](#method-cookie)[csrf\_field](#method-csrf-field)[csrf\_token](#method-csrf-token)[dd](#method-dd)[dispatch](#method-dispatch)[dispatch\_now](#method-dispatch-now)[dump](#method-dump)[env](#method-env)[event](#method-event)[factory](#method-factory)[filled](#method-filled)[info](#method-info)[logger](#method-logger)[method\_field](#method-method-field)[now](#method-now)[old](#method-old)[optional](#method-optional)[policy](#method-policy)[redirect](#method-redirect)[report](#method-report)[request](#method-request)[rescue](#method-rescue)[resolve](#method-resolve)[response](#method-response)[retry](#method-retry)[session](#method-session)[tap](#method-tap)[throw\_if](#method-throw-if)[throw\_unless](#method-throw-unless)[today](#method-today)[trait\_uses\_recursive](#method-trait-uses-recursive)[transform](#method-transform)[validator](#method-validator)[value](#method-value)[view](#method-view)[with](#method-with)
+[abort](helpers.md#method-abort)[abort\_if](helpers.md#method-abort-if)[abort\_unless](helpers.md#method-abort-unless)[app](helpers.md#method-app)[auth](helpers.md#method-auth)[back](helpers.md#method-back)[bcrypt](helpers.md#method-bcrypt)[blank](helpers.md#method-blank)[broadcast](helpers.md#method-broadcast)[cache](helpers.md#method-cache)[class\_uses\_recursive](helpers.md#method-class-uses-recursive)[collect](helpers.md#method-collect)[config](helpers.md#method-config)[cookie](helpers.md#method-cookie)[csrf\_field](helpers.md#method-csrf-field)[csrf\_token](helpers.md#method-csrf-token)[dd](helpers.md#method-dd)[dispatch](helpers.md#method-dispatch)[dispatch\_now](helpers.md#method-dispatch-now)[dump](helpers.md#method-dump)[env](helpers.md#method-env)[event](helpers.md#method-event)[factory](helpers.md#method-factory)[filled](helpers.md#method-filled)[info](helpers.md#method-info)[logger](helpers.md#method-logger)[method\_field](helpers.md#method-method-field)[now](helpers.md#method-now)[old](helpers.md#method-old)[optional](helpers.md#method-optional)[policy](helpers.md#method-policy)[redirect](helpers.md#method-redirect)[report](helpers.md#method-report)[request](helpers.md#method-request)[rescue](helpers.md#method-rescue)[resolve](helpers.md#method-resolve)[response](helpers.md#method-response)[retry](helpers.md#method-retry)[session](helpers.md#method-session)[tap](helpers.md#method-tap)[throw\_if](helpers.md#method-throw-if)[throw\_unless](helpers.md#method-throw-unless)[today](helpers.md#method-today)[trait\_uses\_recursive](helpers.md#method-trait-uses-recursive)[transform](helpers.md#method-transform)[validator](helpers.md#method-validator)[value](helpers.md#method-value)[view](helpers.md#method-view)[with](helpers.md#method-with)
 
 ## Method Listing
 
-### [Arrays & Objects](#arrays) <a id="arrays"></a>
+### Arrays & Objects <a id="arrays"></a>
 
 #### **Arr::accessible\(\)**
 
@@ -73,7 +59,7 @@ $isAccessible = Arr::accessible(new stdClass);
 // false
 ```
 
-**Arr::add\(\)**
+#### **Arr::add\(\)**
 
 The `Arr::add` method adds a given key / value pair to an array if the given key doesn't already exist in the array or is set to `null`:
 
@@ -89,7 +75,7 @@ $array = Arr::add(['name' => 'Desk', 'price' => null], 'price', 100);
 // ['name' => 'Desk', 'price' => 100]
 ```
 
-**Arr::collapse\(\)**
+#### **Arr::collapse\(\)**
 
 The `Arr::collapse` method collapses an array of arrays into a single array:
 
@@ -101,7 +87,7 @@ $array = Arr::collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 // [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-**Arr::crossJoin\(\)**
+#### **Arr::crossJoin\(\)**
 
 The `Arr::crossJoin` method cross joins the given arrays, returning a Cartesian product with all possible permutations:
 
@@ -135,7 +121,7 @@ $matrix = Arr::crossJoin([1, 2], ['a', 'b'], ['I', 'II']);
 */
 ```
 
-**Arr::divide\(\)**
+#### **Arr::divide\(\)**
 
 The `Arr::divide` method returns two arrays, one containing the keys, and the other containing the values of the given array:
 
@@ -149,7 +135,7 @@ use Illuminate\Support\Arr;
 // $values: ['Desk']
 ```
 
-**Arr::dot\(\)**
+#### **Arr::dot\(\)**
 
 The `Arr::dot` method flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
 
@@ -163,7 +149,7 @@ $flattened = Arr::dot($array);
 // ['products.desk.price' => 100]
 ```
 
-**Arr::except\(\)**
+#### **Arr::except\(\)**
 
 The `Arr::except` method removes the given key / value pairs from an array:
 
@@ -177,7 +163,7 @@ $filtered = Arr::except($array, ['price']);
 // ['name' => 'Desk']
 ```
 
-**Arr::exists\(\)**
+#### **Arr::exists\(\)**
 
 The `Arr::exists` method checks that the given key exists in the provided array:
 
@@ -195,7 +181,7 @@ $exists = Arr::exists($array, 'salary');
 // false
 ```
 
-**Arr::first\(\)**
+#### **Arr::first\(\)**
 
 The `Arr::first` method returns the first element of an array passing a given truth test:
 
@@ -219,7 +205,7 @@ use Illuminate\Support\Arr;
 $first = Arr::first($array, $callback, $default);
 ```
 
-**Arr::flatten\(\)**
+#### **Arr::flatten\(\)**
 
 The `Arr::flatten` method flattens a multi-dimensional array into a single level array:
 
@@ -233,7 +219,7 @@ $flattened = Arr::flatten($array);
 // ['Joe', 'PHP', 'Ruby']
 ```
 
-**Arr::forget\(\)**
+#### **Arr::forget\(\)**
 
 The `Arr::forget` method removes a given key / value pair from a deeply nested array using "dot" notation:
 
@@ -247,7 +233,7 @@ Arr::forget($array, 'products.desk');
 // ['products' => []]
 ```
 
-**Arr::get\(\)**
+#### **Arr::get\(\)**
 
 The `Arr::get` method retrieves a value from a deeply nested array using "dot" notation:
 
@@ -271,7 +257,7 @@ $discount = Arr::get($array, 'products.desk.discount', 0);
 // 0
 ```
 
-**Arr::has\(\)**
+#### **Arr::has\(\)**
 
 The `Arr::has` method checks whether a given item or items exists in an array using "dot" notation:
 
@@ -289,7 +275,7 @@ $contains = Arr::has($array, ['product.price', 'product.discount']);
 // false
 ```
 
-**Arr::hasAny\(\)**
+#### **Arr::hasAny\(\)**
 
 The `Arr::hasAny` method checks whether any item in a given set exists in an array using "dot" notation:
 
@@ -311,7 +297,7 @@ $contains = Arr::hasAny($array, ['category', 'product.discount']);
 // false
 ```
 
-**Arr::isAssoc\(\)**
+#### **Arr::isAssoc\(\)**
 
 The `Arr::isAssoc` returns `true` if the given array is an associative array. An array is considered "associative" if it doesn't have sequential numerical keys beginning with zero:
 
@@ -327,7 +313,7 @@ $isAssoc = Arr::isAssoc([1, 2, 3]);
 // false
 ```
 
-**Arr::last\(\)**
+#### **Arr::last\(\)**
 
 The `Arr::last` method returns the last element of an array passing a given truth test:
 
@@ -351,7 +337,7 @@ use Illuminate\Support\Arr;
 $last = Arr::last($array, $callback, $default);
 ```
 
-**Arr::only\(\)**
+#### **Arr::only\(\)**
 
 The `Arr::only` method returns only the specified key / value pairs from the given array:
 
@@ -365,7 +351,7 @@ $slice = Arr::only($array, ['name', 'price']);
 // ['name' => 'Desk', 'price' => 100]
 ```
 
-**Arr::pluck\(\)**
+#### **Arr::pluck\(\)**
 
 The `Arr::pluck` method retrieves all of the values for a given key from an array:
 
@@ -392,7 +378,7 @@ $names = Arr::pluck($array, 'developer.name', 'developer.id');
 // [1 => 'Taylor', 2 => 'Abigail']
 ```
 
-**Arr::prepend\(\)**
+#### **Arr::prepend\(\)**
 
 The `Arr::prepend` method will push an item onto the beginning of an array:
 
@@ -418,7 +404,7 @@ $array = Arr::prepend($array, 'Desk', 'name');
 // ['name' => 'Desk', 'price' => 100]
 ```
 
-**Arr::pull\(\)**
+#### **Arr::pull\(\)**
 
 The `Arr::pull` method returns and removes a key / value pair from an array:
 
@@ -749,7 +735,7 @@ $last = last($array);
 // 300
 ```
 
-### [Paths](#paths) <a id="paths"></a>
+### [Paths](helpers.md#paths) <a id="paths"></a>
 
 **app\_path\(\)**
 
@@ -829,7 +815,7 @@ $path = storage_path();
 $path = storage_path('app/file.txt');
 ```
 
-### [Strings](#strings) <a id="strings"></a>
+### [Strings](helpers.md#strings) <a id="strings"></a>
 
 **\_\_\(\)**
 
@@ -1399,7 +1385,7 @@ echo trans_choice('messages.notifications', $unreadCount);
 
 If the specified translation key does not exist, the `trans_choice` function will return the given key. So, using the example above, the `trans_choice` function would return `messages.notifications` if the translation key does not exist.
 
-### [Fluent Strings](#fluent-strings) <a id="fluent-strings"></a>
+### [Fluent Strings](helpers.md#fluent-strings) <a id="fluent-strings"></a>
 
 Fluent strings provide a more fluent, object-oriented interface for working with string values, allowing you to chain multiple string operations together using a more readable syntax compared to traditional string operations.
 
@@ -2144,7 +2130,7 @@ $string = Str::of('Perfectly balanced, as all things should be.')->words(3, ' >>
 // Perfectly balanced, as >>>
 ```
 
-### [URLs](#urls) <a id="urls"></a>
+### [URLs](helpers.md#urls) <a id="urls"></a>
 
 **action\(\)**
 
@@ -2236,7 +2222,7 @@ $full = url()->full();
 $previous = url()->previous();
 ```
 
-### [Miscellaneous](#miscellaneous) <a id="miscellaneous"></a>
+### [Miscellaneous](helpers.md#miscellaneous) <a id="miscellaneous"></a>
 
 **abort\(\)**
 
@@ -2337,7 +2323,7 @@ blank(false);
 // false
 ```
 
-For the inverse of `blank`, see the [`filled`](#method-filled) method.
+For the inverse of `blank`, see the [`filled`](helpers.md#method-filled) method.
 
 **broadcast\(\)**
 
@@ -2431,7 +2417,7 @@ dd($value);
 dd($value1, $value2, $value3, ...);
 ```
 
-If you do not want to halt the execution of your script, use the [`dump`](#method-dump) function instead.
+If you do not want to halt the execution of your script, use the [`dump`](helpers.md#method-dump) function instead.
 
 **dispatch\(\)**
 
@@ -2459,7 +2445,7 @@ dump($value);
 dump($value1, $value2, $value3, ...);
 ```
 
-If you want to stop executing the script after dumping the variables, use the [`dd`](#method-dd) function instead.
+If you want to stop executing the script after dumping the variables, use the [`dd`](helpers.md#method-dd) function instead.
 
 **env\(\)**
 
@@ -2511,7 +2497,7 @@ filled(collect());
 // false
 ```
 
-For the inverse of `filled`, see the [`blank`](#method-blank) method.
+For the inverse of `filled`, see the [`blank`](helpers.md#method-blank) method.
 
 **info\(\)**
 
@@ -2780,7 +2766,7 @@ $traits = trait_uses_recursive(\Illuminate\Notifications\Notifiable::class);
 
 **transform\(\)**
 
-The `transform` function executes a `Closure` on a given value if the value is not [blank](#method-blank) and returns the result of the `Closure`:
+The `transform` function executes a `Closure` on a given value if the value is not [blank](helpers.md#method-blank) and returns the result of the `Closure`:
 
 ```text
 $callback = function ($value) {
