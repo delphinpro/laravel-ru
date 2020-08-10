@@ -17,7 +17,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 
 ### Paths
 
-<div style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));">
+<p style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr));">
 <span>[app\_path](#method-app-path)</span>
 <span>[base\_path](#method-base-path)</span>
 <span>[config\_path](#method-config-path)</span>
@@ -26,7 +26,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 <span>[public\_path](#method-public-path)</span>
 <span>[resource\_path](#method-resource-path)</span>
 <span>[storage\_path](#method-storage-path)</span>
-</div>
+</p>
 
 ### Strings
 
