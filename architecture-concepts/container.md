@@ -1,6 +1,6 @@
 # Service Container
 
-## [Introduction](https://laravel.com/docs/7.x/container#introduction)
+## Introduction
 
 The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection. Dependency injection is a fancy phrase that essentially means this: class dependencies are "injected" into the class via the constructor or, in some cases, "setter" methods.
 
@@ -54,9 +54,9 @@ In this example, the `UserController` needs to retrieve users from a data source
 
 A deep understanding of the Laravel service container is essential to building a powerful, large application, as well as for contributing to the Laravel core itself.
 
-## [Binding](https://laravel.com/docs/7.x/container#binding)
+## Binding
 
-### [Binding Basics](https://laravel.com/docs/7.x/container#binding-basics)
+### Binding Basics
 
 Almost all of your service container bindings will be registered within [service providers](https://laravel.com/docs/7.x/providers), so most of these examples will demonstrate using the container in that context.
 
@@ -100,7 +100,7 @@ $api = new \HelpSpot\API(new HttpClient);
 $this->app->instance('HelpSpot\API', $api);
 ```
 
-### [Binding Interfaces To Implementations](https://laravel.com/docs/7.x/container#binding-interfaces-to-implementations)
+### Binding Interfaces To Implementations
 
 A very powerful feature of the service container is its ability to bind an interface to a given implementation. For example, let's assume we have an `EventPusher` interface and a `RedisEventPusher` implementation. Once we have coded our `RedisEventPusher` implementation of this interface, we can register it with the service container like so:
 
@@ -128,9 +128,9 @@ public function __construct(EventPusher $pusher)
 }
 ```
 
-### [Contextual Binding](https://laravel.com/docs/7.x/container#contextual-binding)
+### Contextual Binding
 
-Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the `Illuminate\Contracts\Filesystem\Filesystem` [contract](https://laravel.com/docs/7.x/contracts). Laravel provides a simple, fluent interface for defining this behavior:
+Sometimes you may have two classes that utilize the same interface, but you wish to inject different implementations into each class. For example, two controllers may depend on different implementations of the `Illuminate\Contracts\Filesystem\Filesystem` [contract](contracts.md). Laravel provides a simple, fluent interface for defining this behavior:
 
 ```php
 use App\Http\Controllers\PhotoController;
@@ -152,7 +152,7 @@ $this->app->when([VideoController::class, UploadController::class])
           });
 ```
 
-### [Binding Primitives](https://laravel.com/docs/7.x/container#binding-primitives)
+### Binding Primitives
 
 Sometimes you may have a class that receives some injected classes, but also needs an injected primitive value such as an integer. You may easily use contextual binding to inject any value your class may need:
 
@@ -170,7 +170,7 @@ $this->app->when(ReportAggregator::class)
     ->giveTagged('reports');
 ```
 
-### [Binding Typed Variadics](https://laravel.com/docs/7.x/container#binding-typed-variadics)
+### Binding Typed Variadics
 
 Occasionally you may have a class that receives an array of typed objects using a variadic constructor argument:
 
@@ -224,7 +224,7 @@ $this->app->when(ReportAggregator::class)
     ->giveTagged('reports');
 ```
 
-### [Tagging](https://laravel.com/docs/7.x/container#tagging)
+### Tagging
 
 Occasionally, you may need to resolve all of a certain "category" of binding. For example, perhaps you are building a report aggregator that receives an array of many different `Report` interface implementations. After registering the `Report` implementations, you can assign them a tag using the `tag` method:
 
@@ -248,7 +248,7 @@ $this->app->bind('ReportAggregator', function ($app) {
 });
 ```
 
-### [Extending Bindings](https://laravel.com/docs/7.x/container#extending-bindings)
+### Extending Bindings
 
 The `extend` method allows the modification of resolved services. For example, when a service is resolved, you may run additional code to decorate or configure the service. The `extend` method accepts a Closure, which should return the modified service, as its only argument. The Closure receives the service being resolved and the container instance:
 
@@ -258,7 +258,7 @@ $this->app->extend(Service::class, function ($service, $app) {
 });
 ```
 
-## [Resolving](https://laravel.com/docs/7.x/container#resolving)
+## Resolving
 
 ### **The make Method**
 
@@ -282,7 +282,7 @@ $api = $this->app->makeWith('HelpSpot\API', ['id' => 1]);
 
 ### **Automatic Injection**
 
-Alternatively, and importantly, you may "type-hint" the dependency in the constructor of a class that is resolved by the container, including [controllers](https://laravel.com/docs/7.x/controllers), [event listeners](https://laravel.com/docs/7.x/events), [middleware](https://laravel.com/docs/7.x/middleware), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](https://laravel.com/docs/7.x/queues). In practice, this is how most of your objects should be resolved by the container.
+Alternatively, and importantly, you may "type-hint" the dependency in the constructor of a class that is resolved by the container, including [controllers](../the-basics/controllers.md), [event listeners](../digging-deeper/events.md), [middleware](../the-basics/middleware.md), and more. Additionally, you may type-hint dependencies in the `handle` method of [queued jobs](../digging-deeper/queues.md). In practice, this is how most of your objects should be resolved by the container.
 
 For example, you may type-hint a repository defined by your application in a controller's constructor. The repository will automatically be resolved and injected into the class:
 
@@ -324,7 +324,7 @@ class UserController extends Controller
 }
 ```
 
-## [Container Events](https://laravel.com/docs/7.x/container#container-events)
+## Container Events
 
 The service container fires an event each time it resolves an object. You may listen to this event using the `resolving` method:
 
@@ -340,7 +340,7 @@ $this->app->resolving(\HelpSpot\API::class, function ($api, $app) {
 
 As you can see, the object being resolved will be passed to the callback, allowing you to set any additional properties on the object before it is given to its consumer.
 
-## [PSR-11](https://laravel.com/docs/7.x/container#psr-11)
+## PSR-11
 
 Laravel's service container implements the [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) interface. Therefore, you may type-hint the PSR-11 container interface to obtain an instance of the Laravel container:
 

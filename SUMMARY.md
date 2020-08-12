@@ -51,5 +51,5 @@
 
 ## Eloquent ORM <a id="eloquent"></a>
 
-* [Начало работы](eloquent/getting-started.md)
+* [Начало работы](eloquent/eloquent.md)
 
