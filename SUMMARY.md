@@ -23,8 +23,9 @@
 
 * [Маршрутизация](the-basics/routing.md)
 * [Посредники \(Middleware\)](the-basics/middleware.md)
-* [CSRF защита](the-basics/csrf-protection.md)
+* [CSRF защита](the-basics/csrf.md)
 * [Контроллеры](the-basics/controllers.md)
+* [URL Generation](the-basics/urls.md)
 * [Сессии](the-basics/session.md)
 * [Валидация](the-basics/validation.md)
 

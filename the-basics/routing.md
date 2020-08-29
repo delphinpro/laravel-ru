@@ -10,7 +10,7 @@ Route::get('foo', function () {
 });
 ```
 
-**The Default Route Files**
+#### **The Default Route Files**
 
 All Laravel routes are defined in your route files, which are located in the `routes` directory. These files are automatically loaded by the framework. The `routes/web.php` file defines routes that are for your web interface. These routes are assigned the `web` middleware group, which provides features like session state and CSRF protection. The routes in `routes/api.php` are stateless and are assigned the `api` middleware group.
 
@@ -22,7 +22,7 @@ Route::get('/user', 'UserController@index');
 
 Routes defined in the `routes/api.php` file are nested within a route group by the `RouteServiceProvider`. Within this group, the `/api` URI prefix is automatically applied so you do not need to manually apply it to every route in the file. You may modify the prefix and other route group options by modifying your `RouteServiceProvider` class.
 
-**Available Router Methods**
+#### **Available Router Methods**
 
 The router allows you to register routes that respond to any HTTP verb:
 
@@ -47,9 +47,9 @@ Route::any('/', function () {
 });
 ```
 
-**CSRF Protection**
+#### **CSRF Protection**
 
-Any HTML forms pointing to `POST`, `PUT`, `PATCH`, or `DELETE` routes that are defined in the `web` routes file should include a CSRF token field. Otherwise, the request will be rejected. You can read more about CSRF protection in the [CSRF documentation](https://laravel.com/docs/7.x/csrf):
+Any HTML forms pointing to `POST`, `PUT`, `PATCH`, or `DELETE` routes that are defined in the `web` routes file should include a CSRF token field. Otherwise, the request will be rejected. You can read more about CSRF protection in the [CSRF documentation](csrf.md):
 
 ```markup
 <form method="POST" action="/profile">
@@ -142,7 +142,7 @@ Route::get('user/{id}/{name}', function ($id, $name) {
 })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 ```
 
-**Global Constraints**
+#### **Global Constraints**
 
 If you would like a route parameter to always be constrained by a given regular expression, you may use the `pattern` method. You should define these patterns in the `boot` method of your `RouteServiceProvider`:
 
@@ -168,7 +168,7 @@ Route::get('user/{id}', function ($id) {
 });
 ```
 
-**Encoded Forward Slashes**
+#### **Encoded Forward Slashes**
 
 The Laravel routing component allows all characters except `/`. You must explicitly allow `/` to be part of your placeholder using a `where` condition regular expression:
 
@@ -210,7 +210,7 @@ Route::get('user/profile', 'UserProfileController@show')->name('profile');
 >
 > Route names should always be unique.
 
-**Generating URLs To Named Routes**
+#### **Generating URLs To Named Routes**
 
 Once you have assigned a name to a given route, you may use the route's name when generating URLs or redirects via the global `route` function:
 
@@ -250,9 +250,9 @@ $url = route('profile', ['id' => 1, 'photos' => 'yes']);
 
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
-> Sometimes, you may wish to specify request-wide default values for URL parameters, such as the current locale. To accomplish this, you may use the [`URL::defaults` method](https://laravel.com/docs/7.x/urls#default-values).
+> Sometimes, you may wish to specify request-wide default values for URL parameters, such as the current locale. To accomplish this, you may use the [`URL::defaults` method](urls.md#znacheniya-po-umolchaniyu).
 
-**Inspecting The Current Route**
+#### **Inspecting The Current Route**
 
 If you would like to determine if the current request was routed to a given named route, you may use the `named` method on a Route instance. For example, you may check the current route name from a route middleware:
 
@@ -490,7 +490,7 @@ Route::fallback(function () {
 
 ## Rate Limiting
 
-Laravel includes a [middleware](https://laravel.com/docs/7.x/middleware) to rate limit access to routes within your application. To get started, assign the `throttle` middleware to a route or a group of routes. The `throttle` middleware accepts two parameters that determine the maximum number of requests that can be made in a given number of minutes. For example, let's specify that an authenticated user may access the following group of routes 60 times per minute:
+Laravel includes a [middleware](middleware.md) to rate limit access to routes within your application. To get started, assign the `throttle` middleware to a route or a group of routes. The `throttle` middleware accepts two parameters that determine the maximum number of requests that can be made in a given number of minutes. For example, let's specify that an authenticated user may access the following group of routes 60 times per minute:
 
 ```php
 Route::middleware('auth:api', 'throttle:60,1')->group(function () {
