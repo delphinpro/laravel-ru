@@ -1,8 +1,8 @@
 # Локализация
 
-## Introduction
+## Вступление
 
-Laravel's localization features provide a convenient way to retrieve strings in various languages, allowing you to easily support multiple languages within your application. Language strings are stored in files within the `resources/lang` directory. Within this directory there should be a subdirectory for each language supported by the application:
+Функции локализации Laravel обеспечивают удобный способ получения строк на различных языках, позволяя легко поддерживать несколько языков в приложении. Языковые строки хранятся в файлах в каталоге `resources/lang`. Внутри этого каталога должен быть подкаталог для каждого языка, поддерживаемого приложением:
 
 ```text
 /resources
@@ -13,7 +13,7 @@ Laravel's localization features provide a convenient way to retrieve strings in 
             messages.php
 ```
 
-All language files return an array of keyed strings. For example:
+Все языковые файлы возвращают массив ключевых строк. Например:
 
 ```php
 <?php
@@ -24,12 +24,12 @@ return [
 ```
 
 {% hint style="warning" %}
-For languages that differ by territory, you should name the language directories according to the ISO 15897. For example, "en\_GB" should be used for British English rather than "en-gb".
+Для языков, различающихся по территории, следует называть языковые каталоги в соответствии с ISO 15897. Например, для британского английского языка следует использовать "en\_GB", а не "en-gb".
 {% endhint %}
 
-### Configuring The Locale
+### Настройка локали
 
-The default language for your application is stored in the `config/app.php` configuration file. You may modify this value to suit the needs of your application. You may also change the active language at runtime using the `setLocale` method on the `App` facade:
+Язык по умолчанию для приложения хранится в конфигурационном файле `config/app.php`. Вы можете изменить это значение в соответствии со своими потребностями. Вы также можете изменить активный язык во время выполнения, используя метод `setLocale` фасада `App`:
 
 ```text
 Route::get('welcome/{locale}', function ($locale) {
@@ -43,15 +43,15 @@ Route::get('welcome/{locale}', function ($locale) {
 });
 ```
 
-You may configure a "fallback language", which will be used when the active language does not contain a given translation string. Like the default language, the fallback language is also configured in the `config/app.php` configuration file:
+Вы можете настроить "запасной язык (fallback language)", который будет использоваться, когда активный язык не содержит заданной строки перевода. Как и язык по умолчанию, запасной язык также настроен в конфигурационном файле `config/app.php`:
 
 ```text
 'fallback_locale' => 'en',
 ```
 
-**Determining The Current Locale**
+**Определение текущей локали**
 
-You may use the `getLocale` and `isLocale` methods on the `App` facade to determine the current locale or check if the locale is a given value:
+Вы можете использовать методы `getLocale` и `isLocale` фасада `App`, чтобы определить текущую локаль или проверить, является ли локаль заданным значением:
 
 ```text
 $locale = App::getLocale();
@@ -61,11 +61,11 @@ if (App::isLocale('en')) {
 }
 ```
 
-## Defining Translation Strings
+## Определение строк перевода
 
-### Using Short Keys
+### Использование коротких ключей
 
-Typically, translation strings are stored in files within the `resources/lang` directory. Within this directory there should be a subdirectory for each language supported by the application:
+Обычно строки перевода хранятся в файлах в каталоге `resources/lang`. Внутри этого каталога должен быть подкаталог для каждого языка, поддерживаемого приложением:
 
 ```text
 /resources
@@ -76,7 +76,7 @@ Typically, translation strings are stored in files within the `resources/lang` d
             messages.php
 ```
 
-All language files return an array of keyed strings. For example:
+Все языковые файлы возвращают массив ключевых строк. Например:
 
 ```php
 <?php
@@ -88,11 +88,11 @@ return [
 ];
 ```
 
-### Using Translation Strings As Keys
+### Использование перевода строк в качестве ключей
 
-For applications with heavy translation requirements, defining every string with a "short key" can become quickly confusing when referencing them in your views. For this reason, Laravel also provides support for defining translation strings using the "default" translation of the string as the key.
+В приложениях с большим количеством переводимых строк можно быстро запутаться при обращении к ним по коротким ключам. По этой причине Laravel также предоставляет поддержку для определения строк перевода, используя "по умолчанию" перевод строки в качестве ключа.
 
-Translation files that use translation strings as keys are stored as JSON files in the `resources/lang` directory. For example, if your application has a Spanish translation, you should create a `resources/lang/es.json` file:
+Файлы перевода, в которых в качестве ключей используются строки перевода, хранятся в виде JSON-файлов в каталоге `resources/lang`. Например, если ваше приложение имеет испанский перевод, вы должны создать файл `resources/lang/es.json`:
 
 ```javascript
 {
@@ -100,9 +100,9 @@ Translation files that use translation strings as keys are stored as JSON files 
 }
 ```
 
-## Retrieving Translation Strings
+## Получение перевода строк
 
-You may retrieve lines from language files using the `__` helper function. The `__` method accepts the file and key of the translation string as its first argument. For example, let's retrieve the `welcome` translation string from the `resources/lang/messages.php` language file:
+Вы можете получить строки из языковых файлов с помощью функции-помощника `__`. Метод `__` принимает в качестве первого аргумента файл и ключ строки перевода. Например, давайте получим перевод строки `welcome` из языкового файла `resources/lang/messages.php`:
 
 ```php
 echo __('messages.welcome');
@@ -110,7 +110,7 @@ echo __('messages.welcome');
 echo __('I love programming.');
 ```
 
-If you are using the [Blade templating engine](blade.md), you may use the `{{ }}` syntax to echo the translation string or use the `@lang` directive:
+Если вы используете [шаблонизатор Blade](blade.md), то можете использовать синтаксис `{{ }}` для вывода перевода строки или использовать директиву `@lang`:
 
 ```markup
 {{ __('messages.welcome') }}
@@ -118,54 +118,54 @@ If you are using the [Blade templating engine](blade.md), you may use the `{{ }}
 @lang('messages.welcome')
 ```
 
-If the specified translation string does not exist, the `__` function will return the translation string key. So, using the example above, the `__` function would return `messages.welcome` if the translation string does not exist.
+Если указанной строки перевода не существует, функция `__` вернет ключ строки перевода. Таким образом, используя приведенный выше пример, функция `__` вернет `messages.welcome`, если строка перевода не существует.
 
 {% hint style="warning" %}
-The `@lang` directive does not escape any output. You are **fully responsible** for escaping your own output when using this directive.
+Директива @lang не экранирует вывод. При использовании этой директивы вы несете **полную ответственность** за экранирование собственных выходных данных.
 {% endhint %}
 
-### Replacing Parameters In Translation Strings
+### Замена параметров в строках перевода
 
-If you wish, you may define placeholders in your translation strings. All placeholders are prefixed with a `:`. For example, you may define a welcome message with a placeholder name:
+При желании, вы можете определить плейсхолдеры в строках перевода. Все плейсхолдеры имеют префикс `:`. Например, Вы можете определить приветственное сообщение с плейсхолдером `name`:
 
 ```php
 'welcome' => 'Welcome, :name',
 ```
 
-To replace the placeholders when retrieving a translation string, pass an array of replacements as the second argument to the `__` function:
+Для замены плейсхолдеров при получении строки перевода передайте массив замен в качестве второго аргумента в функцию `__`:
 
 ```php
 echo __('messages.welcome', ['name' => 'dayle']);
 ```
 
-If your placeholder contains all capital letters, or only has its first letter capitalized, the translated value will be capitalized accordingly:
+Если плейсхолдер содержит все заглавные буквы или только первую букву, переведенное значение будет выведено заглавными буквами соответственно:
 
 ```php
 'welcome' => 'Welcome, :NAME', // Welcome, DAYLE
 'goodbye' => 'Goodbye, :Name', // Goodbye, Dayle
 ```
 
-### Pluralization
+### Плюрализация
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. By using a "pipe" character, you may distinguish singular and plural forms of a string:
+Плюрализация — это сложная проблема, так как разные языки имеют множество сложных правил для множественного числа. Используя символ "|", можно различать единственную и множественную формы строк:
 
 ```php
 'apples' => 'There is one apple|There are many apples',
 ```
 
-You may even create more complex pluralization rules which specify translation strings for multiple number ranges:
+Можно создавать более сложные правила множественного числа, которые задают строки перевода для множества числовых диапазонов:
 
 ```php
 'apples' => '{0} There are none|[1,19] There are some|[20,*] There are many',
 ```
 
-After defining a translation string that has pluralization options, you may use the `trans_choice` function to retrieve the line for a given "count". In this example, since the count is greater than one, the plural form of the translation string is returned:
+После определения строки перевода, которая имеет опции множественного числа, вы можете использовать функцию `trans_choice` для получения строки для заданного "числового значения". В этом примере, так как счетчик больше единицы, возвращается строка перевода во множественном числе:
 
 ```php
 echo trans_choice('messages.apples', 10);
 ```
 
-You may also define placeholder attributes in pluralization strings. These placeholders may be replaced by passing an array as the third argument to the `trans_choice` function:
+Вы также можете определить плейсхолдеры в строках множественного числа. Эти плейсхолдеры могут быть заменены передачей массива в качестве третьего аргумента в функцию `trans_choice`:
 
 ```php
 'minutes_ago' => '{1} :value minute ago|[2,*] :value minutes ago',
@@ -173,15 +173,15 @@ You may also define placeholder attributes in pluralization strings. These place
 echo trans_choice('time.minutes_ago', 5, ['value' => 5]);
 ```
 
-If you would like to display the integer value that was passed to the `trans_choice` function, you may use the `:count` placeholder:
+Если Вы хотите отобразить целое значение, которое было передано в функцию `trans_choice`, то Вы можете использовать плейсхолдер `:count`:
 
 ```php
 'apples' => '{0} There are none|{1} There is one|[2,*] There are :count',
 ```
 
-## Overriding Package Language Files
+## Переопределение языковых файлов пакета
 
-Some packages may ship with their own language files. Instead of changing the package's core files to tweak these lines, you may override them by placing files in the `resources/lang/vendor/{package}/{locale}` directory.
+Некоторые пакеты могут поставляться с собственными языковыми файлами. Вместо того, чтобы изменять основные файлы пакета, чтобы подкорректировать эти строки, вы можете переопределить их, поместив файлы в каталог `resources/lang/vendor/{package}/{locale}`.
 
-So, for example, if you need to override the English translation strings in `messages.php` for a package named `skyrim/hearthfire`, you should place a language file at: `resources/lang/vendor/hearthfire/en/messages.php`. Within this file, you should only define the translation strings you wish to override. Any translation strings you don't override will still be loaded from the package's original language files.
+Так, например, если вам нужно переопределить строки английского перевода в `messages.php` для пакета с именем `skyrim/hearthfire`, вы должны поместить языковой файл в `resources/lang/vendor/hearthfire/en/messages.php`. В этом файле вы должны определить только те строки перевода, которые вы хотите переопределить. Любые строки перевода, которые вы не переопределите, будут загружены из оригинальных языковых файлов пакета.
 
