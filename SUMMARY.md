@@ -29,6 +29,11 @@
 * [Сессии](the-basics/session.md)
 * [Валидация](the-basics/validation.md)
 
+## Фронтэнд
+
+* [Blade шаблоны](frontend/blade.md)
+* [Локализация](frontend/localization.md)
+
 ## Безопасность <a id="security"></a>
 
 * [Аутентификация](security/authentification.md)
