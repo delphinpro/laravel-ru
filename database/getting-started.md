@@ -1,58 +1,58 @@
 # Начало работы
 
-## Introduction
+## Вступление
 
-Laravel makes interacting with databases extremely simple across a variety of database backends using either raw SQL, the [fluent query builder,](queries.md) and the [Eloquent ORM](../eloquent/eloquent.md). Currently, Laravel supports four databases:
+Laravel делает взаимодействие с базами данных чрезвычайно простым в различных бэкэндах баз данных, используя либо сырой SQL, либо [конструктор запросов,](queries.md) и [Eloquent ORM](.../eloquent/eloquent.md). В настоящее время Laravel поддерживает четыре базы данных:
 
 * MySQL 5.6+ \([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history)\)
 * PostgreSQL 9.4+ \([Version Policy](https://www.postgresql.org/support/versioning/)\)
 * SQLite 3.8.8+
 * SQL Server 2017+ \([Version Policy](https://support.microsoft.com/en-us/lifecycle/search)\)
 
-### Configuration
+### Конфигурация
 
-The database configuration for your application is located at `config/database.php`. In this file you may define all of your database connections, as well as specify which connection should be used by default. Examples for most of the supported database systems are provided in this file.
+Конфигурация базы данных для приложения находится в файле `config/database.php`. В этом файле Вы можете определить все подключения к БД, а также указать, какое подключение должно использоваться по умолчанию. Примеры для большинства поддерживаемых систем баз данных приведены в этом файле.
 
-By default, Laravel's sample [environment configuration](https://laravel.com/docs/7.x/configuration#environment-configuration) is ready to use with [Laravel Homestead](https://laravel.com/docs/7.x/homestead), which is a convenient virtual machine for doing Laravel development on your local machine. You are free to modify this configuration as needed for your local database.
+По умолчанию образец [настройки среды](https://laravel.com/docs/7.x/configuration#environment-configuration) Laravel готов к использованию с [Laravel Homestead](https://laravel.com/docs/7.x/homestead), которая является удобной виртуальной машиной для разработки Laravel на вашей локальной машине. Вы можете свободно изменять эту конфигурацию по мере необходимости для вашей локальной базы данных.
 
-#### **SQLite Configuration**
+#### SQLite конфигурация
 
-After creating a new SQLite database using a command such as `touch database/database.sqlite`, you can easily configure your environment variables to point to this newly created database by using the database's absolute path:
+После создания новой базы данных SQLite с помощью команды `touch database/database.sqlite`, вы можете легко настроить переменные окружения так, чтобы они указывали на только что созданную базу данных, используя абсолютный путь к ней:
 
 ```bash
 DB_CONNECTION=sqlite
 DB_DATABASE=/absolute/path/to/database.sqlite
 ```
 
-To enable foreign key constraints for SQLite connections, you should set the `DB_FOREIGN_KEYS` environment variable to `true`:
+Чтобы включить ограничения по внешнему ключу для соединений SQLite, необходимо установить переменную окружения `DB_FOREIGN_KEYS` в `true`:
 
 ```bash
 DB_FOREIGN_KEYS=true
 ```
 
-#### **Configuration Using URLs**
+#### Конфигурация с использованием URL-адресов
 
-Typically, database connections are configured using multiple configuration values such as `host`, `database`, `username`, `password`, etc. Each of these configuration values has its own corresponding environment variable. This means that when configuring your database connection information on a production server, you need to manage several environment variables.
+Обычно соединения с базами данных настраиваются с использованием нескольких значений конфигурации, таких как `host`, `database`, `username`, `password` и др. Каждое из этих значений конфигурации имеет свою собственную соответствующую переменную окружения. Это означает, что при конфигурировании информации о подключении к базе данных на производственном сервере, необходимо управлять несколькими переменными окружения.
 
-Some managed database providers such as Heroku provide a single database "URL" that contains all of the connection information for the database in a single string. An example database URL may look something like the following:
+Некоторые провайдеры управляемых баз данных, такие как Heroku, предоставляют единый "URL" базы данных, который содержит всю информацию о соединении для БД в одной строке. Пример URL базы данных может выглядеть следующим образом:
 
 ```bash
 mysql://root:password@127.0.0.1/forge?charset=UTF-8
 ```
 
-These URLs typically follow a standard schema convention:
+Эти URL обычно следуют стандартной схеме:
 
 ```bash
 driver://username:password@host:port/database?options
 ```
 
-For convenience, Laravel supports these URLs as an alternative to configuring your database with multiple configuration options. If the `url` \(or corresponding `DATABASE_URL` environment variable\) configuration option is present, it will be used to extract the database connection and credential information.
+Для удобства Laravel поддерживает эти URL-адреса в качестве альтернативы настройке вашей базы данных с несколькими вариантами конфигурации. Если присутствует конфигурационная опция `url` \(или соответствующая пересменная среды `DATABASE_URL`\), то она будет использована для извлечения информации о подключении к БД и учетных данных.
 
-### Read & Write Connections
+### Раздельные соединения для чтения и записи
 
-Sometimes you may wish to use one database connection for SELECT statements, and another for INSERT, UPDATE, and DELETE statements. Laravel makes this a breeze, and the proper connections will always be used whether you are using raw queries, the query builder, or the Eloquent ORM.
+Иногда вам нужно использовать одно подключение к базе данных для чтения \(SELECT\), а другое — для записи \(INSERT, UPDATE и DELETE\). Laravel делает это простым, и правильные соединения всегда будут использоваться, независимо от того, используете ли вы необработанные запросы, конструктор запросов или Eloquent ORM.
 
-To see how read / write connections should be configured, let's look at this example:
+Чтобы посмотреть, как должны быть настроены соединения чтения/записи, давайте посмотрим на этот пример:
 
 ```php
 'mysql' => [
@@ -78,13 +78,13 @@ To see how read / write connections should be configured, let's look at this exa
 ],
 ```
 
-Note that three keys have been added to the configuration array: `read`, `write` and `sticky`. The `read` and `write` keys have array values containing a single key: `host`. The rest of the database options for the `read` and `write` connections will be merged from the main `mysql` array.
+Обратите внимание, что в массив конфигурации были добавлены три ключа: `read`, `write` и `sticky`. Ключи `read` и `write` имеют значения массива, содержащего один ключ: `host`. Остальные опции БД для соединений `read` и `write` будут объединены из основного массива `mysql`.
 
-You only need to place items in the `read` and `write` arrays if you wish to override the values from the main array. So, in this case, `192.168.1.1` will be used as the host for the "read" connection, while `192.168.1.3` will be used for the "write" connection. The database credentials, prefix, character set, and all other options in the main `mysql` array will be shared across both connections.
+Размещать элементы в массивах `read` и `write` нужно только в том случае, если вы хотите переопределить значения из главного массива. Таким образом, в этом случае, `192.168.1.1` будет использоваться в качестве хоста для соединения "read", а `192.168.1.3` — для соединения "write". Учетные данные базы данных, префикс, набор символов и все остальные опции в основном массиве `mysql` будут совместно использоваться для обоих соединений.
 
-#### **The sticky Option**
+#### Опция sticky
 
-The `sticky` option is an _optional_ value that can be used to allow the immediate reading of records that have been written to the database during the current request cycle. If the `sticky` option is enabled and a "write" operation has been performed against the database during the current request cycle, any further "read" operations will use the "write" connection. This ensures that any data written during the request cycle can be immediately read back from the database during that same request. It is up to you to decide if this is the desired behavior for your application.
+Опция `sticky` - это _необязательное_ значение, которое может быть использовано для немедленного считывания записей, которые были записаны в базу данных в течение текущего цикла запроса. Если опция `sticky` включена и в течение текущего цикла запроса против БД была выполнена операция "запись", то при любых дальнейших операциях "чтения" будет использоваться соединение "запись". Это гарантирует, что любые данные, записанные во время цикла запроса, могут быть немедленно считаны из БД во время того же самого запроса. Вы сами решаете, является ли это желаемым поведением вашего приложения.
 
 ### Using Multiple Database Connections
 
