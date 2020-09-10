@@ -64,3 +64,7 @@
 
 * [Начало работы](eloquent/eloquent.md)
 
+## Официальные пакеты <a id="packages"></a>
+
+* [Laravel Passport](packages/passport.md)
+

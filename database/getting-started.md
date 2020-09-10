@@ -2,7 +2,7 @@
 
 ## Вступление
 
-Laravel делает взаимодействие с базами данных чрезвычайно простым в различных бэкэндах баз данных, используя либо сырой SQL, либо [конструктор запросов,](queries.md) и [Eloquent ORM](.../eloquent/eloquent.md). В настоящее время Laravel поддерживает четыре базы данных:
+Laravel делает взаимодействие с базами данных чрезвычайно простым в различных бэкэндах баз данных, используя либо сырой SQL, либо [конструктор запросов,](queries.md) и [Eloquent ORM](https://github.com/delphinpro/laravel-ru/tree/e452f3a46a11a152525d485246264f2ce1016ae6/database/.../eloquent/eloquent.md). В настоящее время Laravel поддерживает четыре базы данных:
 
 * MySQL 5.6+ \([Version Policy](https://en.wikipedia.org/wiki/MySQL#Release_history)\)
 * PostgreSQL 9.4+ \([Version Policy](https://www.postgresql.org/support/versioning/)\)
