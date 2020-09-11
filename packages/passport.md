@@ -2,7 +2,7 @@
 
 ## Вступление
 
-Laravel уже упрощает выполнение аутентификации с помощью традиционных форм входа, но как насчет API? API обычно используют токены для аутентификации пользователей и не поддерживают состояние сеанса между запросами. Laravel делает аутентификацию API легкой задачей, используя Laravel Passport, который обеспечивает полную реализацию сервера OAuth2 для вашего приложения в течение нескольких минут. Passport построен на [OAuth2 сервере] (https://github.com/thephpleague/oauth2-server), который поддерживается Энди Миллингтоном (Andy Millington) и Саймоном Хэмпом (Simon Hamp).
+Laravel уже упрощает выполнение аутентификации с помощью традиционных форм входа, но как насчет API? API обычно используют токены для аутентификации пользователей и не поддерживают состояние сеанса между запросами. Laravel делает аутентификацию API легкой задачей, используя Laravel Passport, который обеспечивает полную реализацию сервера OAuth2 для вашего приложения в течение нескольких минут. Passport построен на [OAuth2 сервере](https://github.com/thephpleague/oauth2-server), который поддерживается Энди Миллингтоном (Andy Millington) и Саймоном Хэмпом (Simon Hamp).
 
 {% hint style="warning" %}
 Эта документация предполагает, что вы уже знакомы с OAuth2. Если вы ничего не знаете об OAuth2, то прежде чем продолжить, ознакомьтесь с общей [терминологией](https://oauth2.thephpleague.com/terminology/) и особенностями OAuth2.
@@ -319,7 +319,7 @@ JSON API защищен посредниками `web` и `auth`, поэтому
 
 **GET /oauth/clients**
 
-This route returns all of the clients for the authenticated user. This is primarily useful for listing all of the user's clients so that they may edit or delete them:
+Этот маршрут возвращает всех клиентов аутентифицированному пользователю. Это в первую очередь полезно для перечисления всех клиентов пользователя, чтобы он мог их редактировать или удалять:
 
 ```javascript
 axios.get('/oauth/clients')
@@ -330,9 +330,9 @@ axios.get('/oauth/clients')
 
 **POST /oauth/clients**
 
-This route is used to create new clients. It requires two pieces of data: the client's `name` and a `redirect` URL. The `redirect` URL is where the user will be redirected after approving or denying a request for authorization.
+Этот маршрут используется для создания новых клиентов. Для него требуются две части данных: имя клиента `name` и `redirect` — URL для перенаправления. URL-адрес `redirect` — это то место, куда пользователь будет перенаправлен после одобрения или отклонения запроса на авторизацию.
 
-When a client is created, it will be issued a client ID and client secret. These values will be used when requesting access tokens from your application. The client creation route will return the new client instance:
+При создании клиента ему будет выдан идентификатор и секрет клиента. Эти значения будут использоваться при запросе токенов доступа из вашего приложения. Маршрут создания клиента вернет новый экземпляр клиента:
 
 ```javascript
 const data = {
@@ -351,7 +351,7 @@ axios.post('/oauth/clients', data)
 
 **PUT /oauth/clients/{client-id}**
 
-This route is used to update clients. It requires two pieces of data: the client's `name` and a `redirect` URL. The `redirect` URL is where the user will be redirected after approving or denying a request for authorization. The route will return the updated client instance:
+Этот маршрут используется для обновления клиентов. Для него требуются две части данных: имя клиента `name` и `redirect` — URL для редиректа. URL-адрес `redirect` — это то место, куда пользователь будет перенаправлен после одобрения или отклонения запроса на авторизацию. Маршрут вернет обновленный экземпляр клиента:
 
 ```javascript
 const data = {
@@ -370,7 +370,7 @@ axios.put('/oauth/clients/' + clientId, data)
 
 **DELETE /oauth/clients/{client-id}**
 
-This route is used to delete clients:
+Этот маршрут используется для удаления клиентов:
 
 ```javascript
 axios.delete('/oauth/clients/' + clientId)
@@ -379,11 +379,11 @@ axios.delete('/oauth/clients/' + clientId)
     });
 ```
 
-### Requesting Tokens
+### Запрос токенов
 
-**Redirecting For Authorization**
+**Переадресация для авторизации**
 
-Once a client has been created, developers may use their client ID and secret to request an authorization code and access token from your application. First, the consuming application should make a redirect request to your application's `/oauth/authorize` route like so:
+После создания клиента разработчики могут использовать свой клиентский ID и секрет для запроса кода авторизации и токена доступа из вашего приложения. Сначала запрашивающее приложение должно переадресовать запрос на маршрут `/oauth/authorize` вашего приложения таким образом:
 
 ```php
 Route::get('/redirect', function (Request $request) {
@@ -401,25 +401,21 @@ Route::get('/redirect', function (Request $request) {
 });
 ```
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> Remember, the `/oauth/authorize` route is already defined by the `Passport::routes` method. You do not need to manually define this route.
-
 {% hint style="info" %}
-
+Помните, что маршрут `/oauth/authorize` уже определен методом `Passport::routes`. Вам не нужно вручную определять этот маршрут.
 {% endhint %}
 
-**Approving The Request**
+**Одобрение запроса**
 
-When receiving authorization requests, Passport will automatically display a template to the user allowing them to approve or deny the authorization request. If they approve the request, they will be redirected back to the `redirect_uri` that was specified by the consuming application. The `redirect_uri` must match the `redirect` URL that was specified when the client was created.
+При получении запроса на авторизацию Паспорт автоматически выводит пользователю шаблон, позволяющий ему одобрить или отклонить запрос на авторизацию. Если запрос на авторизацию будет одобрен, то он будет перенаправлен обратно на `redirect_uri`, который был указан запрашивающим приложением. URL-адрес `redirect_uri` должен совпадать с URL-адресом `redirect`, который был указан при создании клиента.
 
-If you would like to customize the authorization approval screen, you may publish Passport's views using the `vendor:publish` Artisan command. The published views will be placed in `resources/views/vendor/passport`:
+Если вы хотите настроить экран одобрения авторизации, то можете опубликовать представления Паспорта, используя команду Artisan `vendor:publish`. Опубликованные представления будут размещены в `resources/views/vendor/passport`:
 
-```javascript
+```bash
 php artisan vendor:publish --tag=passport-views
 ```
 
-Sometimes you may wish to skip the authorization prompt, such as when authorizing a first-party client. You may accomplish this by [extending the `Client` model](passport.md#overriding-default-models) and defining a `skipsAuthorization` method. If `skipsAuthorization` returns `true` the client will be approved and the user will be redirected back to the `redirect_uri` immediately:
+Иногда вам может понадобиться пропустить запрос авторизации, например, при авторизации клиента первой стороны. Вы можете сделать это, [расширив модель `Clients`](passport.md#overriding-default-models) и определив метод `skipsAuthorization`. Если `skipsAuthorization` вернёт `true`, то клиент будет одобрен и пользователь будет немедленно перенаправлен обратно в `redirect_uri`:
 
 ```php
 <?php
@@ -442,9 +438,9 @@ class Client extends BaseClient
 }
 ```
 
-**Converting Authorization Codes To Access Tokens**
+**Преобразование кодов авторизации в токены доступа**
 
-If the user approves the authorization request, they will be redirected back to the consuming application. The consumer should first verify the `state` parameter against the value that was stored prior to the redirect. If the state parameter matches the consumer should issue a `POST` request to your application to request an access token. The request should include the authorization code that was issued by your application when the user approved the authorization request. In this example, we'll use the Guzzle HTTP library to make the `POST` request:
+Если пользователь одобрит запрос на авторизацию, то он будет перенаправлен обратно в приложение-потребитель. Потребитель должен сначала проверить параметр `state` в сравнении со значением, которое было сохранено до перенаправления. Если параметр "state" соответствует потребителю, то он должен отправить в Ваше приложение запрос "POST" на получение токена доступа. В запросе должен быть указан код авторизации, который был выдан вашим приложением при одобрении запроса на авторизацию пользователем. В данном примере мы будем использовать HTTP-библиотеку Guzzle для создания `POST` запроса:
 
 ```php
 Route::get('/callback', function (Request $request) {
@@ -471,14 +467,10 @@ Route::get('/callback', function (Request $request) {
 });
 ```
 
-This `/oauth/token` route will return a JSON response containing `access_token`, `refresh_token`, and `expires_in` attributes. The `expires_in` attribute contains the number of seconds until the access token expires.
-
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> Like the `/oauth/authorize` route, the `/oauth/token` route is defined for you by the `Passport::routes` method. There is no need to manually define this route. By default, this route is throttled using the settings of the `ThrottleRequests` middleware.
+Этот маршрут `/oauth/token` вернет JSON-ответ, содержащий атрибуты `access_token`, `refresh_token` и `expires_in`. Атрибут `expires_in` содержит количество секунд до истечения срока действия токена доступа.
 
 {% hint style="info" %}
-
+Как и маршрут `/auth/authorize`, маршрут `/oauth/token` определяется для вас методом `Passport::routes`. Нет необходимости вручную определять этот маршрут. По умолчанию этот маршрут дросселируется с помощью настроек посредника `ThrottleRequests`.
 {% endhint %}
 
 **JSON API**
