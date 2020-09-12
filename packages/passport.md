@@ -2,7 +2,7 @@
 
 ## Вступление
 
-Laravel уже упрощает выполнение аутентификации с помощью традиционных форм входа, но как насчет API? API обычно используют токены для аутентификации пользователей и не поддерживают состояние сеанса между запросами. Laravel делает аутентификацию API легкой задачей, используя Laravel Passport, который обеспечивает полную реализацию сервера OAuth2 для вашего приложения в течение нескольких минут. Passport построен на [OAuth2 сервере](https://github.com/thephpleague/oauth2-server), который поддерживается Энди Миллингтоном (Andy Millington) и Саймоном Хэмпом (Simon Hamp).
+Laravel уже упрощает выполнение аутентификации с помощью традиционных форм входа, но как насчет API? API обычно используют токены для аутентификации пользователей и не поддерживают состояние сеанса между запросами. Laravel делает аутентификацию API легкой задачей, используя Laravel Passport, который обеспечивает полную реализацию сервера OAuth2 для вашего приложения в течение нескольких минут. Passport построен на [OAuth2 сервере](https://github.com/thephpleague/oauth2-server), который поддерживается Энди Миллингтоном \(Andy Millington\) и Саймоном Хэмпом \(Simon Hamp\).
 
 {% hint style="warning" %}
 Эта документация предполагает, что вы уже знакомы с OAuth2. Если вы ничего не знаете об OAuth2, то прежде чем продолжить, ознакомьтесь с общей [терминологией](https://oauth2.thephpleague.com/terminology/) и особенностями OAuth2.
@@ -26,17 +26,17 @@ composer require laravel/passport
 php artisan migrate
 ```
 
-Далее следует запустить команду `passport:install`. Эта команда создаст ключи шифрования, необходимые для генерации маркеров безопасного доступа. Кроме того, команда создаст клиентов "персонального доступа (personal access)" и "выдачи пароля (password grant)", которые будут использоваться для генерации токенов доступа:
+Далее следует запустить команду `passport:install`. Эта команда создаст ключи шифрования, необходимые для генерации маркеров безопасного доступа. Кроме того, команда создаст клиентов "персонального доступа \(personal access\)" и "выдачи пароля \(password grant\)", которые будут использоваться для генерации токенов доступа:
 
 ```bash
 php artisan passport:install
 ```
 
 {% hint style="info" %}
-Если вы хотите использовать UUID в качестве значения первичного ключа (primary key) модели `Client` Passport'a вместо автоинкрементируемых целых чисел, пожалуйста, установите Passport, используя [опцию `uuids`] (passport.md#client-uuids).
+Если вы хотите использовать UUID в качестве значения первичного ключа \(primary key\) модели `Client` Passport'a вместо автоинкрементируемых целых чисел, пожалуйста, установите Passport, используя \[опцию `uuids`\] \(passport.md\#client-uuids\).
 {% endhint %}
 
-После выполнения команды `passport:install` добавьте трейт `Laravel\Passport\HasApiTokens` к вашей модели `App\User`. Этот трейт предоставит несколько вспомогательных методов для модели, которые позволят проверять токен аутентифицированного пользователя и области видимости (scopes):
+После выполнения команды `passport:install` добавьте трейт `Laravel\Passport\HasApiTokens` к вашей модели `App\User`. Этот трейт предоставит несколько вспомогательных методов для модели, которые позволят проверять токен аутентифицированного пользователя и области видимости \(scopes\):
 
 ```php
 <?php
@@ -548,7 +548,7 @@ php artisan passport:purge --revoked
 php artisan passport:purge --expired
 ```
 
-You may also configure a [scheduled job](scheduling) in your console `Kernel` class to automatically prune your tokens on a schedule:
+You may also configure a [scheduled job](https://github.com/delphinpro/laravel-ru/tree/310ae4ba9e9192a52b44ffbd0d02380355505025/packages/scheduling/README.md) in your console `Kernel` class to automatically prune your tokens on a schedule:
 
 ```php
 /**
@@ -710,7 +710,7 @@ $response = $http->post('http://your-app.com/oauth/token', [
 
 ### Customizing The User Provider
 
-If your application uses more than one [authentication user provider](authentication#introduction), you may specify which user provider the password grant client uses by providing a `--provider` option when creating the client via the `artisan passport:client --password` command. The given provider name should match a valid provider defined in your `config/auth.php` configuration file. You can then [protect your route using middleware](passport.md#via-middleware) to ensure that only users from the guard's specified provider are authorized.
+If your application uses more than one [authentication user provider](https://github.com/delphinpro/laravel-ru/tree/310ae4ba9e9192a52b44ffbd0d02380355505025/packages/authentication/README.md#introduction), you may specify which user provider the password grant client uses by providing a `--provider` option when creating the client via the `artisan passport:client --password` command. The given provider name should match a valid provider defined in your `config/auth.php` configuration file. You can then [protect your route using middleware](passport.md#via-middleware) to ensure that only users from the guard's specified provider are authorized.
 
 ### Customizing The Username Field
 
@@ -998,7 +998,7 @@ axios.delete('/oauth/personal-access-tokens/' + tokenId);
 
 ### Via Middleware
 
-Passport includes an [authentication guard](authentication#adding-custom-guards) that will validate access tokens on incoming requests. Once you have configured the `api` guard to use the `passport` driver, you only need to specify the `auth:api` middleware on any routes that require a valid access token:
+Passport includes an [authentication guard](https://github.com/delphinpro/laravel-ru/tree/310ae4ba9e9192a52b44ffbd0d02380355505025/packages/authentication/README.md#adding-custom-guards) that will validate access tokens on incoming requests. Once you have configured the `api` guard to use the `passport` driver, you only need to specify the `auth:api` middleware on any routes that require a valid access token:
 
 ```php
 Route::get('/user', function () {
