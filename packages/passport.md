@@ -475,11 +475,11 @@ Route::get('/callback', function (Request $request) {
 
 **JSON API**
 
-Passport also includes a JSON API for managing authorized access tokens. You may pair this with your own frontend to offer your users a dashboard for managing access tokens. For convenience, we'll use [Axios](https://github.com/mzabriskie/axios) to demonstrate making HTTP requests to the endpoints. The JSON API is guarded by the `web` and `auth` middleware; therefore, it may only be called from your own application.
+Паспорт также включает JSON API для управления токенами авторизованного доступа. Вы можете связать его с вашим собственным фронтендом, чтобы предложить вашим пользователям панель инструментов для управления токенами доступа. Для удобства мы используем [Axios](https://github.com/mzabriskie/axios), чтобы продемонстрировать выполнение HTTP-запросов к конечным точкам. JSON API защищен посредниками `web` и `auth`, поэтому он может быть вызван только из вашего собственного приложения.
 
 **GET /oauth/tokens**
 
-This route returns all of the authorized access tokens that the authenticated user has created. This is primarily useful for listing all of the user's tokens so that they can revoke them:
+Этот маршрут возвращает все токены авторизованного доступа, созданные аутентифицированным пользователем. Это в первую очередь полезно для перечисления всех токенов пользователя, чтобы он мог их отозвать:
 
 ```javascript
 axios.get('/oauth/tokens')
@@ -490,15 +490,15 @@ axios.get('/oauth/tokens')
 
 **DELETE /oauth/tokens/{token-id}**
 
-This route may be used to revoke authorized access tokens and their related refresh tokens:
+Этот маршрут может использоваться для отзыва токенов авторизованного доступа и связанных с ними токенов обновления:
 
 ```javascript
 axios.delete('/oauth/tokens/' + tokenId);
 ```
 
-### Refreshing Tokens
+### Токены обновления
 
-If your application issues short-lived access tokens, users will need to refresh their access tokens via the refresh token that was provided to them when the access token was issued. In this example, we'll use the Guzzle HTTP library to refresh the token:
+Если ваше приложение выпускает кратковременные токены доступа, пользователям необходимо будет обновлять свои токены доступа с помощью токена обновления, который был предоставлен им при выпуске токена доступа. В этом примере мы будем использовать HTTP-библиотеку Guzzle для обновления токена:
 
 ```php
 $http = new GuzzleHttp\Client;
@@ -516,39 +516,40 @@ $response = $http->post('http://your-app.com/oauth/token', [
 return json_decode((string) $response->getBody(), true);
 ```
 
-This `/oauth/token` route will return a JSON response containing `access_token`, `refresh_token`, and `expires_in` attributes. The `expires_in` attribute contains the number of seconds until the access token expires.
+Этот маршрут `/oauth/token` вернет JSON-ответ, содержащий атрибуты `access_token`, `refresh_token` и `expires_in`. Атрибут `expires_in` содержит количество секунд до истечения срока действия токена доступа.
 
-### Revoking Tokens
+### Отзыв токенов
 
-You may revoke a token by using the `revokeAccessToken` method on the `TokenRepository`. You may revoke a token's refresh tokens using the `revokeRefreshTokensByAccessTokenId` method on the `RefreshTokenRepository`:
+Вы можете отозвать токен, используя метод `revokeAccessToken` в `TokenRepository`. Отзыв токена осуществляется методом `revokeRefreshTokensByAccessTokenId` в `RefreshTokenRepository`:
 
 ```php
 $tokenRepository = app('Laravel\Passport\TokenRepository');
 $refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
 
-// Revoke an access token...
+// Отозвать токен доступа...
 $tokenRepository->revokeAccessToken($tokenId);
 
 // Revoke all of the token's refresh tokens...
+// Отозвать все обновляющие токены токена доступа...
 $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($tokenId);
 ```
 
-### Purging Tokens
+### Очистка токенов
 
-When tokens have been revoked or expired, you might want to purge them from the database. Passport ships with a command that can do this for you:
+Когда маркеры отозваны или просрочены, возможно, вы захотите удалить их из базы данных. Паспорт поставляется с командой, которая может сделать это за вас:
 
 ```bash
-# Purge revoked and expired tokens and auth codes...
+# Очистка отозванных и истекших токенов и кодов авторизации...
 php artisan passport:purge
 
-# Only purge revoked tokens and auth codes...
+# Очистка только отозванных токенов и кодов авторизации...
 php artisan passport:purge --revoked
 
-# Only purge expired tokens and auth codes...
+# Очистка только истекших токенов и кодов авторизации...
 php artisan passport:purge --expired
 ```
 
-You may also configure a [scheduled job](https://github.com/delphinpro/laravel-ru/tree/310ae4ba9e9192a52b44ffbd0d02380355505025/packages/scheduling/README.md) in your console `Kernel` class to automatically prune your tokens on a schedule:
+Вы также можете настроить [задание по расписанию](scheduling/README.md) в классе `Kernel` вашей консоли, чтобы автоматически удалять токены по расписанию:
 
 ```php
 /**
@@ -564,26 +565,27 @@ protected function schedule(Schedule $schedule)
 ```
 
 ## Authorization Code Grant with PKCE
+## Код авторизации Грант с PKCE
 
-The Authorization Code grant with "Proof Key for Code Exchange" \(PKCE\) is a secure way to authenticate single page applications or native applications to access your API. This grant should be used when you can't guarantee that the client secret will be stored confidentially or in order to mitigate the threat of having the authorization code intercepted by an attacker. A combination of a "code verifier" and a "code challenge" replaces the client secret when exchanging the authorization code for an access token.
+Код авторизации с помощью "Proof Key for Code Exchange" \(PKCE\) является безопасным способом аутентификации одностраничных приложений или обычных приложений для доступа к вашему API. Этот грант должен использоваться, когда вы не можете гарантировать, что клиентская тайна будет храниться конфиденциально, или для уменьшения угрозы того, что код авторизации будет перехвачен злоумышленником. Комбинация "верификатор кода" и "вызов кода" заменяет клиентский секрет при обмене кода авторизации на токен доступа.
 
-### Creating The Client
+### Создание клиента
 
-Before your application can issue tokens via the authorization code grant with PKCE, you will need to create a PKCE-enabled client. You may do this using the `passport:client` command with the `--public` option:
+Прежде чем ваше приложение сможет выпускать токены с помощью кода авторизации, выданного с помощью PKCE, вам нужно будет создать клиент с поддержкой PKCE. Вы можете сделать это, используя команду `passport:client` с опцией `-public`:
 
 ```bash
 php artisan passport:client --public
 ```
 
-### Requesting Tokens
+### Запрос токенов
 
-**Code Verifier & Code Challenge**
+**Верификатор кода и код вызова**
 
-As this authorization grant does not provide a client secret, developers will need to generate a combination of a code verifier and a code challenge in order to request a token.
+Поскольку данное разрешение на авторизацию не предоставляет секрета клиента, разработчикам необходимо будет сгенерировать комбинацию верификатора кода и вызова кода, чтобы запросить токен.
 
-The code verifier should be a random string of between 43 and 128 characters containing letters, numbers and `"-"`, `"."`, `"_"`, `"~"`, as defined in the [RFC 7636 specification](https://tools.ietf.org/html/rfc7636).
+Верификатор кода должен представлять собой случайную строку от 43 до 128 символов, содержащую буквы, цифры и `"-"`, `"."`, `"_"`, `"~"`, как определено в [спецификации RFC 7636](https://tools.ietf.org/html/rfc7636).
 
-The code challenge should be a Base64 encoded string with URL and filename-safe characters. The trailing `'='` characters should be removed and no line breaks, whitespace, or other additional characters should be present.
+Кодом вызова должна быть Base64-кодированная строка с URL и символами, безопасными для файлов. Оконечные символы `'='` должны быть удалены, и не должно быть ни разрывов строк, ни пробелов, ни других дополнительных символов.
 
 ```php
 $encoded = base64_encode(hash('sha256', $code_verifier, true));
@@ -591,9 +593,9 @@ $encoded = base64_encode(hash('sha256', $code_verifier, true));
 $codeChallenge = strtr(rtrim($encoded, '='), '+/', '-_');
 ```
 
-**Redirecting For Authorization**
+**Переадресация для авторизации**
 
-Once a client has been created, you may use the client ID and the generated code verifier and code challenge to request an authorization code and access token from your application. First, the consuming application should make a redirect request to your application's `/oauth/authorize` route:
+После создания клиента вы можете использовать идентификатор клиента и сгенерированный верификатор кода и код вызова для запроса кода авторизации и токена доступа из вашего приложения. Сначала клиентское приложение должно сделать запрос перенаправления на маршрут `/oauth/authorize` вашего приложения:
 
 ```php
 Route::get('/redirect', function (Request $request) {
@@ -619,11 +621,11 @@ Route::get('/redirect', function (Request $request) {
 });
 ```
 
-**Converting Authorization Codes To Access Tokens**
+**Преобразование кодов авторизации в токены доступа**
 
-If the user approves the authorization request, they will be redirected back to the consuming application. The consumer should verify the `state` parameter against the value that was stored prior to the redirect, as in the standard Authorization Code Grant.
+Если пользователь одобрит запрос на авторизацию, то он будет перенаправлен обратно в клиентское приложение. Оно должено сравнить параметр `state` со значением, которое было сохранено до перенаправления, как в стандартном разрешении на код авторизации.
 
-If the state parameter matches, the consumer should issue a `POST` request to your application to request an access token. The request should include the authorization code that was issued by your application when the user approved the authorization request along with the originally generated code verifier:
+Если параметр состояния совпадает, клиент должен отправить в Ваше приложение `POST` запрос на запрос токена доступа. В запросе должен быть указан код авторизации, который был выдан вашим приложением при одобрении запроса на авторизацию пользователем, а также изначально сгенерированный верификатор кода:
 
 ```php
 Route::get('/callback', function (Request $request) {
