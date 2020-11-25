@@ -1,16 +1,16 @@
 # Валидация
 
-## Introduction
+## Вступление
 
-Laravel provides several different approaches to validate your application's incoming data. By default, Laravel's base controller class uses a `ValidatesRequests` trait which provides a convenient method to validate incoming HTTP requests with a variety of powerful validation rules.
+Laravel предлагает несколько различных подходов к проверке входящих данных вашего приложения. По умолчанию, базовый класс контроллера Laravel использует трейт `ValidatesRequests`, который обеспечивает удобный метод для проверки входящих HTTP-запросов с различными мощными правилами проверки.
 
-## Validation Quickstart
+## Быстрый старт
 
-To learn about Laravel's powerful validation features, let's look at a complete example of validating a form and displaying the error messages back to the user.
+Чтобы узнать о мощных функциях валидации Laravel, давайте рассмотрим полный пример валидации формы и отображения сообщений об ошибках обратно к пользователю.
 
-### Defining The Routes
+### Определение маршрутов
 
-First, let's assume we have the following routes defined in our `routes/web.php` file:
+Во-первых, предположим, что в нашем файле `routes/web.php` определены следующие маршруты:
 
 ```php
 Route::get('post/create', 'PostController@create');
@@ -18,11 +18,11 @@ Route::get('post/create', 'PostController@create');
 Route::post('post', 'PostController@store');
 ```
 
-The `GET` route will display a form for the user to create a new blog post, while the `POST` route will store the new blog post in the database.
+Маршрут `GET` отобразит форму для создания пользователем нового поста блога, а `POST` маршрут сохранит новый пост блога в базе данных.
 
-### Creating The Controller
+### Создание контроллера
 
-Next, let's take a look at a simple controller that handles these routes. We'll leave the `store` method empty for now:
+Далее, давайте посмотрим на простой контроллер, который обрабатывает эти маршруты. Пока оставим метод `store` пустым:
 
 ```php
 <?php
@@ -57,11 +57,11 @@ class PostController extends Controller
 }
 ```
 
-### Writing The Validation Logic
+### Пишем логику проверки
 
-Now we are ready to fill in our `store` method with the logic to validate the new blog post. To do this, we will use the `validate` method provided by the `Illuminate\Http\Request` object. If the validation rules pass, your code will keep executing normally; however, if validation fails, an exception will be thrown and the proper error response will automatically be sent back to the user. In the case of a traditional HTTP request, a redirect response will be generated, while a JSON response will be sent for AJAX requests.
+Теперь мы готовы заполнить наш метод `store` логикой проверки новой записи в блоге. Для этого мы будем использовать метод `validate`, предоставляемый объектом `Illuminate\Http\Request`. Если правила валидации пройдут, то ваш код будет продолжать выполняться нормально, но если валидация не пройдет, то будет выброшено исключение, и пользователю будет автоматически отправлен правильный ответ об ошибке. В случае традиционного HTTP-запроса будет сгенерирован редиректный ответ, а для AJAX-запросов будет отправлен JSON-ответ.
 
-To get a better understanding of the `validate` method, let's jump back into the `store` method:
+Чтобы лучше понять метод `validate`, давайте вернемся к методу `store`:
 
 ```php
 /**
@@ -81,9 +81,9 @@ public function store(Request $request)
 }
 ```
 
-As you can see, we pass the desired validation rules into the `validate` method. Again, if the validation fails, the proper response will automatically be generated. If the validation passes, our controller will continue executing normally.
+Как видите, мы передаем желаемые правила валидации в метод `validate`. Опять же, если валидация не пройдет, правильный ответ будет сгенерирован автоматически. Если валидация пройдет, наш контроллер продолжит работать в нормальном режиме.
 
-Alternatively, validation rules may be specified as arrays of rules instead of a single `|` delimited string:
+Кроме того, правила проверки могут быть указаны в виде массивов правил, а не в виде отдельной строки `|`:
 
 ```php
 $validatedData = $request->validate([
@@ -92,7 +92,7 @@ $validatedData = $request->validate([
 ]);
 ```
 
-You may use the `validateWithBag` method to validate a request and store any error messages within a [named error bag](https://laravel.com/docs/7.x/validation#named-error-bags):
+Вы можете использовать метод `validateWithBag` для проверки запроса и хранения любых сообщений об ошибках в [пакете именованных ошибок](#named-error-bags):
 
 ```php
 $validatedData = $request->validateWithBag('post', [
@@ -101,9 +101,9 @@ $validatedData = $request->validateWithBag('post', [
 ]);
 ```
 
-**Stopping On First Validation Failure**
+**Остановка при первой неудаче проверки**
 
-Sometimes you may wish to stop running validation rules on an attribute after the first validation failure. To do so, assign the `bail` rule to the attribute:
+Иногда вам может понадобиться прекратить выполнение правил проверки атрибута после первого сбоя проверки. Для этого, назначьте правило `bail` для атрибута:
 
 ```php
 $request->validate([
@@ -112,11 +112,11 @@ $request->validate([
 ]);
 ```
 
-In this example, if the `unique` rule on the `title` attribute fails, the `max` rule will not be checked. Rules will be validated in the order they are assigned.
+В этом примере, если правило `unique` по атрибуту `title` не срабатывает, правило `max` не будет проверено. Правила будут проверяться в порядке их назначения.
 
-**A Note On Nested Attributes**
+**Замечание о вложенных атрибутах**
 
-If your HTTP request contains "nested" parameters, you may specify them in your validation rules using "dot" syntax:
+Если ваш HTTP-запрос содержит "вложенные" параметры, вы можете указать их в правилах проверки, используя синтаксис "точка":
 
 ```php
 $request->validate([
@@ -126,21 +126,17 @@ $request->validate([
 ]);
 ```
 
-### Displaying The Validation Errors
+### Отображение ошибок проверки
 
-So, what if the incoming request parameters do not pass the given validation rules? As mentioned previously, Laravel will automatically redirect the user back to their previous location. In addition, all of the validation errors will automatically be [flashed to the session](https://laravel.com/docs/7.x/session#flash-data).
+Что если параметры входящего запроса не проходят заданные правила проверки? Как уже упоминалось ранее, Laravel автоматически перенаправит пользователя обратно на его предыдущее местоположение. Кроме того, все ошибки валидации будут автоматически [сохранены в сессию](session#flash-data).
 
-Again, notice that we did not have to explicitly bind the error messages to the view in our `GET` route. This is because Laravel will check for errors in the session data, and automatically bind them to the view if they are available. The `$errors` variable will be an instance of `Illuminate\Support\MessageBag`. For more information on working with this object, [check out its documentation](https://laravel.com/docs/7.x/validation#working-with-error-messages).
+Опять же, обратите внимание, что нам не пришлось явно привязывать сообщения об ошибках к представлению в нашем `GET` маршруте. Это связано с тем, что Laravel будет проверять данные сессии на наличие ошибок и автоматически привязывать к представлению, если они доступны. Переменная `$errors` будет экземпляром `Illuminate\Support\MessageBag`. Подробнее о работе с этим объектом можно прочитать в его документации [#working-with-error-messages].
 
 {% hint style="info" %}
-
+Переменная `$errors` привязана к представлению с помощью посредника `Illuminate\View\Middleware\ShareErrorsFromSession`, который предоставляется группой `web`. **Когда этотпосредник применяется, переменная `$errors` всегда будет доступна в вашем представлении**, что позволяет удобно предположить, что переменная `$errors` всегда определена и может быть безопасно использована.
 {% endhint %}
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> The `$errors` variable is bound to the view by the `Illuminate\View\Middleware\ShareErrorsFromSession` middleware, which is provided by the `web` middleware group. **When this middleware is applied an `$errors` variable will always be available in your views**, allowing you to conveniently assume the `$errors` variable is always defined and can be safely used.
-
-So, in our example, the user will be redirected to our controller's `create` method when validation fails, allowing us to display the error messages in the view:
+Таким образом, в нашем примере, пользователь будет перенаправлен в метод `create` контроллера, когда проверка не удастся, что позволит нам отобразить сообщения об ошибках в представлении:
 
 ```markup
 <!-- /resources/views/post/create.blade.php -->
@@ -160,9 +156,9 @@ So, in our example, the user will be redirected to our controller's `create` met
 <!-- Create Post Form -->
 ```
 
-**The @error Directive**
+**Директива @error**
 
-You may also use the `@error` [Blade](https://laravel.com/docs/7.x/blade) directive to quickly check if validation error messages exist for a given attribute. Within an `@error` directive, you may echo the `$message` variable to display the error message:
+Вы также можете использовать директиву `@error` [Blade](https://laravel.com/docs/7.x/blade) для быстрой проверки наличия сообщений об ошибках проверки для данного атрибута. В директиве `@error` для отображения сообщения об ошибке можно использовать переменную `$message`:
 
 ```markup
 <!-- /resources/views/post/create.blade.php -->
@@ -176,9 +172,9 @@ You may also use the `@error` [Blade](https://laravel.com/docs/7.x/blade) direct
 @enderror
 ```
 
-### A Note On Optional Fields
+### Замечание о дополнительных полях
 
-By default, Laravel includes the `TrimStrings` and `ConvertEmptyStringsToNull` middleware in your application's global middleware stack. These middleware are listed in the stack by the `App\Http\Kernel` class. Because of this, you will often need to mark your "optional" request fields as `nullable` if you do not want the validator to consider `null` values as invalid. For example:
+По умолчанию Laravel включает посредники `TrimStrings` и `ConvertEmptyStringsToNull` в глобальный стек посредников приложения. Эти посредники перечислены в классе `App\Http\Kernel`. Из-за этого вам часто придется отмечать свои "необязательные" поля запроса как `nullable`, если вы не хотите, чтобы валидатор считал `nullable` значения недействительными. Например:
 
 ```php
 $request->validate([
@@ -188,23 +184,23 @@ $request->validate([
 ]);
 ```
 
-In this example, we are specifying that the `publish_at` field may be either `null` or a valid date representation. If the `nullable` modifier is not added to the rule definition, the validator would consider `null` an invalid date.
+В данном примере мы указываем, что поле `publish_at` может быть как `null`, так и действительным представлением даты. Если модификатор `nullable` не будет добавлен в определение правила, валидатор будет считать `null` недействительной датой.
 
-**AJAX Requests & Validation**
+**AJAX запросы и валидация**
 
-In this example, we used a traditional form to send data to the application. However, many applications use AJAX requests. When using the `validate` method during an AJAX request, Laravel will not generate a redirect response. Instead, Laravel generates a JSON response containing all of the validation errors. This JSON response will be sent with a 422 HTTP status code.
+В данном примере мы использовали традиционную форму для отправки данных в приложение. Однако многие приложения используют AJAX-запросы. При использовании метода `validate` во время AJAX-запроса, Laravel не будет генерировать редиректный ответ. Вместо этого, Laravel генерирует JSON ответ, содержащий все ошибки проверки. Этот JSON-ответ будет отправлен с кодом статуса 422 HTTP.
 
-## Form Request Validation
+## Проверка формы запроса
 
-### Creating Form Requests
+### Создание формы запроса
 
-For more complex validation scenarios, you may wish to create a "form request". Form requests are custom request classes that contain validation logic. To create a form request class, use the `make:request` Artisan CLI command:
+Для более сложных сценариев валидации вы можете создать "форму запроса". Форма запроса — это пользовательские классы запросов, которые содержат логику валидации. Для создания класса формы запроса используйте команду Artisan CLI `make:request`:
 
 ```bash
 php artisan make:request StoreBlogPost
 ```
 
-The generated class will be placed in the `app/Http/Requests` directory. If this directory does not exist, it will be created when you run the `make:request` command. Let's add a few validation rules to the `rules` method:
+Сгенерированный класс будет помещен в каталог `app/Http/Requests`. Если этот каталог не существует, то он будет создан при выполнении команды `make:request`. Добавим несколько правил проверки в метод `rules`:
 
 ```php
 /**
@@ -227,9 +223,9 @@ public function rules()
 
 > ![](https://laravel.com/img/callouts/lightbulb.min.svg)
 >
-> You may type-hint any dependencies you need within the `rules` method's signature. They will automatically be resolved via the Laravel [service container](https://laravel.com/docs/7.x/container).
+В сигнатуре метода `rules` вы можете указать любые необходимые вам зависимости. Они будут автоматически разрешены через Laravel [сервис-контейнер](https://laravel.com/docs/7.x/container).
 
-So, how are the validation rules evaluated? All you need to do is type-hint the request on your controller method. The incoming form request is validated before the controller method is called, meaning you do not need to clutter your controller with any validation logic:
+Так как же оцениваются правила валидации? Все, что вам нужно сделать, это указать класс запроса в методе контроллера. Запрос входящей формы проверяется перед вызовом метода контроллера, что означает, что вам не нужно загромождать контроллер какой-либо логикой валидации:
 
 ```php
 /**
@@ -247,11 +243,11 @@ public function store(StoreBlogPost $request)
 }
 ```
 
-If validation fails, a redirect response will be generated to send the user back to their previous location. The errors will also be flashed to the session so they are available for display. If the request was an AJAX request, a HTTP response with a 422 status code will be returned to the user including a JSON representation of the validation errors.
+Если проверка провалилась, будет сгенерирован ответ с перенаправлением для отправки пользователя обратно в его предыдущее местоположение. Ошибки также будут сохранены в в сессию, чтобы они были доступны для отображения. Если был AJAX запрос, HTTP ответ с кодом состояния 422 будет возвращен пользователю, включая JSON представление ошибок проверки.
 
-**Adding After Hooks To Form Requests**
+**Добавление хука перед вызовом формы запроса**
 
-If you would like to add an "after" hook to a form request, you may use the `withValidator` method. This method receives the fully constructed validator, allowing you to call any of its methods before the validation rules are actually evaluated:
+Если Вы хотите добавить к запросу формы хук "after", то можете использовать метод `withValidator`. Этот метод получает полностью построенный валидатор, позволяющий вызывать любой из его методов до того, как правила валидации будут реально оценены:
 
 ```php
 /**
@@ -270,9 +266,9 @@ public function withValidator($validator)
 }
 ```
 
-### Authorizing Form Requests
+### Авторизованные формы запроса
 
-The form request class also contains an `authorize` method. Within this method, you may check if the authenticated user actually has the authority to update a given resource. For example, you may determine if a user actually owns a blog comment they are attempting to update:
+Класс запроса формы также содержит метод `authorize`. В рамках этого метода можно проверить, действительно ли аутентифицированный пользователь имеет право обновлять данный ресурс. Например, вы можете определить, действительно ли пользователь владеет комментарием к блогу, который он пытается обновить:
 
 ```php
 /**
@@ -288,7 +284,7 @@ public function authorize()
 }
 ```
 
-Since all form requests extend the base Laravel request class, we may use the `user` method to access the currently authenticated user. Also note the call to the `route` method in the example above. This method grants you access to the URI parameters defined on the route being called, such as the `{comment}` parameter in the example below:
+Поскольку все запросы формы расширяют базовый класс запроса Laravel, мы можем использовать метод `user` для доступа к текущему аутентифицированному пользователю. Также обратите внимание на вызов метода `route` в примере выше. Этот метод предоставляет доступ к параметрам URI, определенным на вызываемом маршруте, таким как `{comment}`, в примере ниже:
 
 ```php
 Route::post('comment/{comment}');
@@ -311,16 +307,12 @@ public function authorize()
 ```
 
 {% hint style="info" %}
-
+Вы можете указать любые зависимости, которые вам нужны в методе `authorize`. Они будут автоматически разрешены через Laravel [сервис-контейнер](https://laravel.com/docs/7.x/container).
 {% endhint %}
 
-> ![](https://laravel.com/img/callouts/lightbulb.min.svg)
->
-> You may type-hint any dependencies you need within the `authorize` method's signature. They will automatically be resolved via the Laravel [service container](https://laravel.com/docs/7.x/container).
+### Настройка сообщений об ошибках
 
-### Customizing The Error Messages
-
-You may customize the error messages used by the form request by overriding the `messages` method. This method should return an array of attribute / rule pairs and their corresponding error messages:
+Вы можете настроить сообщения об ошибках, используемые запросом формы, переопределив метод `messages`. Этот метод должен возвращать массив пар атрибут/правило и соответствующие им сообщения об ошибках: 
 
 ```php
 /**
@@ -337,9 +329,9 @@ public function messages()
 }
 ```
 
-### Customizing The Validation Attributes
+### Настройка атрибутов проверки
 
-If you would like the `:attribute` portion of your validation message to be replaced with a custom attribute name, you may specify the custom names by overriding the `attributes` method. This method should return an array of attribute / name pairs:
+Если Вы хотите, чтобы часть `:attribute` сообщения о проверке была заменена именем пользовательского атрибута, Вы можете указать пользовательские имена, переопределив метод `attributes`. Этот метод должен возвращать массив пар атрибут/имя:
 
 ```php
 /**
@@ -355,9 +347,9 @@ public function attributes()
 }
 ```
 
-### Prepare Input For Validation
+### Подготовка входных данных для проверки
 
-If you need to sanitize any data from the request before you apply your validation rules, you can use the `prepareForValidation` method:
+Если вам необходимо очистить какие-либо данные из запроса перед применением правил валидации, вы можете воспользоваться методом `prepareForValidation`:
 
 ```php
 use Illuminate\Support\Str;
@@ -375,9 +367,9 @@ protected function prepareForValidation()
 }
 ```
 
-## Manually Creating Validators
+## Ручное создание валидаторов
 
-If you do not want to use the `validate` method on the request, you may create a validator instance manually using the `Validator` [facade](https://laravel.com/docs/7.x/facades). The `make` method on the facade generates a new validator instance:
+Если вы не хотите использовать метод `validate` в запросе, то можете создать экземпляр валидатора вручную, используя [фасад](https://laravel.com/docs/7.x/facades)  `Validator`. Метод `make` фасада генерирует новый экземпляр валидатора:
 
 ```php
 <?php
@@ -414,13 +406,13 @@ class PostController extends Controller
 }
 ```
 
-The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
+Первый аргумент, передаваемый в метод `make` — данные для проверки. Второй аргумент — правила валидации, которые должны применяться к данным.
 
-After checking if the request validation failed, you may use the `withErrors` method to flash the error messages to the session. When using this method, the `$errors` variable will automatically be shared with your views after redirection, allowing you to easily display them back to the user. The `withErrors` method accepts a validator, a `MessageBag`, or a PHP `array`.
+После проверки, если проверка запроса не прошла успешно, вы можете использовать метод `withErrors` для сохранения сообщений об ошибках в сессии. При использовании этого метода, переменная `$errors` после переадресации будет автоматически передана в представления, что позволит вам легко отобразить их пользователю. Метод `withErrors` принимает валидатор, `MessageBag` или PHP-массив.
 
-### Automatic Redirection
+### Автоматическая переадресация
 
-If you would like to create a validator instance manually but still take advantage of the automatic redirection offered by the request's `validate` method, you may call the `validate` method on an existing validator instance. If validation fails, the user will automatically be redirected or, in the case of an AJAX request, a JSON response will be returned:
+Если вы хотите создать экземпляр валидатора вручную, но все же пользуетесь автоматической переадресацией, предлагаемой методом `validate` запроса, вы можете вызвать метод `validate` на существующем экземпляре валидатора. В случае неудачи валидации, пользователь будет автоматически перенаправлен или, в случае запроса AJAX, будет возвращен JSON ответ:
 
 ```php
 Validator::make($request->all(), [
@@ -429,7 +421,7 @@ Validator::make($request->all(), [
 ])->validate();
 ```
 
-You may use the `validateWithBag` method to store the error messages in a [named error bag](https://laravel.com/docs/7.x/validation#named-error-bags) if validation fails:
+Вы можете использовать метод `validateWithBag` для хранения сообщений об ошибках в [пакете именованных ошибок](#named-error-bags), если проверка не прошла успешно:
 
 ```php
 Validator::make($request->all(), [
@@ -438,9 +430,9 @@ Validator::make($request->all(), [
 ])->validateWithBag('post');
 ```
 
-### Named Error Bags
+### Пакет именованных ошибок
 
-If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors, allowing you to retrieve the error messages for a specific form. Pass a name as the second argument to `withErrors`:
+Если у вас несколько форм на одной странице, вы можете дать имя пакету `MessageBag` ошибок, что позволит вам получить сообщения об ошибках для конкретной формы. Передайте имя в качестве второго аргумента в `withErrors`:
 
 ```php
 return redirect('register')
