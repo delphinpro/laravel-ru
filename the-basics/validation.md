@@ -92,7 +92,7 @@ $validatedData = $request->validate([
 ]);
 ```
 
-Вы можете использовать метод `validateWithBag` для проверки запроса и хранения любых сообщений об ошибках в [именованной коллекции ошибок](#named-error-bags):
+Вы можете использовать метод `validateWithBag` для проверки запроса и хранения любых сообщений об ошибках в [именованной коллекции ошибок](validation.md#named-error-bags):
 
 ```php
 $validatedData = $request->validateWithBag('post', [
@@ -128,9 +128,9 @@ $request->validate([
 
 ### Отображение ошибок проверки
 
-Что если параметры входящего запроса не проходят заданные правила проверки? Как уже упоминалось ранее, Laravel автоматически перенаправит пользователя обратно на его предыдущее местоположение. Кроме того, все ошибки валидации будут автоматически [сохранены в сессию](session#flash-data).
+Что если параметры входящего запроса не проходят заданные правила проверки? Как уже упоминалось ранее, Laravel автоматически перенаправит пользователя обратно на его предыдущее местоположение. Кроме того, все ошибки валидации будут автоматически [сохранены в сессию](https://github.com/delphinpro/laravel-ru/tree/2d2ea3adc5e79ae67432bf74106531d53e55c7ab/the-basics/session/README.md#flash-data).
 
-Опять же, обратите внимание, что нам не пришлось явно привязывать сообщения об ошибках к представлению в нашем `GET` маршруте. Это связано с тем, что Laravel будет проверять данные сессии на наличие ошибок и автоматически привязывать к представлению, если они доступны. Переменная `$errors` будет экземпляром `Illuminate\Support\MessageBag`. Подробнее о работе с этим объектом можно прочитать в его документации [#working-with-error-messages].
+Опять же, обратите внимание, что нам не пришлось явно привязывать сообщения об ошибках к представлению в нашем `GET` маршруте. Это связано с тем, что Laravel будет проверять данные сессии на наличие ошибок и автоматически привязывать к представлению, если они доступны. Переменная `$errors` будет экземпляром `Illuminate\Support\MessageBag`. Подробнее о работе с этим объектом можно прочитать в его документации \[\#working-with-error-messages\].
 
 {% hint style="info" %}
 Переменная `$errors` привязана к представлению с помощью посредника `Illuminate\View\Middleware\ShareErrorsFromSession`, который предоставляется группой `web`. **Когда этот посредник применяется, переменная `$errors` всегда будет доступна в вашем представлении**, что позволяет удобно предположить, что переменная `$errors` всегда определена и может быть безопасно использована.
@@ -308,7 +308,7 @@ public function authorize()
 
 ### Настройка сообщений об ошибках
 
-Вы можете настроить сообщения об ошибках, используемые запросом формы, переопределив метод `messages`. Этот метод должен возвращать массив пар атрибут/правило и соответствующие им сообщения об ошибках: 
+Вы можете настроить сообщения об ошибках, используемые запросом формы, переопределив метод `messages`. Этот метод должен возвращать массив пар атрибут/правило и соответствующие им сообщения об ошибках:
 
 ```php
 /**
@@ -365,7 +365,7 @@ protected function prepareForValidation()
 
 ## Ручное создание валидаторов
 
-Если вы не хотите использовать метод `validate` в запросе, то можете создать экземпляр валидатора вручную, используя [фасад](https://laravel.com/docs/7.x/facades)  `Validator`. Метод `make` фасада генерирует новый экземпляр валидатора:
+Если вы не хотите использовать метод `validate` в запросе, то можете создать экземпляр валидатора вручную, используя [фасад](https://laravel.com/docs/7.x/facades) `Validator`. Метод `make` фасада генерирует новый экземпляр валидатора:
 
 ```php
 <?php
@@ -417,7 +417,7 @@ Validator::make($request->all(), [
 ])->validate();
 ```
 
-Вы можете использовать метод `validateWithBag` для хранения сообщений об ошибках в [именованной коллекции ошибок](#named-error-bags), если проверка не прошла успешно:
+Вы можете использовать метод `validateWithBag` для хранения сообщений об ошибках в [именованной коллекции ошибок](validation.md#named-error-bags), если проверка не прошла успешно:
 
 ```php
 Validator::make($request->all(), [
@@ -612,73 +612,73 @@ The credit card number field is required when payment type is credit card.
 
 Ниже приведен список всех доступных правил проверки и их функции:
 
-* [Accepted](#rule-accepted)
-* [Active URL](#rule-active-url)
-* [After \(Date\)](#rule-after)
-* [After Or Equal \(Date\)](#rule-after-or-equal)
-* [Alpha](#rule-alpha)
-* [Alpha Dash](#rule-alpha-dash)
-* [Alpha Numeric](#rule-alpha-num)
-* [Array](#rule-array)
-* [Bail](#rule-bail)
-* [Before \(Date\)](#rule-before)
-* [Before Or Equal \(Date\)](#rule-before-or-equal)
-* [Between](#rule-between)
-* [Boolean](#rule-boolean)
-* [Confirmed](#rule-confirmed)
-* [Date](#rule-date)
-* [Date Equals](#rule-date-equals)
-* [Date Format](#rule-date-format)
-* [Different](#rule-different)
-* [Digits](#rule-digits)
-* [Digits Between](#rule-digits-between)
-* [Dimensions \(Image Files\)](#rule-dimensions)
-* [Distinct](#rule-distinct)
-* [Email](#rule-email)
-* [Ends With](#rule-ends-with)
-* [Exclude If](#rule-exclude-if)
-* [Exclude Unless](#rule-exclude-unless)
-* [Exists \(Database\)](#rule-exists)
-* [File](#rule-file)
-* [Filled](#rule-filled)
-* [Greater Than](#rule-gt)
-* [Greater Than Or Equal](#rule-gte)
-* [Image \(File\)](#rule-image)
-* [In](#rule-in)
-* [In Array](#rule-in-array)
-* [Integer](#rule-integer)
-* [IP Address](#rule-ip)
-* [JSON](#rule-json)
-* [Less Than](#rule-lt)
-* [Less Than Or Equal](#rule-lte)
-* [Max](#rule-max)
-* [MIME Types](#rule-mimetypes)
-* [MIME Type By File Extension](#rule-mimes)
-* [Min](#rule-min)
-* [Not In](#rule-not-in)
-* [Not Regex](#rule-not-regex)
-* [Nullable](#rule-nullable)
-* [Numeric](#rule-numeric)
-* [Password](#rule-password)
-* [Present](#rule-present)
-* [Regular Expression](#rule-regex)
-* [Required](#rule-required)
-* [Required If](#rule-required-if)
-* [Required Unless](#rule-required-unless)
-* [Required With](#rule-required-with)
-* [Required With All](#rule-required-with-all)
-* [Required Without](#rule-required-without)
-* [Required Without All](#rule-required-without-all)
-* [Same](#rule-same)
-* [Size](#rule-size)
-* [Sometimes](#conditionally-adding-rules)
-* [Starts With](#rule-starts-with)
-* [String](#rule-string)
-* [Timezone](#rule-timezone)
-* [Unique \(Database\)](#rule-unique)
-* [URL](#rule-url)[UUID](#rule-uuid)
+* [Accepted](validation.md#rule-accepted)
+* [Active URL](validation.md#rule-active-url)
+* [After \(Date\)](validation.md#rule-after)
+* [After Or Equal \(Date\)](validation.md#rule-after-or-equal)
+* [Alpha](validation.md#rule-alpha)
+* [Alpha Dash](validation.md#rule-alpha-dash)
+* [Alpha Numeric](validation.md#rule-alpha-num)
+* [Array](validation.md#rule-array)
+* [Bail](validation.md#rule-bail)
+* [Before \(Date\)](validation.md#rule-before)
+* [Before Or Equal \(Date\)](validation.md#rule-before-or-equal)
+* [Between](validation.md#rule-between)
+* [Boolean](validation.md#rule-boolean)
+* [Confirmed](validation.md#rule-confirmed)
+* [Date](validation.md#rule-date)
+* [Date Equals](validation.md#rule-date-equals)
+* [Date Format](validation.md#rule-date-format)
+* [Different](validation.md#rule-different)
+* [Digits](validation.md#rule-digits)
+* [Digits Between](validation.md#rule-digits-between)
+* [Dimensions \(Image Files\)](validation.md#rule-dimensions)
+* [Distinct](validation.md#rule-distinct)
+* [Email](validation.md#rule-email)
+* [Ends With](validation.md#rule-ends-with)
+* [Exclude If](validation.md#rule-exclude-if)
+* [Exclude Unless](validation.md#rule-exclude-unless)
+* [Exists \(Database\)](validation.md#rule-exists)
+* [File](validation.md#rule-file)
+* [Filled](validation.md#rule-filled)
+* [Greater Than](validation.md#rule-gt)
+* [Greater Than Or Equal](validation.md#rule-gte)
+* [Image \(File\)](validation.md#rule-image)
+* [In](validation.md#rule-in)
+* [In Array](validation.md#rule-in-array)
+* [Integer](validation.md#rule-integer)
+* [IP Address](validation.md#rule-ip)
+* [JSON](validation.md#rule-json)
+* [Less Than](validation.md#rule-lt)
+* [Less Than Or Equal](validation.md#rule-lte)
+* [Max](validation.md#rule-max)
+* [MIME Types](validation.md#rule-mimetypes)
+* [MIME Type By File Extension](validation.md#rule-mimes)
+* [Min](validation.md#rule-min)
+* [Not In](validation.md#rule-not-in)
+* [Not Regex](validation.md#rule-not-regex)
+* [Nullable](validation.md#rule-nullable)
+* [Numeric](validation.md#rule-numeric)
+* [Password](validation.md#rule-password)
+* [Present](validation.md#rule-present)
+* [Regular Expression](validation.md#rule-regex)
+* [Required](validation.md#rule-required)
+* [Required If](validation.md#rule-required-if)
+* [Required Unless](validation.md#rule-required-unless)
+* [Required With](validation.md#rule-required-with)
+* [Required With All](validation.md#rule-required-with-all)
+* [Required Without](validation.md#rule-required-without)
+* [Required Without All](validation.md#rule-required-without-all)
+* [Same](validation.md#rule-same)
+* [Size](validation.md#rule-size)
+* [Sometimes](validation.md#conditionally-adding-rules)
+* [Starts With](validation.md#rule-starts-with)
+* [String](validation.md#rule-string)
+* [Timezone](validation.md#rule-timezone)
+* [Unique \(Database\)](validation.md#rule-unique)
+* [URL](validation.md#rule-url)[UUID](validation.md#rule-uuid)
 
-**accepted**<a name="rule-accepted"></a>
+**accepted**
 
 Поле под проверкой должно быть _yes_, _on_, _1_, или _true_. Это полезно для подтверждения принятия "Terms of Service".
 
@@ -702,7 +702,7 @@ The credit card number field is required when payment type is credit card.
 
 **after\_or\_equal:date**
 
-Поле, подлежащее проверке, должно быть значением после или равным данной дате. Для получения дополнительной информации см. правило [after](#rule-after).
+Поле, подлежащее проверке, должно быть значением после или равным данной дате. Для получения дополнительной информации см. правило [after](validation.md#rule-after).
 
 **alpha**
 
@@ -726,15 +726,15 @@ The credit card number field is required when payment type is credit card.
 
 **before:date**
 
-Поле, подлежащее проверке, должно быть значением, предшествующим данной дате. Даты будут переданы в функцию PHP `strtotime`. Кроме того, как и в правиле [`after`](#rule-after), в качестве значения `date` может быть введено имя другого поля, находящегося на проверке.
+Поле, подлежащее проверке, должно быть значением, предшествующим данной дате. Даты будут переданы в функцию PHP `strtotime`. Кроме того, как и в правиле [`after`](validation.md#rule-after), в качестве значения `date` может быть введено имя другого поля, находящегося на проверке.
 
 **before\_or\_equal:date**
 
-Проверяемое поле должно быть значением, предшествующим или равным данной дате. Даты будут переданы в функцию PHP `strtotime`. Кроме того, как и в правиле [`after`](#rule-after), в качестве значения `date` может быть введено имя другого поля, находящегося на проверке.
+Проверяемое поле должно быть значением, предшествующим или равным данной дате. Даты будут переданы в функцию PHP `strtotime`. Кроме того, как и в правиле [`after`](validation.md#rule-after), в качестве значения `date` может быть введено имя другого поля, находящегося на проверке.
 
 **between:min,max**
 
-Проверяемое поле должно иметь размер между _min_ и _max_. Строки, цифры, массивы и файлы оцениваются так же, как и правило [`size`](#rule-size).
+Проверяемое поле должно иметь размер между _min_ и _max_. Строки, цифры, массивы и файлы оцениваются так же, как и правило [`size`](validation.md#rule-size).
 
 **boolean**
 
@@ -890,11 +890,11 @@ Validator::make($data, [
 
 **gt:field**
 
-Проверяемое поле должно быть больше заданного _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](#rule-size).
+Проверяемое поле должно быть больше заданного _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](validation.md#rule-size).
 
 **gte:field**
 
-Проверяемое поле должно быть больше или равно заданному _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](#rule-size).
+Проверяемое поле должно быть больше или равно заданному _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](validation.md#rule-size).
 
 **image**
 
@@ -945,15 +945,15 @@ Validator::make($data, [
 
 **lt:field**
 
-Проверяемое поле должно быть меньше заданного _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](#rule-size).
+Проверяемое поле должно быть меньше заданного _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](validation.md#rule-size).
 
 **lte:field**
 
-Проверяемое поле должно быть меньше или равно заданному _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](#rule-size).
+Проверяемое поле должно быть меньше или равно заданному _field_. Эти два поля должны быть одного типа. Строки, цифры, массивы и файлы оцениваются по тем же конвенциям, что и правило [`size`](validation.md#rule-size).
 
 **max:value**
 
-Поле, подлежащее проверке, должно быть меньше или равно максимальному значению _value_. Строки, цифры, массивы и файлы оцениваются таким же образом, как и правило [`size`](#rule-size).
+Поле, подлежащее проверке, должно быть меньше или равно максимальному значению _value_. Строки, цифры, массивы и файлы оцениваются таким же образом, как и правило [`size`](validation.md#rule-size).
 
 **mimetypes:text/plain,...**
 
@@ -981,7 +981,7 @@ Validator::make($data, [
 
 **min:value**
 
-Проверяемое поле должно иметь минимальное _value_. Строки, цифры, массивы и файлы оцениваются так же, как и правило [`size`](#rule-size).
+Проверяемое поле должно иметь минимальное _value_. Строки, цифры, массивы и файлы оцениваются так же, как и правило [`size`](validation.md#rule-size).
 
 **not\_in:foo,bar,...**
 
@@ -1004,7 +1004,7 @@ Validator::make($data, [
 
 Внутренне это правило использует функцию PHP `preg_match`. Указанный шаблон должен подчиняться тому же форматированию, которое требуется в `preg_match` и, таким образом, также включать в себя допустимые разделители. Например: `'email' => 'not_regex:/^.+$/i'`.
 
-**Замечание:** При использовании шаблонов `regex`/`not_regex` может потребоваться указать правила в массиве вместо использования разделителей "|", особенно если регулярное выражение содержит символ "|".
+**Замечание:** При использовании шаблонов `regex`/`not_regex` может потребоваться указать правила в массиве вместо использования разделителей "\|", особенно если регулярное выражение содержит символ "\|".
 
 **nullable**
 
@@ -1032,7 +1032,7 @@ Validator::make($data, [
 
 Внутренне это правило использует функцию PHP `preg_match`. Указанный шаблон должен подчиняться тому же форматированию, которое требуется в `preg_match` и, таким образом, также включать в себя допустимые разделители. Например: `'email' => 'regex:/^.+@.+$/i'`.
 
-**Замечание:** При использовании шаблонов `regex`/`not_regex` может потребоваться указать правила в массиве вместо использования разделителей "|", особенно если регулярное выражение содержит символ "|".
+**Замечание:** При использовании шаблонов `regex`/`not_regex` может потребоваться указать правила в массиве вместо использования разделителей "\|", особенно если регулярное выражение содержит символ "\|".
 
 **required**
 
@@ -1237,7 +1237,7 @@ $v = Validator::make($data, [
 В приведенном выше примере поле `email` будет проверено только в том случае, если оно присутствует в массиве `$data`.
 
 {% hint style="info" %}
-Если вы пытаетесь проверить поле, которое всегда должно присутствовать, но может быть пустым, обратите внимание [на эту заметку о необязательных полях](#a-note-on-optional-fields)
+Если вы пытаетесь проверить поле, которое всегда должно присутствовать, но может быть пустым, обратите внимание [на эту заметку о необязательных полях](validation.md#a-note-on-optional-fields)
 {% endhint %}
 
 **Комплексная условная проверка**
@@ -1465,7 +1465,7 @@ public function boot()
 
 ### Неявные расширения
 
-По умолчанию, когда проверяемый атрибут отсутствует или содержит пустую строку, обычные правила проверки, включая пользовательские расширения, не выполняются. Например, правило [`unique`](#rule-unique) не будет запущено против пустой строки:
+По умолчанию, когда проверяемый атрибут отсутствует или содержит пустую строку, обычные правила проверки, включая пользовательские расширения, не выполняются. Например, правило [`unique`](validation.md#rule-unique) не будет запущено против пустой строки:
 
 ```php
 $rules = ['name' => 'unique:users,name'];

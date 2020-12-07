@@ -30,7 +30,7 @@ Laravel делает внедрение аутентификации очень 
 Пакет `laravel/ui` предоставляет быстрый способ задания всех маршрутов и представлений, необходимых для аутентификации с помощью нескольких простых команд:
 
 ```bash
-composer require laravel/ui
+composer require laravel/ui:^2.4
 
 php artisan ui vue --auth
 ```

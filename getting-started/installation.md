@@ -48,7 +48,7 @@ laravel new blog
 Также, Вы можете установить Laravel, выполнив команду Composer `create-project` в Вашем терминале:
 
 ```bash
-composer create-project --prefer-dist laravel/laravel blog
+composer create-project --prefer-dist laravel/laravel:^7.30.1 blog
 ```
 
 **Локальный сервер разработки**
